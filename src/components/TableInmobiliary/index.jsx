@@ -1,7 +1,6 @@
 "use client"
 import React from 'react'
 import Image from 'next/image'
-import Button from '@/components/Button'
 import Loader from '@/components/Loader'
 import { getDate } from '@/utils/getDate'
 import useInmobiliary from '@/hooks/useInmobiliary'
@@ -35,16 +34,21 @@ const Index = () => {
                 </tr>)}           
             </tbody>          
         </table>
-        <div className="bg-primary text-white rounded-md justify-between px-8 items-center my-1 flex">
-            <p>Total inmobiliarias: {inmobiliarias.length}</p>
-            {getDate() == 1 ? <Image src="/assets/send.svg"  alt="send.svg" height={30} width={30} title="Enviar resúmen mensual"
-            className='bg-auxiliar rounded-full p-1 cursor-pointer' 
-            onClick= {() => sendEmail('alejandro.auribe1@gmail.com', 
-            'Resumen facturación mes de Febrero', 
-            inmobiliarias
-            .filter(inmobiliaria => inmobiliaria.rol !== 'admin')
-            .map(inmobiliaria => `${inmobiliaria.Nombre_Inmobiliaria}: ${inmobiliaria.totalMes} Leads \n`).join(''))}
-            />: null }
+        <div className="bg-primary text-white rounded-md justify-between px-16 items-center my-1 flex">
+            <p className='font-bold'>Total inmobiliarias: {inmobiliarias.length}</p>
+            <div className='flex items-center gap-2'>
+                    <p className='font-bold'> Enviar resumen de leads </p>
+            {getDate() <= 2 
+                ? <Image src="/assets/send.svg"  alt="send.svg" height={30} width={30} title="Enviar resúmen mensual"
+                className='bg-auxiliar rounded-full p-1 cursor-pointer' 
+                onClick= {() => sendEmail('alejandro.auribe1@gmail.com', 
+                'Resumen facturación mes de Febrero', 
+                inmobiliarias
+                .filter(inmobiliaria => inmobiliaria.rol !== 'admin')
+                .map(inmobiliaria => `${inmobiliaria.Nombre_Inmobiliaria}: ${inmobiliaria.totalMes} Leads \n`).join(''))}/>
+                : <Image src="/assets/send.svg"  alt="send.svg" height={30} width={30} title="No disponible"
+                className='bg-auxiliar rounded-full p-1 cursor-not-allowed' /> }
+            </div> 
         </div>
     </div>  
   )
