@@ -37,7 +37,7 @@ const Index = () => {
         <div className="bg-primary text-white rounded-md justify-between px-16 items-center my-1 flex">
             <p className='font-bold'>Total inmobiliarias: {inmobiliarias.length}</p>
             <div className='flex items-center gap-2'>
-                    <p className='font-bold'> Enviar resumen de leads </p>
+                    <p className='font-bold'>  &nbsp; &nbsp; &nbsp; Enviar resumen de leads </p>
             {getDate() <= 2 
                 ? <Image src="/assets/send.svg"  alt="send.svg" height={30} width={30} title="Enviar resúmen mensual"
                 className='bg-auxiliar rounded-full p-1 cursor-pointer' 
