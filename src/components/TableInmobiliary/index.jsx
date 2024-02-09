@@ -13,7 +13,7 @@ const Index = () => {
     <div className="bg-primary max-w-5xl overflow-auto max-h-[80vh] py-1 rounded-md">
         <Loader active={loaderActive} />
         <h1 className="text-center mb-4 text-3xl font-bold text-auxiliar"> Inmobiliarias asociadas </h1>
-        <table className="table table-hover bg-auxiliar">
+        <table className="table table-hover w-full bg-auxiliar">
             <thead className='bg-secondary text-white'>
                 <tr>        
                     <th className='border px-2 font-bold'> ID Inmobiliaria </th>                    

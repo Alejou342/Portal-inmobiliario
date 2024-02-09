@@ -46,16 +46,16 @@ const Index = () => {
           onClick={() => handleChange(1)} 
           type="button" 
           className={`text-xs ${item == 1 ? styles[0] : styles[1]}`} 
-        >
-          Propiedades residenciales
+          >
+          Propiedades comerciales 
         </Button>
         <Button 
           onClick={() => handleChange(2)} 
           type="button" 
           className={`text-xs ${item == 2 ? styles[0] : styles[1]}`} 
-          >
-          Propiedades comerciales 
-          </Button>
+        >
+          Propiedades residenciales
+        </Button>
         <Button 
           onClick={() => handleChange(3)} 
           type="button" 
