@@ -74,7 +74,7 @@ const Index = () => {
                 {inmuebles.map(inmueble => 
                 <tr key={inmueble.ID_Comercial} className="hover:bg-slate-300">
                     <td className='border px-2 text-center'>{inmueble.ID_Comercial}</td>
-                    <td className='border px-2 text-center cursor-pointer' onClick={() => handleNavigate(`/propertie/comercial/${inmueble.ID_Comercial}`, inmueble.ID_Comercial)}>{inmueble.NombreC}</td>
+                    <td className='border px-2 text-center cursor-pointer' onClick={() => handleNavigate(`/propertie/comercial/${inmueble.ID_Comercial}`, inmueble.ID_Comercial)}>{inmueble?.NombreC?.substring(0,40)}</td>
                     <td className='border px-2 text-center'>{inmueble.Tipo_ServicioC}</td>
                     <td className='border px-2 text-center'>$ {inmueble.PrecioC}</td>
                     <td className='border px-2'>

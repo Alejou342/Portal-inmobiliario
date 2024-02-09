@@ -56,7 +56,7 @@ const Index = () => {
                 {leads.map((lead, id) => 
                 <tr key={id + 1} className="cursor-pointer hover:bg-slate-300">
                     <td className='border px-2 text-center'>{id + 1}</td>
-                    <td className='border px-2 text-center'>{lead?.NombreR || lead?.NombreC}</td>
+                    <td className='border px-2 text-center'>{lead?.NombreR?.substring(0,40) || lead?.NombreC?.substring(0,40)}</td>
                     <td className='border px-2 text-center'>{lead?.Nombrecliente}</td>
                     <td className='border px-2 text-center'>{lead?.Numerocliente}</td>
                     <td className='border px-2 text-center'>{lead?.Fechalead.substr(0,10)}</td>
