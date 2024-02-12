@@ -1,6 +1,7 @@
 "use client"
 import React from 'react'
-import Image from 'next/image'
+import { getDate } from '@/utils/getDate'
+import AlertIcon from '@/components/AlertIcon'
 import LimitLeads from '@/components/LimitLeads'
 import ModalGeneral from '@/containers/ModalGeneral'
 
@@ -15,19 +16,21 @@ const Index = () => {
       <ModalGeneral state={openModal} setState={setOpenModal} className='p-4'>
         <LimitLeads setState={setOpenModal} />
       </ModalGeneral>}
-      <div className='flex'>
-        {isHover && <p className='border text-sm border-primary absolute right-[5%] bottom-9 p-2 rounded-lg bg-auxiliar'> Definir límite mensual de Leads </p>}
-      <Image 
-        src="/assets/warning.svg" 
-        alt="limit-modal.svg" 
-        width={50} 
-        height={50} 
-        className="absolute bottom-8 right-8 cursor-pointer" 
-        onClick={() => setOpenModal(true)}
-        onMouseEnter={() => setIsHover(true)}
-        onMouseLeave={() => setIsHover(false)}
-      />
-      </div>
+      {getDate() <= 2 
+      ? <AlertIcon 
+        icon="warning" 
+        isHover={isHover} 
+        setIsHover={setIsHover} 
+        setOpenModal={setOpenModal} 
+        text="¡Definir límite mensual de Leads!" 
+        className= {{i: "cursor-pointer", p: "text-black"}} />
+      : <AlertIcon 
+        icon="warning-red" 
+        isHover={isHover} 
+        setIsHover={setIsHover} 
+        setOpenModal={() => {}} 
+        text="¡Solo puedes definir el límite de Leads el día 1 y 2 de cada mes!" 
+        className={{i: "cursor-not-allowed", p: "text-red-500"}} />}
     </>
   )
 }

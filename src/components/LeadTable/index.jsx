@@ -45,11 +45,12 @@ const Index = () => {
         <table className="table table-hover bg-auxiliar">
             <thead className='bg-secondary text-white'>
                 <tr>        
-                    <th className='border px-2 font-bold'> ID Lead </th>                    
-                    <th className='border px-2 font-bold'>Nombre inmueble</th>                                                                                            
-                    <th className='border px-2 font-bold'>Nombre Cliente</th>
-                    <th className='border px-2 font-bold'>Teléfono Cliente</th>                                              
-                    <th className='border px-2 font-bold'>Fecha de generación</th>                                              
+                    <th className='border px-2 text-xs font-bold'> ID Lead </th>                    
+                    <th className='border px-2 text-xs font-bold'>Nombre inmueble</th>                                                                                            
+                    <th className='border px-2 text-xs font-bold'>Nombre Cliente</th>
+                    <th className='border px-2 text-xs font-bold'>Teléfono Cliente</th>                                              
+                    <th className='border px-2 text-xs font-bold'>Fecha de generación</th>                                              
+                    <th className='border px-2 text-xs font-bold'>Hora de generación</th>                                              
                 </tr>
             </thead>
             <tbody>
@@ -60,6 +61,7 @@ const Index = () => {
                     <td className='border px-2 text-center'>{lead?.Nombrecliente}</td>
                     <td className='border px-2 text-center'>{lead?.Numerocliente}</td>
                     <td className='border px-2 text-center'>{lead?.Fechalead.substr(0,10)}</td>
+                    <td className='border px-2 text-center'>{lead?.Fechalead.substr(11,5)}</td>
                 </tr>)}           
             </tbody>          
         </table>
