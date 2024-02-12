@@ -9,7 +9,7 @@ const Index = ({ to }) => {
         <Link href={to}>
             <Image src="/Pocki.svg" alt="pocki.svg" width={120} height={120} className='mx-auto w-[8rem]' priority={true} />
         </Link>
-        <p className='text-center text-xs text-[#7fbd42] font-bold'> Inmobiliario </p>
+        <p className='text-center text-xs text-primary font-bold'> Inmobiliario </p>
     </div>
   )
 }
