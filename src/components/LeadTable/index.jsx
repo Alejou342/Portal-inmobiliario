@@ -45,18 +45,20 @@ const Index = () => {
         <table className="table table-hover bg-auxiliar">
             <thead className='bg-secondary text-white'>
                 <tr>        
-                    <th className='border px-2 text-xs font-bold'> ID Lead </th>                    
-                    <th className='border px-2 text-xs font-bold'>Nombre inmueble</th>                                                                                            
-                    <th className='border px-2 text-xs font-bold'>Nombre Cliente</th>
-                    <th className='border px-2 text-xs font-bold'>Teléfono Cliente</th>                                              
-                    <th className='border px-2 text-xs font-bold'>Fecha de generación</th>                                              
-                    <th className='border px-2 text-xs font-bold'>Hora de generación</th>                                              
+                    <th className='border px-2 text-sm font-bold'> # </th>                    
+                    <th className='border px-2 text-sm font-bold'> Código </th>                    
+                    <th className='border px-2 text-sm font-bold'>Nombre inmueble</th>                                                                                            
+                    <th className='border px-2 text-sm font-bold'>Nombre Cliente</th>
+                    <th className='border px-2 text-sm font-bold'>Teléfono Cliente</th>                                              
+                    <th className='border px-2 text-sm font-bold'>Fecha de generación</th>                                              
+                    <th className='border px-2 text-sm font-bold'>Hora de generación</th>                                              
                 </tr>
             </thead>
             <tbody>
                 {leads.map((lead, id) => 
                 <tr key={id + 1} className="cursor-pointer hover:bg-slate-300">
                     <td className='border px-2 text-center'>{id + 1}</td>
+                    <td className='border px-2 text-center'>{lead?.CodigoInmobiliaria}</td>
                     <td className='border px-2 text-center'>{lead?.NombreR?.substring(0,40) || lead?.NombreC?.substring(0,40)}</td>
                     <td className='border px-2 text-center'>{lead?.Nombrecliente}</td>
                     <td className='border px-2 text-center'>{lead?.Numerocliente}</td>

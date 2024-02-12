@@ -60,19 +60,21 @@ const Index = () => {
         <table className="table table-hover bg-auxiliar">
             <thead className='bg-secondary text-white'>
                 <tr>        
-                    <th className='border px-2 font-bold'> ID Inmueble </th>                    
-                    <th className='border px-2 font-bold'>Nombre Inmueble</th>
-                    <th className='border px-2 font-bold'> Tipo Negocio </th>                                              
-                    <th className='border px-2 font-bold'>Precio Inmueble</th>    
-                    <th className='border px-2 font-bold'>Estado</th>                                              
-                    <th className='border px-2 font-bold'>Editar</th>                                              
-                    <th className='border px-2 font-bold'>Eliminar</th>                                              
+                    <th className='border text-sm px-2 font-bold'> # </th>                    
+                    <th className='border text-sm px-2 font-bold'>Código</th>                    
+                    <th className='border text-sm px-2 font-bold'>Nombre Inmueble</th>
+                    <th className='border text-sm px-2 font-bold'>Tipo Negocio</th>                                              
+                    <th className='border text-sm px-2 font-bold'>Precio Inmueble</th>    
+                    <th className='border text-sm px-2 font-bold'>Estado</th>                                              
+                    <th className='border text-sm px-2 font-bold'>Editar</th>                                              
+                    <th className='border text-sm px-2 font-bold'>Eliminar</th>                                              
                 </tr>
             </thead>
             <tbody>
-                {inmuebles.map(inmueble => 
+                {inmuebles.map((inmueble, id) => 
                 <tr key={inmueble.ID_Residencial} className="hover:bg-slate-300">
-                    <td className='border px-2 text-center'>{inmueble.ID_Residencial}</td>
+                    <td className='border px-2 text-center'>{id + 1}</td>
+                    <td className='border px-2 text-center'>{inmueble.CodigoInmobiliaria}</td>
                     <td className='border px-2 text-center cursor-pointer' onClick={() => handleNavigate(`/propertie/residencial/${inmueble.ID_Residencial}`, inmueble.ID_Residencial)}>{inmueble?.NombreR?.substring(0,40)}</td>
                     <td className='border px-2 text-center'>{inmueble.Tipo_ServicioR}</td>
                     <td className='border px-2 text-center'>$ {inmueble.PrecioR}</td>

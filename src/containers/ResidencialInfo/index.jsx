@@ -36,7 +36,7 @@ const Index = ({ props }) => {
     <div className='propertie-card bg-auxiliar relative rounded-lg'>
       <Image src={props?.ImagenR || '/assets/default-house.svg'} alt="foto" width={400} height={400} className="card-image aspect-square rounded-lg mb-2" />
       <div className="flex justify-between px-3">
-        <p className="font-bold mx-auto"> {props?.NombreR.toUpperCase()} </p>
+        <p className="font-bold mx-auto"> {props?.NombreR.substr(0,40).toUpperCase()} </p>
         <Image src="/assets/edit.svg" alt="edit" width={30} height={35} title="Editar" className="icon-edit absolute cursor-pointer" onClick={() => router.push(`/propertie/residencial/edit/${formData.Idresidencia}`)} />
         <div className="is-available">
           {props?.EstadoR == "Disponible" 
