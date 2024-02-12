@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Cookies from 'js-cookie'
 import Loader from '@/components/Loader'
 import { useRouter } from 'next/navigation'
+import { formatPrice } from '@/utils/formatPrice'
 import ModalGeneral from '@/containers/ModalGeneral'
 import ComercialContent from '@/components/ComercialContent'
 
@@ -76,9 +77,9 @@ const Index = () => {
                 <tr key={inmueble.ID_Comercial} className="hover:bg-slate-300">
                     <td className='border px-2 text-center'>{inmueble.ID_Comercial}</td>
                     <td className='border px-2 text-center'>{inmueble.CodigoInmobiliaria}</td>
-                    <td className='border px-2 text-center cursor-pointer' onClick={() => handleNavigate(`/propertie/comercial/${inmueble.ID_Comercial}`, inmueble.ID_Comercial)}>{inmueble?.NombreC?.substring(0,40)}</td>
+                    <td className='border px-2 text-center cursor-pointer' onClick={() => handleNavigate(`/propertie/comercial/${inmueble.ID_Comercial}`, inmueble.ID_Comercial)}>{inmueble?.NombreC?.substring(0,35)}</td>
                     <td className='border px-2 text-center'>{inmueble.Tipo_ServicioC}</td>
-                    <td className='border px-2 text-center'>$ {inmueble.PrecioC}</td>
+                    <td className='border px-2 text-center'>{formatPrice(inmueble.PrecioC)}</td>
                     <td className='border px-2'>
                         {inmueble.EstadoC == "Disponible" 
                         ? <Image src="/assets/green-circle.svg" alt="green.svg" title={inmueble.EstadoC} width={18} height={18} className="mx-auto cursor-pointer" /> 

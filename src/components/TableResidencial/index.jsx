@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Cookies from 'js-cookie'
 import Loader from '@/components/Loader'
 import { useRouter } from 'next/navigation'
+import { formatPrice } from '@/utils/formatPrice'
 import ModalGeneral from '@/containers/ModalGeneral'
 import ResidencialContent from '@/components/ResidencialContent'
 
@@ -75,9 +76,9 @@ const Index = () => {
                 <tr key={inmueble.ID_Residencial} className="hover:bg-slate-300">
                     <td className='border px-2 text-center'>{id + 1}</td>
                     <td className='border px-2 text-center'>{inmueble.CodigoInmobiliaria}</td>
-                    <td className='border px-2 text-center cursor-pointer' onClick={() => handleNavigate(`/propertie/residencial/${inmueble.ID_Residencial}`, inmueble.ID_Residencial)}>{inmueble?.NombreR?.substring(0,40)}</td>
+                    <td className='border px-2 text-center cursor-pointer' onClick={() => handleNavigate(`/propertie/residencial/${inmueble.ID_Residencial}`, inmueble.ID_Residencial)}>{inmueble?.NombreR?.substring(0,35)}</td>
                     <td className='border px-2 text-center'>{inmueble.Tipo_ServicioR}</td>
-                    <td className='border px-2 text-center'>$ {inmueble.PrecioR}</td>
+                    <td className='border px-2 text-center'>{formatPrice(inmueble.PrecioR)}</td>
                     <td className='border px-2'>
                         {inmueble.EstadoR == "Disponible" 
                         ? <Image src="/assets/green-circle.svg" alt="green.svg" title={inmueble.EstadoR} width={18} height={18} className="mx-auto cursor-pointer" /> 
