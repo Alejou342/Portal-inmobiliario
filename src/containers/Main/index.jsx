@@ -32,10 +32,10 @@ const Index = () => {
   }, [])
 
   const views = [
-    { key: 'Comercial', component: <TableComercial />},
-    { key: 'Residencial', component: <TableResidencial />},
-    { key: 'Lead', component: <LeadTable />},
-    { key: 'Form', component: user?.rol == 'admin' ?  <TableInmobiliary /> : <Form />}
+    { key: 'Comercial', component: <TableComercial key="Comercial" />},
+    { key: 'Residencial', component: <TableResidencial key="Residencial" />},
+    { key: 'Lead', component: <LeadTable key="Lead" />},
+    { key: 'Form', component: user?.rol == 'admin' ?  <TableInmobiliary key="Inmobiliary" /> : <Form key="Form" />}
   ]
 
     return (
