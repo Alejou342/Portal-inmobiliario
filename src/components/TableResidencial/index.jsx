@@ -5,41 +5,55 @@ import Cookies from 'js-cookie'
 import Loader from '@/components/Loader'
 import { useRouter } from 'next/navigation'
 import { formatPrice } from '@/utils/formatPrice'
+import TableFooter from '@/components/TableFooter'
 import ModalGeneral from '@/containers/ModalGeneral'
+import SearchSection from '@/components/SearchSection'
 import ResidencialContent from '@/components/ResidencialContent'
+
+const fetchDataResidencial = async () => {
+    try {
+        const userInfo = JSON.parse(Cookies.get('SessionInfo'));
+        const adminResidencials = `${process.env.BACK_LINK}/api/getAllR`;
+        const userResidencials = `${process.env.BACK_LINK}/api/UserResidencia/${userInfo?.answer[0]?.Correo_Inmobiliaria}`;
+
+        const response = await axios.get(userInfo?.answer[0]?.rol === 'admin' ? adminResidencials : userResidencials, {
+            headers: {
+                "Authorization": `Bearer ${userInfo?.accesToken}`
+            }
+        });
+
+        return response.data;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+};
 
 const Index = () => {
 
-    const [inmuebles, setInmuebles] = React.useState([])
+    const [search, setSearch] = React.useState("")
     const [openModal, setOpenModal] = React.useState(false)
-    const [loaderActive, setLoaderActive] = React.useState(false)
+    const [page, setPage] = React.useState(0)
+
+    const [inmuebles, setInmuebles] = React.useState([])
+    const [loaderActive, setLoaderActive] = React.useState(true)
     const router = useRouter()
 
+    const memoizedFetchData = React.useMemo(() => fetchDataResidencial(), [])
+
     React.useEffect(() => {
-        try {
-            const userInfo = JSON.parse(Cookies.get('SessionInfo'))
-
-            const adminResidencials = `${process.env.BACK_LINK}/api/getAllR`
-            const userResidencials = `${process.env.BACK_LINK}/api/UserResidencia/${userInfo?.answer[0]?.Correo_Inmobiliaria}`
-
-            setLoaderActive(true)
-            axios.get(userInfo?.answer[0]?.rol == 'admin' ? adminResidencials : userResidencials, {
-                headers: {
-                    "Authorization": `Bearer ${userInfo?.accesToken}`
-                }
-            })
-            .then((result) => {
-                setInmuebles(result.data)
+        const fetchDataAndSetState = async () => {
+            try {
+                const data = await memoizedFetchData
+                setInmuebles(data)
                 setLoaderActive(false)
-            })
-            .catch((error) => { 
-                console.error(error) 
+            } catch (error) {
                 setLoaderActive(false)
-            })
-        } catch (error) {
-            console.error(error)
+            }
         }
-    }, [])
+
+        fetchDataAndSetState()
+    }, [memoizedFetchData])
 
     const handleNavigate = (url, id) => {
         Cookies.set('ResidencialID', id)
@@ -57,7 +71,10 @@ const Index = () => {
         <ModalGeneral state={openModal} setState={setOpenModal}>
             <ResidencialContent setState={setOpenModal} />
         </ModalGeneral>
-        <h1 className="text-center mb-4 text-3xl font-bold text-auxiliar">Mis Propiedades Residenciales</h1>
+        <div className="flex justify-between my-2 w-4/5 mx-auto items-center">
+            <h1 className="text-center text-3xl font-bold text-auxiliar">Mis Propiedades Residenciales</h1>
+            <SearchSection search={search} setSearch={setSearch} setPage={setPage} />
+        </div>
         <table className="table table-hover bg-auxiliar">
             <thead className='bg-secondary text-white'>
                 <tr>        
@@ -72,7 +89,10 @@ const Index = () => {
                 </tr>
             </thead>
             <tbody>
-                {inmuebles.map((inmueble, id) => 
+                {inmuebles
+                .filter(inmueble => inmueble.CodigoInmobiliaria?.includes(search))
+                .slice(page * 20, page * 20 + 20)
+                .map((inmueble, id) => 
                 <tr key={inmueble.ID_Residencial} className="hover:bg-slate-300">
                     <td className='border px-2 text-center'>{id + 1}</td>
                     <td className='border px-2 text-center'>{inmueble.CodigoInmobiliaria}</td>
@@ -93,9 +113,12 @@ const Index = () => {
                 </tr>)}           
             </tbody>          
         </table>
-        <div className="bg-primary text-white rounded-md text-center my-1">
-            <b>Total Propiedades Residenciales: </b> {inmuebles.length}
-        </div>
+        <TableFooter 
+            param={inmuebles.filter(inmueble => inmueble.CodigoInmobiliaria?.includes(search))} 
+            text="Total Propiedades Residenciales" 
+            page={page} 
+            setPage={setPage} 
+        />
     </div>  
   )
 }

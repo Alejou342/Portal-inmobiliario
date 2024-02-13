@@ -6,15 +6,19 @@ import Cookies from 'js-cookie'
 import Loader from '@/components/Loader'
 import { useRouter } from 'next/navigation'
 import { formatPrice } from '@/utils/formatPrice'
+import TableFooter from '@/components/TableFooter'
 import ModalGeneral from '@/containers/ModalGeneral'
+import SearchSection from '@/components/SearchSection'
 import ComercialContent from '@/components/ComercialContent'
 
 const Index = () => {
 
-    const [loaderActive, setLoaderActive] = React.useState(false)
-    const [openModal, setOpenModal] = React.useState(false)
-    const [inmuebles, setInmuebles] = React.useState([])
     const router = useRouter()
+    const [page, setPage] = React.useState(0)
+    const [search, setSearch] = React.useState("")
+    const [inmuebles, setInmuebles] = React.useState([])
+    const [openModal, setOpenModal] = React.useState(false)
+    const [loaderActive, setLoaderActive] = React.useState(false)
 
     React.useEffect(() => {
         try {
@@ -58,9 +62,12 @@ const Index = () => {
         <ModalGeneral state={openModal} setState={setOpenModal}>
             <ComercialContent setState={setOpenModal} />
         </ModalGeneral>
-        <h1 className="text-center mb-4 text-3xl font-bold text-auxiliar">Mis Propiedades Comerciales</h1>
+        <div className="flex justify-between my-2 w-4/5 mx-auto items-center">
+            <h1 className="text-center text-3xl font-bold text-auxiliar">Mis Propiedades Comerciales</h1>
+            <SearchSection search={search} setSearch={setSearch} setPage={setPage} />
+        </div>
         <table className="table table-hover bg-auxiliar">
-            <thead className='bg-secondary text-white'>
+            <thead className='bg-secondary text-white h-10'>
                 <tr>        
                     <th className='border text-sm px-2 font-bold'> # </th>                    
                     <th className='border text-sm px-2 font-bold'>Código</th>                    
@@ -73,7 +80,10 @@ const Index = () => {
                 </tr>
             </thead>
             <tbody>
-                {inmuebles.map(inmueble => 
+                {inmuebles
+                .filter(inmueble => inmueble.CodigoInmobiliaria?.includes(search))
+                .slice(page * 20, page * 20 + 20)
+                .map(inmueble => 
                 <tr key={inmueble.ID_Comercial} className="hover:bg-slate-300">
                     <td className='border px-2 text-center'>{inmueble.ID_Comercial}</td>
                     <td className='border px-2 text-center'>{inmueble.CodigoInmobiliaria}</td>
@@ -94,9 +104,7 @@ const Index = () => {
                 </tr>)}           
             </tbody>          
         </table>
-        <div className="bg-primary text-white rounded-md text-center my-1">
-            <b>Total Propiedades Comerciales: </b> {inmuebles.length}
-        </div>
+        <TableFooter param={inmuebles.filter(inmueble => inmueble.CodigoInmobiliaria?.includes(search))} text="Total Propiedades Comerciales" page={page} setPage={setPage} />
     </div>  
   )
 }

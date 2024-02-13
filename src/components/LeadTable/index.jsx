@@ -1,16 +1,20 @@
 import React from 'react'
-import Image from 'next/image'
-import Loader from '@/components/Loader'
 import axios from 'axios'
 import Cookies from 'js-cookie'
+import Loader from '@/components/Loader'
+import TableFooter from '@/components/TableFooter'
+import SearchSection from '@/components/SearchSection'
 
 const Index = () => {
 
+    const [page, setPage] = React.useState(0)
     const [leads, setLeads] = React.useState([])
+    const [search, setSearch] = React.useState("")
     const [loaderActive, setLoaderActive] = React.useState(true)
 
     React.useEffect(() => {
         try {
+            setLoaderActive(true)
             const userInfo = JSON.parse(Cookies.get('SessionInfo'))
 
             const adminLeads = [
@@ -22,8 +26,7 @@ const Index = () => {
                 axios.get(`${process.env.BACK_LINK}/api/UserLeadResidencia/${userInfo?.answer[0]?.Correo_Inmobiliaria}`),
                 axios.get(`${process.env.BACK_LINK}/api/UserLeadComercial/${userInfo?.answer[0]?.Correo_Inmobiliaria}`)
             ]
-        
-            setLoaderActive(true)
+
             Promise.all(userInfo?.answer[0]?.rol == 'admin' ? adminLeads : userLeads)
             .then(([response1, response2]) => {
                 setLeads([...response1.data, ...response2.data])
@@ -41,7 +44,10 @@ const Index = () => {
   return (
     <div className="bg-primary max-w-5xl max-h-[80vh] overflow-auto py-1 rounded-md">
         <Loader active={loaderActive} />
-        <h1 className="text-center mb-4 text-3xl font-bold text-auxiliar">Leads</h1>
+        <div className="flex justify-between my-2 w-4/5 mx-auto items-center">
+            <h1 className="text-center text-3xl font-bold text-auxiliar">Mis Leads</h1>
+            <SearchSection search={search} setSearch={setSearch} setPage={setPage} />
+        </div>
         <table className="table table-hover bg-auxiliar">
             <thead className='bg-secondary text-white'>
                 <tr>        
@@ -55,11 +61,14 @@ const Index = () => {
                 </tr>
             </thead>
             <tbody>
-                {leads.map((lead, id) => 
+                {leads
+                .filter(lead => lead?.CodigoInmobiliaria?.includes(search))
+                .slice(page * 20, page * 20 + 20)
+                .map((lead, id) => 
                 <tr key={id + 1} className="cursor-pointer hover:bg-slate-300">
                     <td className='border px-2 text-center'>{id + 1}</td>
                     <td className='border px-2 text-center'>{lead?.CodigoInmobiliaria}</td>
-                    <td className='border px-2 text-center'>{lead?.NombreR?.substring(0,40) || lead?.NombreC?.substring(0,40)}</td>
+                    <td className='border px-2 text-center'>{lead?.NombreR?.substring(0,30) || lead?.NombreC?.substring(0,30)}</td>
                     <td className='border px-2 text-center'>{lead?.Nombrecliente}</td>
                     <td className='border px-2 text-center'>{lead?.Numerocliente}</td>
                     <td className='border px-2 text-center'>{lead?.Fechalead.substr(0,10)}</td>
@@ -67,9 +76,7 @@ const Index = () => {
                 </tr>)}           
             </tbody>          
         </table>
-        <div className="bg-primary text-white rounded-md text-center my-1">
-            <b>Total Leads este mes: </b> {leads.length}
-        </div>
+        <TableFooter param={leads.filter(lead => lead?.CodigoInmobiliaria?.includes(search))} text="Total Propiedades Comerciales" page={page} setPage={setPage} />
     </div>  
   )
 }
