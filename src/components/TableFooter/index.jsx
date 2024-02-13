@@ -12,7 +12,7 @@ const index = ({ param, text, page, setPage }) => {
     }
 
     return (
-        <div className="bg-primary flex justify-between px-4 text-white rounded-md text-center my-1">
+        <div className="bg-primary flex justify-between px-4 py-2 text-white rounded-md text-center my-1">
             <Image 
             src="/assets/arrow.svg" 
             alt="left-arrow.svg" 

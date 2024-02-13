@@ -42,14 +42,14 @@ const Index = () => {
     }, [])
 
   return (
-    <div className="bg-primary max-w-5xl max-h-[80vh] overflow-auto py-1 rounded-md">
+    <div className="bg-primary w-[60rem] overflow-auto py-1 rounded-md">
         <Loader active={loaderActive} />
         <div className="flex justify-between my-2 w-4/5 mx-auto items-center">
             <h1 className="text-center text-3xl font-bold text-auxiliar">Mis Leads</h1>
             <SearchSection search={search} setSearch={setSearch} setPage={setPage} />
         </div>
-        <table className="table table-hover bg-auxiliar">
-            <thead className='bg-secondary text-white'>
+        <table className="table table-hover bg-auxiliar w-full">
+            <thead className='bg-secondary text-white h-10'>
                 <tr>        
                     <th className='border px-2 text-sm font-bold'> # </th>                    
                     <th className='border px-2 text-sm font-bold'> Código </th>                    
@@ -69,14 +69,19 @@ const Index = () => {
                     <td className='border px-2 text-center'>{id + 1}</td>
                     <td className='border px-2 text-center'>{lead?.CodigoInmobiliaria}</td>
                     <td className='border px-2 text-center'>{lead?.NombreR?.substring(0,30) || lead?.NombreC?.substring(0,30)}</td>
-                    <td className='border px-2 text-center'>{lead?.Nombrecliente}</td>
-                    <td className='border px-2 text-center'>{lead?.Numerocliente}</td>
+                    <td className='border px-2 text-center'>{lead?.Nombrecliente.substr(0,15)}</td>
+                    <td className='border px-2 text-center'>{lead?.Numerocliente.substr(2,10)}</td>
                     <td className='border px-2 text-center'>{lead?.Fechalead.substr(0,10)}</td>
                     <td className='border px-2 text-center'>{lead?.Fechalead.substr(11,5)}</td>
                 </tr>)}           
             </tbody>          
         </table>
-        <TableFooter param={leads.filter(lead => lead?.CodigoInmobiliaria?.includes(search))} text="Total Propiedades Comerciales" page={page} setPage={setPage} />
+        <TableFooter 
+        param={leads.filter(lead => lead?.CodigoInmobiliaria?.includes(search))} 
+        text="Total Leads este mes:" 
+        page={page} 
+        setPage={setPage} 
+        />
     </div>  
   )
 }

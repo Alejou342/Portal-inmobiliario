@@ -7,6 +7,7 @@ import Loader from '@/components/Loader'
 import { useRouter } from 'next/navigation'
 import { formatPrice } from '@/utils/formatPrice'
 import TableFooter from '@/components/TableFooter'
+import TableHeader from '@/components/TableHeader'
 import ModalGeneral from '@/containers/ModalGeneral'
 import SearchSection from '@/components/SearchSection'
 import ComercialContent from '@/components/ComercialContent'
@@ -57,28 +58,17 @@ const Index = () => {
     }
 
   return (
-    <div className="bg-primary max-w-5xl overflow-auto max-h-[80vh] py-1 rounded-md">
+    <div className="bg-primary w-[60rem] overflow-auto py-1 rounded-md">
         <Loader active={loaderActive} />
         <ModalGeneral state={openModal} setState={setOpenModal}>
             <ComercialContent setState={setOpenModal} />
         </ModalGeneral>
-        <div className="flex justify-between my-2 w-4/5 mx-auto items-center">
+        <div className="flex justify-between my-2 px-8 mx-auto items-center">
             <h1 className="text-center text-3xl font-bold text-auxiliar">Mis Propiedades Comerciales</h1>
             <SearchSection search={search} setSearch={setSearch} setPage={setPage} />
         </div>
-        <table className="table table-hover bg-auxiliar">
-            <thead className='bg-secondary text-white h-10'>
-                <tr>        
-                    <th className='border text-sm px-2 font-bold'> # </th>                    
-                    <th className='border text-sm px-2 font-bold'>Código</th>                    
-                    <th className='border text-sm px-2 font-bold'>Nombre Inmueble</th>
-                    <th className='border text-sm px-2 font-bold'>Tipo Negocio</th>                                              
-                    <th className='border text-sm px-2 font-bold'>Precio Inmueble</th>                                              
-                    <th className='border text-sm px-2 font-bold'>Estado</th>                                              
-                    <th className='border text-sm px-2 font-bold'>Editar</th>                                              
-                    <th className='border text-sm px-2 font-bold'>Eliminar</th>                                              
-                </tr>
-            </thead>
+        <table className="table table-hover bg-auxiliar w-full">
+            <TableHeader columns={['#', 'Código', 'Nombre Inmueble', 'Tipo Negocio', 'Precio Inmueble', 'Estado', 'Editar', 'Eliminar']} />
             <tbody>
                 {inmuebles
                 .filter(inmueble => inmueble.CodigoInmobiliaria?.includes(search))
@@ -104,7 +94,12 @@ const Index = () => {
                 </tr>)}           
             </tbody>          
         </table>
-        <TableFooter param={inmuebles.filter(inmueble => inmueble.CodigoInmobiliaria?.includes(search))} text="Total Propiedades Comerciales" page={page} setPage={setPage} />
+        <TableFooter 
+        param={inmuebles.filter(inmueble => inmueble.CodigoInmobiliaria?.includes(search))} 
+        text="Total Propiedades Comerciales:" 
+        page={page} 
+        setPage={setPage} 
+        />
     </div>  
   )
 }
