@@ -15,6 +15,7 @@ import ComercialContent from '@/components/ComercialContent'
 const Index = () => {
 
     const router = useRouter()
+    const [rol, setRol] = React.useState('')
     const [page, setPage] = React.useState(0)
     const [search, setSearch] = React.useState("")
     const [inmuebles, setInmuebles] = React.useState([])
@@ -24,6 +25,7 @@ const Index = () => {
     React.useEffect(() => {
         try {
             const userInfo = JSON.parse(Cookies.get('SessionInfo'))
+            setRol(userInfo?.answer[0]?.rol)
             setLoaderActive(true)
 
             const userComercials = `${process.env.BACK_LINK}/api/UserComercial/${userInfo?.answer[0]?.Correo_Inmobiliaria}`
@@ -68,7 +70,9 @@ const Index = () => {
             <SearchSection search={search} setSearch={setSearch} setPage={setPage} />
         </div>
         <table className="table table-hover bg-auxiliar w-full">
-            <TableHeader columns={['#', 'Código', 'Nombre Inmueble', 'Tipo Negocio', 'Precio Inmueble', 'Estado', 'Editar', 'Eliminar']} />
+            {rol == 'user' 
+            ? <TableHeader columns={['#', 'Código', 'Nombre Inmueble', 'Tipo Negocio', 'Precio Inmueble', 'Estado', 'Editar', 'Eliminar']} />
+            : <TableHeader columns={['#', 'Código', 'Nombre Inmueble', 'Tipo Negocio', 'Precio Inmueble', 'Estado', 'Editar']} />}
             <tbody>
                 {inmuebles
                 .filter(inmueble => inmueble.CodigoInmobiliaria?.includes(search))
@@ -88,9 +92,10 @@ const Index = () => {
                     <td className='border px-2 text-center cursor-pointer' onClick={() => handleNavigate(`/propertie/comercial/edit/${inmueble.ID_Comercial}`, inmueble.ID_Comercial)}>
                         <Image src="/assets/edit.svg" alt="edit.svg" width={20} height={20} className="mx-auto" />
                     </td> 
+                    {rol == 'user' && 
                     <td className='border px-2 text-center cursor-pointer' onClick={() => handleDelete(inmueble.ID_Comercial)}>
                         <Image src="/assets/delete.svg" alt="delete.svg" width={20} height={20} className="mx-auto" />
-                    </td>
+                    </td>}
                 </tr>)}           
             </tbody>          
         </table>

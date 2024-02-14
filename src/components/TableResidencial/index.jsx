@@ -33,16 +33,19 @@ const fetchDataResidencial = async () => {
 const Index = () => {
 
     const [search, setSearch] = React.useState("")
+    const [rol, setRol] = React.useState('')
     const [openModal, setOpenModal] = React.useState(false)
     const [page, setPage] = React.useState(0)
 
     const [inmuebles, setInmuebles] = React.useState([])
     const [loaderActive, setLoaderActive] = React.useState(true)
     const router = useRouter()
-
+    
     const memoizedFetchData = React.useMemo(() => fetchDataResidencial(), [])
-
+    
     React.useEffect(() => {
+        const userInfo = JSON.parse(Cookies.get('SessionInfo'));
+        setRol(userInfo?.answer[0]?.rol)
         const fetchDataAndSetState = async () => {
             try {
                 const data = await memoizedFetchData
@@ -77,7 +80,9 @@ const Index = () => {
             <SearchSection search={search} setSearch={setSearch} setPage={setPage} />
         </div>
         <table className="table table-hover bg-auxiliar w-full">
-            <TableHeader columns={['#', 'Código', 'Nombre Inmueble', 'Tipo Negocio', 'Precio Inmueble', 'Estado', 'Editar', 'Eliminar']} />
+            {rol == 'user'
+            ? <TableHeader columns={['#', 'Código', 'Nombre Inmueble', 'Tipo Negocio', 'Precio Inmueble', 'Estado', 'Editar', 'Eliminar']} />
+            : <TableHeader columns={['#', 'Código', 'Nombre Inmueble', 'Tipo Negocio', 'Precio Inmueble', 'Estado', 'Editar']} />}
             <tbody>
                 {inmuebles
                 .filter(inmueble => inmueble.CodigoInmobiliaria?.includes(search))
@@ -97,9 +102,10 @@ const Index = () => {
                     <td className='border px-2 text-center cursor-pointer' onClick={() => handleNavigate(`/propertie/residencial/edit/${inmueble.ID_Residencial}`, inmueble.ID_Residencial)}>
                         <Image src="/assets/edit.svg" alt="edit.svg" width={20} height={20} className="mx-auto" />
                     </td> 
+                    {rol == 'user' && 
                     <td className='border px-2 text-center cursor-pointer' onClick={() => handleDelete(inmueble.ID_Residencial)}>
                         <Image src="/assets/delete.svg" alt="delete.svg" width={20} height={20} className="mx-auto" />
-                    </td>
+                    </td>}
                 </tr>)}           
             </tbody>          
         </table>
