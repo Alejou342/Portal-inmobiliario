@@ -35,6 +35,14 @@ const Index = () => {
             />
             <FormSection 
                 type="text"
+                id="CodigoInmobiliaria"
+                placeholder="Numero de 7 dígitos"
+                label="Código"
+                onChange={handleInputChange}
+                value={formData.CodigoInmobiliaria}
+            />
+            <FormSection 
+                type="text"
                 id="Nombre"
                 placeholder="Ej: Bonita casa en Laureles"
                 label="Nombre de la propiedad"

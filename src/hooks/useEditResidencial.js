@@ -12,6 +12,7 @@ const useEditResidencial = () => {
     const [formData, setFormData] = React.useState({
         // Idinmobiliaria: 0,
         Tiporesidencia: "",
+        CodigoInmobiliaria: "",
         Tiposervicio: "",
         Estado: "",
         Nombre: "",
@@ -45,6 +46,7 @@ const useEditResidencial = () => {
                     // Idinmobiliaria: result?.data[0]?.ID_Inmobiliaria,
                     Tiporesidencia: result?.data[0]?.TipoR,
                     Tiposervicio: result?.data[0]?.Tipo_ServicioR,
+                    CodigoInmobiliaria: result?.data[0]?.CodigoInmobiliaria,
                     Ciudad: result?.data[0]?.CiudadR,
                     Estado: result?.data[0]?.EstadoR,
                     Nombre: result?.data[0]?.NombreR,

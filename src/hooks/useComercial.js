@@ -10,6 +10,7 @@ const useComercial = () => {
     const [formData, setFormData] = React.useState({
         Idinmobiliaria: 0,
         Tipocomercial: "",
+        CodigoInmobiliaria: "",
         Tiposervicio: "",
         Estado: "",
         Nombre: "",

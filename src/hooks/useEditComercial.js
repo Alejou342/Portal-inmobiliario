@@ -11,8 +11,8 @@ const useEditComercial = () => {
     const [alert, setAlert] = React.useState(null)
     const [comercialId, setComercialId] = React.useState(null)
     const [formData, setFormData] = React.useState({
-        // Idinmobiliaria: 0,
         Tipocomercial: "",
+        CodigoInmobiliaria: "",
         Tiposervicio: "",
         Estado: "",
         Nombre: "",
@@ -42,6 +42,7 @@ const useEditComercial = () => {
                     // Idinmobiliaria: result?.data[0]?.ID_Inmobiliaria,
                     Tipocomercial: result?.data[0]?.TipoC,
                     Tiposervicio: result?.data[0]?.Tipo_ServicioC,
+                    CodigoInmobiliaria: result?.data[0]?.CodigoInmobiliaria,
                     Ciudad: result?.data[0]?.CiudadC,
                     Estado: result?.data[0]?.EstadoC,
                     Nombre: result?.data[0]?.NombreC,
