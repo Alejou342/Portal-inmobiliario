@@ -70,6 +70,13 @@ const Index = () => {
         >
           {user?.rol == 'admin' ? 'Inmobiliarias' : 'Añadir propiedad'} 
         </Button>
+        {(user?.rol == 'admin' || user?.rol == 'user') && <Button 
+          onClick={() => handleChange(5)} 
+          type="button" 
+          className={`text-xs ${item == 5 ? styles[0] : styles[1]}`} 
+        >
+          Huella
+        </Button>}
       </div>
       <UserInfo props = {{user, handleLogout}} />
     </aside>

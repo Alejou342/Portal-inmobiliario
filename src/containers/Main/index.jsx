@@ -1,4 +1,5 @@
 "use client"
+import './index.css'
 import React from 'react'
 import Cookies from 'js-cookie'
 import Form from '@/containers/Form'
@@ -6,11 +7,11 @@ import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
 import LeadTable from '@/components/LeadTable'
 import { useItem } from '@/context/ItemContext'
+import TraceTable from '@/components/TraceTable'
+import LimitButton from '@/components/LimitButton'
 import TableComercial from '@/components/TableComercial'
 import TableInmobiliary from '@/components/TableInmobiliary'
 import TableResidencial from '@/components/TableResidencial'
-import LimitButton from '@/components/LimitButton'
-import './index.css'
 
 const Index = () => {
 
@@ -35,7 +36,8 @@ const Index = () => {
     { key: 'Comercial', component: <TableComercial key="Comercial" />},
     { key: 'Residencial', component: <TableResidencial key="Residencial" />},
     { key: 'Lead', component: <LeadTable key="Lead" />},
-    { key: 'Form', component: user?.rol == 'admin' ?  <TableInmobiliary key="Inmobiliary" /> : <Form key="Form" />}
+    { key: 'Form', component: user?.rol == 'admin' ?  <TableInmobiliary key="Inmobiliary" /> : <Form key="Form" />},
+    { key: 'Trace', component: <TraceTable /> },
   ]
 
     return (

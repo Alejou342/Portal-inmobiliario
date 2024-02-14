@@ -80,7 +80,7 @@ const Index = () => {
             <SearchSection search={search} setSearch={setSearch} setPage={setPage} />
         </div>
         <table className="table table-hover bg-auxiliar w-full">
-            {rol == 'user'
+            {(rol == 'user' || rol == 'admin')
             ? <TableHeader columns={['#', 'Código', 'Nombre Inmueble', 'Tipo Negocio', 'Precio Inmueble', 'Estado', 'Editar', 'Eliminar']} />
             : <TableHeader columns={['#', 'Código', 'Nombre Inmueble', 'Tipo Negocio', 'Precio Inmueble', 'Estado', 'Editar']} />}
             <tbody>
@@ -102,7 +102,7 @@ const Index = () => {
                     <td className='border px-2 text-center cursor-pointer' onClick={() => handleNavigate(`/propertie/residencial/edit/${inmueble.ID_Residencial}`, inmueble.ID_Residencial)}>
                         <Image src="/assets/edit.svg" alt="edit.svg" width={20} height={20} className="mx-auto" />
                     </td> 
-                    {rol == 'user' && 
+                    {(rol == 'user' || rol == 'admin') && 
                     <td className='border px-2 text-center cursor-pointer' onClick={() => handleDelete(inmueble.ID_Residencial)}>
                         <Image src="/assets/delete.svg" alt="delete.svg" width={20} height={20} className="mx-auto" />
                     </td>}
