@@ -70,7 +70,7 @@ const Index = () => {
                     <td className='border px-2 text-center'>{inmueble.Correo}</td>
                     <td className='border px-2 text-center'>{inmueble.Fechaingreso.substr(0,10)}</td>
                     <td className='border px-2 text-center'>{inmueble.Fechaingreso.substr(11,5)}</td>
-                    <td className='border px-2 text-center'>{inmueble.Personaencargada}</td>
+                    <td className='border px-2 text-center'>{inmueble.Personaencargada.substr(0,15)}...</td>
                 </tr>)}           
             </tbody>          
         </table>

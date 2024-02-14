@@ -91,7 +91,7 @@ const Index = () => {
                 <tr key={inmueble.ID_Residencial} className="hover:bg-slate-300">
                     <td className='border px-2 text-center'>{id + 1}</td>
                     <td className='border px-2 text-center'>{inmueble.CodigoInmobiliaria}</td>
-                    <td className='border px-2 text-center cursor-pointer' onClick={() => handleNavigate(`/propertie/residencial/${inmueble.ID_Residencial}`, inmueble.ID_Residencial)}>{inmueble?.NombreR?.substring(0,35)}</td>
+                    <td className='border px-2 text-center cursor-pointer' onClick={() => handleNavigate(`/propertie/residencial/${inmueble.ID_Residencial}`, inmueble.ID_Residencial)}>{inmueble?.NombreR?.substring(0,35)}...</td>
                     <td className='border px-2 text-center'>{inmueble.Tipo_ServicioR}</td>
                     <td className='border px-2 text-center'>{formatPrice(inmueble.PrecioR)}</td>
                     <td className='border px-2'>
