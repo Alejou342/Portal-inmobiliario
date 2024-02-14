@@ -19,7 +19,7 @@ const Index = () => {
             <tbody>
                 {inmobiliarias
                 .filter(inmobiliaria => inmobiliaria.rol !== 'admin')
-                .map((inmobiliaria, id) => 
+                .map(inmobiliaria => 
                 <tr key={inmobiliaria.ID_Inmobiliaria} className="hover:bg-slate-300">
                     <td className='border px-2 text-center'>{inmobiliaria.ID_Inmobiliaria}</td>
                     <td className='border px-2 text-center cursor-pointer'>{inmobiliaria.Nombre_Inmobiliaria}</td>

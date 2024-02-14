@@ -12,6 +12,25 @@ import ModalGeneral from '@/containers/ModalGeneral'
 import SearchSection from '@/components/SearchSection'
 import ComercialContent from '@/components/ComercialContent'
 
+const fetchDataComercial = async () => {
+    try {
+        const userInfo = JSON.parse(Cookies.get('SessionInfo'))
+        const adminComercials = `${process.env.BACK_LINK}/api/getAllC`
+        const userComercials = `${process.env.BACK_LINK}/api/UserComercial/${userInfo?.answer[0]?.Correo_Inmobiliaria}`
+    
+        const response = await axios.get(userInfo?.answer[0]?.rol == 'admin' ? adminComercials : userComercials ,  {
+            headers: {
+                "Authorization": `Bearer ${userInfo?.accesToken}`
+            }
+        })
+
+        return response.data    
+    } catch (error) {
+        console.error(error)
+        throw error
+    }
+}
+
 const Index = () => {
 
     const router = useRouter()
@@ -20,34 +39,26 @@ const Index = () => {
     const [search, setSearch] = React.useState("")
     const [inmuebles, setInmuebles] = React.useState([])
     const [openModal, setOpenModal] = React.useState(false)
-    const [loaderActive, setLoaderActive] = React.useState(false)
+    const [loaderActive, setLoaderActive] = React.useState(true)
+
+    const memoizedFetchData = React.useMemo(() => fetchDataComercial(), [])
 
     React.useEffect(() => {
-        try {
-            const userInfo = JSON.parse(Cookies.get('SessionInfo'))
-            setRol(userInfo?.answer[0]?.rol)
-            setLoaderActive(true)
-
-            const userComercials = `${process.env.BACK_LINK}/api/UserComercial/${userInfo?.answer[0]?.Correo_Inmobiliaria}`
-            const adminComercials = `${process.env.BACK_LINK}/api/getAllC`
-
-            axios.get(userInfo?.answer[0]?.rol == 'admin' ? adminComercials : userComercials ,  {
-                headers: {
-                    "Authorization": `Bearer ${userInfo?.accesToken}`
-                }
-            })
-            .then((result) => {
-                setInmuebles(result.data)
+        const userInfo = JSON.parse(Cookies.get('SessionInfo'))
+        setRol(userInfo?.answer[0]?.rol)
+        const fetchDataAndSetState = async () => {
+            try {
+                const data = await memoizedFetchData
+                setInmuebles(data)
                 setLoaderActive(false)
-            })
-            .catch((error) => { 
-                console.error(error) 
+            } catch (error) {
+                console.error(error)
                 setLoaderActive(false)
-            })
-        } catch (error) {
-            console.error(error)
+            }
         }
-    }, [])
+
+        fetchDataAndSetState()
+    }, [memoizedFetchData])
 
     const handleNavigate = (url, id) => {
         Cookies.set('ComercialID', id)

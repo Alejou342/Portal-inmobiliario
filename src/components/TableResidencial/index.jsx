@@ -32,14 +32,13 @@ const fetchDataResidencial = async () => {
 
 const Index = () => {
 
-    const [search, setSearch] = React.useState("")
-    const [rol, setRol] = React.useState('')
-    const [openModal, setOpenModal] = React.useState(false)
-    const [page, setPage] = React.useState(0)
-
-    const [inmuebles, setInmuebles] = React.useState([])
-    const [loaderActive, setLoaderActive] = React.useState(true)
     const router = useRouter()
+    const [rol, setRol] = React.useState('')
+    const [page, setPage] = React.useState(0)
+    const [search, setSearch] = React.useState("")
+    const [inmuebles, setInmuebles] = React.useState([])
+    const [openModal, setOpenModal] = React.useState(false)
+    const [loaderActive, setLoaderActive] = React.useState(true)
     
     const memoizedFetchData = React.useMemo(() => fetchDataResidencial(), [])
     
@@ -52,6 +51,7 @@ const Index = () => {
                 setInmuebles(data)
                 setLoaderActive(false)
             } catch (error) {
+                console.error(error)
                 setLoaderActive(false)
             }
         }
