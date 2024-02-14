@@ -30,7 +30,7 @@ const Index = () => {
         setIsHover={setIsHover} 
         setOpenModal={() => {}} 
         text="¡Solo puedes definir el límite de Leads el día 1 y 2 de cada mes!" 
-        className={{i: "cursor-not-allowed", p: "text-red-500"}} />}
+        className={{i: "cursor-not-allowed", p: "text-red-500 right-[5%] bottom-9"}} />}
     </>
   )
 }

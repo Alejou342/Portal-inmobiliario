@@ -8,6 +8,7 @@ import Sidebar from '@/components/Sidebar'
 import LeadTable from '@/components/LeadTable'
 import { useItem } from '@/context/ItemContext'
 import TraceTable from '@/components/TraceTable'
+import TrashButton from '@/components/TrashButton'
 import LimitButton from '@/components/LimitButton'
 import TableComercial from '@/components/TableComercial'
 import TableInmobiliary from '@/components/TableInmobiliary'
@@ -49,7 +50,10 @@ const Index = () => {
             {views[item - 1]?.component}
           </div>
         </div>
+        <div className="flex">
+        {(rol == 'admin' || rol == 'user') ? <TrashButton /> : null}
         {rol == 'admin' ? null : <LimitButton />}
+        </div>
       </div>
     )
 }
