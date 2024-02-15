@@ -21,7 +21,7 @@ const Index = () => {
         setIsHover={setIsHover} 
         setOpenModal={setOpenModal} 
         text="Papelera de reciclaje" 
-        className= {{i: "cursor-pointer bottom-[10%]", p: "text-black right-[5%] bottom-[10%]"}} />
+        className= {{i: "cursor-pointer", p: "text-black right-[5%] bottom-9"}} />
     </>
   )
 }
