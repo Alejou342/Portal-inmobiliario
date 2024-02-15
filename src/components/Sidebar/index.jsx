@@ -16,7 +16,7 @@ const Index = () => {
 
     React.useEffect(() => {
       try {
-        const userLogged = JSON.parse(Cookies.get('SessionInfo'))
+        const userLogged = JSON.parse(Cookies?.get('SessionInfo'))
 
         if (userLogged) {
           setUser(userLogged?.answer[0])

@@ -14,7 +14,7 @@ const Page = ({ params }) => {
   React.useEffect(() => {
     try {
       setLoaderActive(true)
-      const sessionInfo = JSON.parse(Cookies.get('SessionInfo'))
+      const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
       axios.get(`${process.env.BACK_LINK}/api/residenciaById/${params.id}`, {
           headers: {
               "Authorization": `Bearer ${sessionInfo.accesToken}`

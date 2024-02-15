@@ -33,7 +33,7 @@ const useEditResidencial = () => {
     React.useEffect(() => {
         try {
             const residencialId = Cookies.get('ResidencialID')
-            const sessionInfo = JSON.parse(Cookies.get('SessionInfo'))
+            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
             setResidencialId(residencialId)
     
             axios.get(`${process.env.BACK_LINK}/api/residenciaById/${residencialId}`, {
@@ -111,7 +111,7 @@ const useEditResidencial = () => {
         e.preventDefault()
 
         try {
-            const sessionInfo = JSON.parse(Cookies.get('SessionInfo'))
+            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
             const formDataNumerico = {
                 ...formData,
                 Areaconstruida: parseInt(formData.Areaconstruida),

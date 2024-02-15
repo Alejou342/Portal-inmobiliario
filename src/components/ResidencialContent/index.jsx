@@ -13,7 +13,7 @@ const Index = ({ setState }) => {
         try {
             setLoaderActive(true)
             const id = Cookies.get('ResidencialID')
-            const sessionInfo = JSON.parse(Cookies.get('SessionInfo'))
+            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
             setId(id)
             axios.get(`${process.env.BACK_LINK}/api/residenciaById/${id}`, {
                 headers: {
@@ -36,7 +36,7 @@ const Index = ({ setState }) => {
     const handleDelete = (id) => {
         try {
             setLoaderActive(true)
-            const sessionInfo = JSON.parse(Cookies.get('SessionInfo'))
+            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
             axios.delete(`${process.env.BACK_LINK}/api/deleteResidencial/${id}`, {
                 headers: {
                     "Authorization": `Bearer ${sessionInfo.accesToken}`

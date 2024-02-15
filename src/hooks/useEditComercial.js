@@ -29,7 +29,7 @@ const useEditComercial = () => {
     React.useEffect(() => {
         try {
             const comercialId = Cookies.get('ComercialID')
-            const sessionInfo = JSON.parse(Cookies.get('SessionInfo'))
+            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
             setComercialId(comercialId)
     
             axios.get(`${process.env.BACK_LINK}/api/comercialById/${comercialId}`, {
@@ -104,7 +104,7 @@ const useEditComercial = () => {
         e.preventDefault()
 
         try {
-            const sessionInfo = JSON.parse(Cookies.get('SessionInfo'))
+            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
             const formDataNumerico = {
                 ...formData,
                 Areaconstruida: parseInt(formData.Areaconstruida),

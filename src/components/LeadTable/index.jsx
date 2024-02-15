@@ -8,7 +8,7 @@ import SearchSection from '@/components/SearchSection'
 
 const fetchDataLeads = async () => {
     try {
-        const userInfo = JSON.parse(Cookies.get('SessionInfo'))
+        const userInfo = JSON.parse(Cookies?.get('SessionInfo'))
 
         const adminLeads = [
             axios.get(`${process.env.BACK_LINK}/api/getAllLeadsR`),

@@ -14,7 +14,7 @@ import ComercialContent from '@/components/ComercialContent'
 
 const fetchDataComercial = async () => {
     try {
-        const userInfo = JSON.parse(Cookies.get('SessionInfo'))
+        const userInfo = JSON.parse(Cookies?.get('SessionInfo'))
         const adminComercials = `${process.env.BACK_LINK}/api/getAllC`
         const userComercials = `${process.env.BACK_LINK}/api/UserComercial/${userInfo?.answer[0]?.Correo_Inmobiliaria}`
     
@@ -44,7 +44,7 @@ const Index = () => {
     const memoizedFetchData = React.useMemo(() => fetchDataComercial(), [])
 
     React.useEffect(() => {
-        const userInfo = JSON.parse(Cookies.get('SessionInfo'))
+        const userInfo = JSON.parse(Cookies?.get('SessionInfo'))
         setRol(userInfo?.answer[0]?.rol)
         const fetchDataAndSetState = async () => {
             try {
@@ -81,9 +81,7 @@ const Index = () => {
             <SearchSection search={search} setSearch={setSearch} setPage={setPage} />
         </div>
         <table className="table table-hover bg-auxiliar w-full">
-            {(rol == 'user' || rol == 'admin') 
-            ? <TableHeader columns={['#', 'Código', 'Nombre Inmueble', 'Tipo Negocio', 'Precio Inmueble', 'Estado', 'Editar', 'Eliminar']} />
-            : <TableHeader columns={['#', 'Código', 'Nombre Inmueble', 'Tipo Negocio', 'Precio Inmueble', 'Estado', 'Editar']} />}
+            <TableHeader columns={['#', 'Código', 'Nombre Inmueble', 'Tipo Negocio', 'Precio Inmueble', 'Estado', 'Editar', 'Eliminar']} />
             <tbody>
                 {inmuebles
                 .filter(inmueble => inmueble.CodigoInmobiliaria?.includes(search))
@@ -103,10 +101,9 @@ const Index = () => {
                     <td className='border px-2 text-center cursor-pointer' onClick={() => handleNavigate(`/propertie/comercial/edit/${inmueble.ID_Comercial}`, inmueble.ID_Comercial)}>
                         <Image src="/assets/edit.svg" alt="edit.svg" width={20} height={20} className="mx-auto" />
                     </td> 
-                    {(rol == 'user' || rol == 'admin') && 
                     <td className='border px-2 text-center cursor-pointer' onClick={() => handleDelete(inmueble.ID_Comercial)}>
                         <Image src="/assets/delete.svg" alt="delete.svg" width={20} height={20} className="mx-auto" />
-                    </td>}
+                    </td>
                 </tr>)}           
             </tbody>          
         </table>

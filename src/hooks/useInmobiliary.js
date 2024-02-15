@@ -10,7 +10,7 @@ const useInmobiliary = () => {
 
     React.useEffect(() => {
         try {
-            const sessionInfo = JSON.parse(Cookies.get('SessionInfo'))
+            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
             setLoaderActive(true)
             axios.get(`${process.env.BACK_LINK}/api/getI`, {
                 headers: {

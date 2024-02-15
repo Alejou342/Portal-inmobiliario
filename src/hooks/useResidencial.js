@@ -30,7 +30,7 @@ const useResidencial = () => {
 
     React.useEffect(() => {
         try {
-            const sessionInfo = JSON.parse(Cookies.get('SessionInfo'))
+            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
             setFormData({...formData, ["Idinmobiliaria"]: Number(sessionInfo?.answer[0]?.ID_Inmobiliaria)})
         } catch (error) {
             console.error(error)
@@ -81,7 +81,7 @@ const useResidencial = () => {
         e.preventDefault()
         
         try {
-            const sessionInfo = JSON.parse(Cookies.get('SessionInfo'))
+            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
             const formDataNumerico = {
                 ...formData,
                 Areaconstruida: parseInt(formData.Areaconstruida),

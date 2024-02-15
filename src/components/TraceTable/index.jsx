@@ -9,7 +9,7 @@ import SearchSection from '@/components/SearchSection'
 
 const fetchDataResidencial = async () => {
     try {
-        const userInfo = JSON.parse(Cookies.get('SessionInfo'));
+        const userInfo = JSON.parse(Cookies?.get('SessionInfo'));
         const adminTraces = `${process.env.BACK_LINK}/api/AllHuellas`;
         const userTraces = `${process.env.BACK_LINK}/api/getHuellas/${userInfo?.answer[0]?.Correo_Inmobiliaria}`;
 
@@ -70,7 +70,7 @@ const Index = () => {
                     <td className='border px-2 text-center'>{inmueble.Correo}</td>
                     <td className='border px-2 text-center'>{inmueble.Fechaingreso.substr(0,10)}</td>
                     <td className='border px-2 text-center'>{inmueble.Fechaingreso.substr(11,5)}</td>
-                    <td className='border px-2 text-center'>{inmueble.Personaencargada.substr(0,15)}...</td>
+                    <td className='border px-2 text-center'>{inmueble.Personaencargada.substr(0,15)}</td>
                 </tr>)}           
             </tbody>          
         </table>

@@ -12,7 +12,7 @@ const Index = () => {
 
     React.useEffect(() => {
         try {
-            const userInfo = JSON.parse(Cookies.get('SessionInfo'))
+            const userInfo = JSON.parse(Cookies?.get('SessionInfo'))
             setRol(userInfo?.answer[0]?.rol)
 
             Promise.all([

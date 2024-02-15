@@ -14,7 +14,7 @@ const Index = ({ setState }) => {
     React.useEffect(() => {
         try {
             setLoaderActive(true)
-            const userInfo = JSON.parse(Cookies.get('SessionInfo'))
+            const userInfo = JSON.parse(Cookies?.get('SessionInfo'))
             Promise.all([
                 axios.get(`${process.env.BACK_LINK}/api/UserLeadResidencia/${userInfo?.answer[0]?.Correo_Inmobiliaria}`),
                 axios.get(`${process.env.BACK_LINK}/api/UserLeadComercial/${userInfo?.answer[0]?.Correo_Inmobiliaria}`)  
@@ -39,7 +39,7 @@ const Index = ({ setState }) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         try {
-            const userInfo = JSON.parse(Cookies.get('SessionInfo'))
+            const userInfo = JSON.parse(Cookies?.get('SessionInfo'))
             axios.patch(`${process.env.BACK_LINK}/api/amountLead/${userInfo?.answer[0]?.Correo_Inmobiliaria}`, {
                 Numero: parseInt(value)
             })
