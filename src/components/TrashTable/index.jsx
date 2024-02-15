@@ -70,7 +70,7 @@ const Index = () => {
                 .filter(inmueble => inmueble.CodigoInmobiliaria?.includes(search))
                 .slice(page * 20, page * 20 + 20)
                 .map((inmueble, id) => 
-                <tr key={inmueble.ID_Residencial} className="hover:bg-slate-300">
+                <tr key={id + 1} className="hover:bg-slate-300">
                     <td className='border px-2 text-center'>{id + 1}</td>
                     <td className='border px-2 text-center'>{inmueble.CodigoInmobiliaria}</td>
                     <td className='border px-2 text-center cursor-pointer'>{inmueble?.Tipo}</td>

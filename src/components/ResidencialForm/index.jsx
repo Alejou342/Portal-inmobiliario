@@ -14,14 +14,14 @@ const Index = () => {
             <Loader active={loaderActive} />    
             <FormSelect 
                 id="Tiporesidencia"
-                label="Selecciona tipo de inmueble"
+                label="Tipo de inmueble"
                 value={formData.Tiporesidencia}
-                list={["Casa","Apartamento", "Finca"]} 
+                list={["Casa","Apartamento", "Finca", "Proyecto"]} 
                 onChange={handleInputChange}
             />
             <FormSelect 
                 id="Tiposervicio"
-                label="Selecciona tipo de servicio"
+                label="Tipo de servicio"
                 value={formData.Tiposervicio}
                 list={["Comprar", "Arrendar"]} 
                 onChange={handleInputChange}
@@ -81,34 +81,21 @@ const Index = () => {
                 onChange={handleInputChange}
                 value={formData.Parqueaderos}
             />
-            <FormSelect 
-                id="Ciudad"
-                label="Selecciona el municipio"
-                value={formData.Ciudad}
-                list={["Medellín", "La Estrella", "Sabaneta", "Envigado", "Itagüí", "Bello", "Caldas", "Otros"]} 
-                onChange={handleInputChange}
-            />
-            {formData.Ciudad == "Medellín" && <FormSelect 
-                id="Barrio"
-                label="Selecciona el barrio"
-                value={formData.Barrio}
-                list={["Belén", "Laureles", "Poblado", "Centro"]} 
-                onChange={handleInputChange}
-            />}
-            {formData.Tiporesidencia !== "Finca" && <FormSelect 
-                id="Unidadcerrada"
-                label="¿Unidad cerrada?"
-                value={formData.Unidadcerrada}
-                list={["Si", "No"]} 
-                onChange={handleInputChange}
-            />}
             <FormSection 
                 type="text"
-                id="Anoconstruccion"
-                placeholder="Ej: 2018"
-                label="Año de construcción"
+                id="Ciudad"
+                placeholder="Ej: Medellín"
+                label="Escribe el municipio"
                 onChange={handleInputChange}
-                value={formData.Anoconstruccion}
+                value={formData.Ciudad}
+            />
+            <FormSection 
+                type="text"
+                id="Barrio"
+                placeholder="Ej: Belén"
+                label="Escribe el barrio"
+                onChange={handleInputChange}
+                value={formData.Barrio}
             />
             <FormSection 
                 type="text"
@@ -126,14 +113,6 @@ const Index = () => {
                 onChange={handleInputChange}
                 value={formData.Precio}
             />
-            {formData.Tiporesidencia == "Finca" && <FormSection 
-                type="text"
-                id="Arealote"
-                placeholder="Ej: 85"
-                label="Area del lote m²"
-                onChange={handleInputChange}
-                value={formData.Arealote}
-            />}
             <div className="flex flex-col my-3 justify-center items-center gap-3">
                 <label className="text-sm"> Sube una imagen del inmueble </label>
                 <input type="file" id="Imagen" accept="image/*" onChange={uploadImage} />
