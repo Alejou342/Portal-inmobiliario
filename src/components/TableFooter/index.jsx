@@ -18,7 +18,7 @@ const index = ({ param, text, page, setPage }) => {
             alt="left-arrow.svg" 
             width={20} 
             height={20} 
-            className="rotate-180 cursor-pointer" 
+            className="rotate-180 cursor-pointer aspect-square" 
             onClick={handlePreview} 
             title="Página Anterior" />
                 <b> {text} &nbsp; {`${page* 20} / ${param?.length}`} </b>
@@ -27,7 +27,7 @@ const index = ({ param, text, page, setPage }) => {
             alt="right-arrow.svg" 
             width={20} 
             height={20} 
-            className="cursor-pointer" 
+            className="cursor-pointer aspect-square" 
             onClick={handleNext} 
             title="Página Siguiente" />
         </div>

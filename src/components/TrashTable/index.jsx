@@ -7,6 +7,8 @@ import TableHeader from '@/components/TableHeader'
 import ModalGeneral from '@/containers/ModalGeneral'
 import SearchSection from '@/components/SearchSection'
 import ResidencialContent from '@/components/ResidencialContent'
+import Link from 'next/link'
+import Image from 'next/image'
 
 const fetchDataResidencial = async () => {
     try {
@@ -73,7 +75,11 @@ const Index = () => {
                     <td className='border px-2 text-center'>{inmueble.CodigoInmobiliaria}</td>
                     <td className='border px-2 text-center cursor-pointer'>{inmueble?.Tipo}</td>
                     <td className='border px-2 text-center'>{inmueble.Personaencargada}</td>    
-                    <td className='border px-2 text-center'>{inmueble.Enlace}</td>
+                    <td className='border px-2 text-center w-[5%]'>
+                        <Link href={inmueble.Enlace} target='blank'>
+                            <Image src='/assets/link.svg' alt='link.svg' width={15} height={15} className='mx-auto' />
+                        </Link>
+                    </td>
                 </tr>)}    
             </tbody>          
         </table>
