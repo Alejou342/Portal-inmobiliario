@@ -49,7 +49,9 @@ const Index = () => {
         const fetchDataAndSetState = async () => {
             try {
                 const data = await memoizedFetchData
-                setLeads(data?.flat())
+                setLeads(
+                    data?.flat()
+                    .sort((a, b) => (a.Fechalead < b.Fechalead) ? 1 : ((b.Fechalead < a.Fechalead) ? -1 : 0)))
                 setLoaderActive(false)
             } catch (error) {
                 console.error(error)
@@ -59,6 +61,8 @@ const Index = () => {
 
         fetchDataAndSetState()
     }, [memoizedFetchData])
+
+    console.log(leads)
 
   return (
     <div className="bg-primary w-[60rem] overflow-auto py-1 rounded-md">

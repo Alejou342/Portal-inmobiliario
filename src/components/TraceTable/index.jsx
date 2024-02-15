@@ -30,7 +30,7 @@ const Index = () => {
 
     const [page, setPage] = React.useState(0)
     const [search, setSearch] = React.useState("")
-    const [inmuebles, setInmuebles] = React.useState([])
+    const [traces, setTraces] = React.useState([])
     const [loaderActive, setLoaderActive] = React.useState(true)
     
     const memoizedFetchData = React.useMemo(() => fetchDataResidencial(), [])
@@ -40,7 +40,7 @@ const Index = () => {
         const fetchDataAndSetState = async () => {
             try {
                 const data = await memoizedFetchData
-                setInmuebles(data)
+                setTraces(data.sort((a, b) => (a.Fechaingreso < b.Fechaingreso) ? 1 : ((b.Fechaingreso < a.Fechaingreso) ? -1 : 0)))
                 setLoaderActive(false)
             } catch (error) {
                 console.error(error)
@@ -61,7 +61,7 @@ const Index = () => {
         <table className="table table-hover bg-auxiliar w-full">
             <TableHeader columns={['#', 'Correo', 'Fecha Ingreso', 'Hora Ingreso', 'Encargado']} />
             <tbody>
-                {inmuebles
+                {traces
                 .filter(inmueble => inmueble.Correo?.includes(search))
                 .slice(page * 20, page * 20 + 20)
                 .map((inmueble, id) => 
@@ -75,7 +75,7 @@ const Index = () => {
             </tbody>          
         </table>
         <TableFooter 
-            param={inmuebles.filter(inmueble => inmueble.Correo?.includes(search))} 
+            param={traces.filter(inmueble => inmueble.Correo?.includes(search))} 
             text="Total ingresos:" 
             page={page} 
             setPage={setPage} 

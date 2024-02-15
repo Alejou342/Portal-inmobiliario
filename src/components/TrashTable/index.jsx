@@ -30,18 +30,14 @@ const fetchDataResidencial = async () => {
 
 const Index = () => {
 
-    const [rol, setRol] = React.useState('')
     const [page, setPage] = React.useState(0)
     const [search, setSearch] = React.useState("")
     const [inmuebles, setInmuebles] = React.useState([])
-    const [openModal, setOpenModal] = React.useState(false)
     const [loaderActive, setLoaderActive] = React.useState(true)
     
     const memoizedFetchData = React.useMemo(() => fetchDataResidencial(), [])
     
     React.useEffect(() => {
-        const userInfo = JSON.parse(Cookies?.get('SessionInfo'));
-        setRol(userInfo?.answer[0]?.rol)
         const fetchDataAndSetState = async () => {
             try {
                 const data = await memoizedFetchData
