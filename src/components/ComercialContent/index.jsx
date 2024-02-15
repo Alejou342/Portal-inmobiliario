@@ -37,7 +37,7 @@ const Index = ({ setState }) => {
         try {
             setLoaderActive(true)
             const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
-            axios.delete(`${process.env.BACK_LINK}/api/deleteComercial/${id}`, {
+            axios.post(`${process.env.BACK_LINK}/api/deleteComercial/${id}`, { Personaencargada: sessionInfo?.answer[0]?.Personaencargada }, {
                 headers: {
                     "Authorization": `Bearer ${sessionInfo.accesToken}`
                 }
