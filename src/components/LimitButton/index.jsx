@@ -23,7 +23,7 @@ const Index = () => {
         setIsHover={setIsHover} 
         setOpenModal={setOpenModal} 
         text="¡Definir límite mensual de Leads!" 
-        className= {{i: "cursor-pointer", p: "text-black"}} />
+        className= {{i: "cursor-pointer bottom-[10%]", p: "text-black right-[5%] bottom-[10%]"}} />
       : <AlertIcon 
         icon="warning-red" 
         isHover={isHover} 
