@@ -56,13 +56,13 @@ const Index = () => {
         <Loader active={loaderActive} />
         <div className="flex justify-between my-2 px-8 mx-auto items-center">
             <h1 className="text-center text-3xl font-bold text-auxiliar">Registro de ingresos</h1>
-            <SearchSection search={search} setSearch={setSearch} setPage={setPage} type='text' placeholder='correo' />
+            <SearchSection search={search} setSearch={setSearch} setPage={setPage} type='text' placeholder='encargado' />
         </div>
         <table className="table table-hover bg-auxiliar w-full">
             <TableHeader columns={['#', 'Correo', 'Fecha Ingreso', 'Hora Ingreso', 'Encargado']} />
             <tbody>
                 {traces
-                .filter(inmueble => inmueble.Correo?.includes(search))
+                .filter(inmueble => inmueble.Personaencargada?.toLowerCase().includes(search.toLowerCase()))
                 .slice(page * 20, page * 20 + 20)
                 .map((inmueble, id) => 
                 <tr key={id + 1} className="hover:bg-slate-300">
@@ -75,7 +75,7 @@ const Index = () => {
             </tbody>          
         </table>
         <TableFooter 
-            param={traces.filter(inmueble => inmueble.Correo?.includes(search))} 
+            param={traces.filter(inmueble => inmueble.Personaencargada?.toLowerCase().includes(search.toLowerCase()))} 
             text="Total ingresos:" 
             page={page} 
             setPage={setPage} 
