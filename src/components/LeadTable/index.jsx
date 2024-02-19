@@ -81,7 +81,7 @@ const Index = () => {
                 <tr key={id + 1} className="cursor-pointer hover:bg-slate-300">
                     <td className='border px-2 text-center'>{id + 1}</td>
                     <td className='border px-2 text-center'>{lead?.CodigoInmobiliaria}</td>
-                    <td className='border px-2 text-center'>{lead?.NombreR?.substring(0,30) || lead?.NombreC?.substring(0,30)}...</td>
+                    <td className='border px-2 text-center'>{lead?.NombreR?.substring(0,25) || lead?.NombreC?.substring(0,25)}...</td>
                     <td className='border px-2 text-center'>{lead?.Nombrecliente.substr(0,10)}...</td>
                     <td className='border px-2 text-center'>{lead?.Numerocliente.substr(2,10)}</td>
                     <td className='border px-2 text-center'>{lead?.Fechalead.substr(0,10)}</td>
