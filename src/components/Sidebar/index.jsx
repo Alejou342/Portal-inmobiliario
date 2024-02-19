@@ -61,19 +61,26 @@ const Index = () => {
           type="button" 
           className={`text-xs ${item == 3 ? styles[0] : styles[1]}`} 
         >
-          Leads
+          Leads Comerciales
         </Button>
         <Button 
           onClick={() => handleChange(4)} 
           type="button" 
           className={`text-xs ${item == 4 ? styles[0] : styles[1]}`} 
         >
-          {user?.rol == 'admin' ? 'Inmobiliarias' : 'Añadir propiedad'} 
+          Leads Residenciales
         </Button>
-        {(user?.rol == 'admin' || user?.rol == 'user') && <Button 
+        <Button 
           onClick={() => handleChange(5)} 
           type="button" 
           className={`text-xs ${item == 5 ? styles[0] : styles[1]}`} 
+        >
+          {user?.rol == 'admin' ? 'Inmobiliarias' : 'Añadir propiedad'} 
+        </Button>
+        {(user?.rol == 'admin' || user?.rol == 'user') && <Button 
+          onClick={() => handleChange(6)} 
+          type="button" 
+          className={`text-xs ${item == 6 ? styles[0] : styles[1]}`} 
         >
           Huella
         </Button>}

@@ -5,7 +5,8 @@ import Cookies from 'js-cookie'
 import Form from '@/containers/Form'
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
-import LeadTable from '@/components/LeadTable'
+import LeadRTable from '@/components/LeadRTable'
+import LeadCTable from '@/components/LeadCTable'
 import { useItem } from '@/context/ItemContext'
 import TraceTable from '@/components/TraceTable'
 import TrashButton from '@/components/TrashButton'
@@ -36,7 +37,8 @@ const Index = () => {
   const views = [
     { key: 'Residencial', component: <TableResidencial key="Residencial" />},
     { key: 'Comercial', component: <TableComercial key="Comercial" />},
-    { key: 'Lead', component: <LeadTable key="Lead" />},
+    { key: 'LeadC', component: <LeadCTable key="LeadC" />},
+    { key: 'LeadR', component: <LeadRTable key="LeadR" />},
     { key: 'Form', component: user?.rol == 'admin' ?  <TableInmobiliary key="Inmobiliary" /> : <Form key="Form" />},
     { key: 'Trace', component: <TraceTable /> },
   ]

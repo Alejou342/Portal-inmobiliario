@@ -10,15 +10,8 @@ const fetchDataLeads = async () => {
     try {
         const userInfo = JSON.parse(Cookies?.get('SessionInfo'))
 
-        const adminLeads = [
-            axios.get(`${process.env.BACK_LINK}/api/getAllLeadsR`),
-            axios.get(`${process.env.BACK_LINK}/api/getAllLeadsC`)
-        ]
-    
-        const userLeads = [
-            axios.get(`${process.env.BACK_LINK}/api/UserLeadResidencia/${userInfo?.answer[0]?.Correo_Inmobiliaria}`),
-            axios.get(`${process.env.BACK_LINK}/api/UserLeadComercial/${userInfo?.answer[0]?.Correo_Inmobiliaria}`)
-        ]
+        const adminLeads = [axios.get(`${process.env.BACK_LINK}/api/getAllLeadsR`)]
+        const userLeads = [axios.get(`${process.env.BACK_LINK}/api/UserLeadResidencia/${userInfo?.answer[0]?.Correo_Inmobiliaria}`)]
 
         let response
         if (userInfo?.answer[0]?.rol == 'admin') {
@@ -61,12 +54,35 @@ const Index = () => {
 
         fetchDataAndSetState()
     }, [memoizedFetchData]) 
+    
+    const handleChecked = async (lead) => {
+
+        try {
+            setLeads(prevLeads => {
+                return prevLeads.map(prevLead => {
+                    if (prevLead.Idlead === lead.Idlead) {
+                        return {
+                            ...prevLead,
+                            revisado: !prevLead.revisado
+                        };
+                    }
+                    return prevLead;
+                });
+            });
+
+            await axios.put(`${process.env.BACK_LINK}/api/Residencial/updateRevisado/${lead.Idlead}`
+            , { newStatus: !lead?.revisado });
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
 
   return (
     <div className="bg-primary w-[60rem] overflow-auto py-1 rounded-md">
         <Loader active={loaderActive} />
         <div className="flex justify-between my-2 w-4/5 mx-auto items-center">
-            <h1 className="text-center text-3xl font-bold text-auxiliar">Mis Leads</h1>
+            <h1 className="text-center text-3xl font-bold text-auxiliar">Mis Leads Residenciales</h1>
             <SearchSection search={search} setSearch={setSearch} setPage={setPage} />
         </div>
         <table className="table table-hover bg-auxiliar w-full">
@@ -85,14 +101,14 @@ const Index = () => {
                     <td className='border px-2 text-center'>{lead?.Fechalead.substr(0,10)}</td>
                     <td className='border px-2 text-center'>{lead?.Fechalead.substr(11,5)}</td>
                     <td className='border px-2 text-center'>
-                        <input type="checkbox" checked={id} />
+                        <input type="checkbox" checked={lead.revisado} onChange={() => handleChecked(lead)}/>
                     </td>
                 </tr>)}           
             </tbody>          
         </table>
         <TableFooter 
         param={leads.filter(lead => lead?.CodigoInmobiliaria?.includes(search))} 
-        text="Total Leads este mes:" 
+        text="Total Leads Residenciales este mes:" 
         page={page} 
         setPage={setPage}
         number={20}
