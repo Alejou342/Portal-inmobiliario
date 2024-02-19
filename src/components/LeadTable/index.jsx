@@ -60,9 +60,7 @@ const Index = () => {
         }
 
         fetchDataAndSetState()
-    }, [memoizedFetchData])
-
-    console.log(leads)
+    }, [memoizedFetchData]) 
 
   return (
     <div className="bg-primary w-[60rem] overflow-auto py-1 rounded-md">
@@ -72,7 +70,7 @@ const Index = () => {
             <SearchSection search={search} setSearch={setSearch} setPage={setPage} />
         </div>
         <table className="table table-hover bg-auxiliar w-full">
-            <TableHeader columns={['#', 'Código', 'Nombre Inmueble', 'Nombre Cliente', 'Teléfono Cliente', 'Fecha de generación', 'Hora de generación']} />
+            <TableHeader columns={['#', 'Código', 'Nombre Inmueble', 'Nombre Cliente', 'Teléfono Cliente', 'Fecha de generación', 'Hora de generación', 'Estado']} />
             <tbody>
                 {leads
                 .filter(lead => lead?.CodigoInmobiliaria?.includes(search))
@@ -81,11 +79,14 @@ const Index = () => {
                 <tr key={id + 1} className="cursor-pointer hover:bg-slate-300">
                     <td className='border px-2 text-center'>{id + 1}</td>
                     <td className='border px-2 text-center'>{lead?.CodigoInmobiliaria}</td>
-                    <td className='border px-2 text-center'>{lead?.NombreR?.substring(0,25) || lead?.NombreC?.substring(0,25)}...</td>
+                    <td className='border px-2 text-center'>{lead?.NombreR?.substring(0,25) || lead?.NombreC?.substring(0,25)}</td>
                     <td className='border px-2 text-center'>{lead?.Nombrecliente.substr(0,10)}...</td>
                     <td className='border px-2 text-center'>{lead?.Numerocliente.substr(2,10)}</td>
                     <td className='border px-2 text-center'>{lead?.Fechalead.substr(0,10)}</td>
                     <td className='border px-2 text-center'>{lead?.Fechalead.substr(11,5)}</td>
+                    <td className='border px-2 text-center'>
+                        <input type="checkbox" checked={id} />
+                    </td>
                 </tr>)}           
             </tbody>          
         </table>
@@ -93,7 +94,8 @@ const Index = () => {
         param={leads.filter(lead => lead?.CodigoInmobiliaria?.includes(search))} 
         text="Total Leads este mes:" 
         page={page} 
-        setPage={setPage} 
+        setPage={setPage}
+        number={20}
         />
     </div>  
   )

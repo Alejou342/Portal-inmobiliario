@@ -1,14 +1,14 @@
 import React from 'react'
 import Image from 'next/image'
 
-const index = ({ param, text, page, setPage }) => {
+const index = ({ param, text, page, setPage, number }) => {
 
     const handlePreview = () => {
         return page > 0 ? setPage(page - 1) : null
     }
 
     const handleNext = () => {
-        return page * 20 < param?.length - 20 ? setPage(page + 1) : null
+        return page * number < param?.length - number ? setPage(page + 1) : null
     }
 
     return (
@@ -21,7 +21,7 @@ const index = ({ param, text, page, setPage }) => {
             className="rotate-180 cursor-pointer aspect-square" 
             onClick={handlePreview} 
             title="Página Anterior" />
-                <b> {text} &nbsp; {`${page* 20} / ${param?.length}`} </b>
+                <b> {text} &nbsp; {`${page* number} / ${param?.length}`} </b>
             <Image 
             src="/assets/arrow.svg" 
             alt="right-arrow.svg" 

@@ -79,6 +79,7 @@ const Index = () => {
             text="Total ingresos:" 
             page={page} 
             setPage={setPage} 
+            number={20}
         />
     </div>  
   )

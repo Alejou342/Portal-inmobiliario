@@ -108,6 +108,7 @@ const Index = () => {
             text="Total Propiedades Residenciales:" 
             page={page} 
             setPage={setPage} 
+            number={20}
         />
     </div>  
   )

@@ -109,6 +109,7 @@ const Index = () => {
         text="Total Propiedades Comerciales:" 
         page={page} 
         setPage={setPage} 
+        number={20}
         />
     </div>  
   )

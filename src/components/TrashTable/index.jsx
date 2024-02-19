@@ -84,6 +84,7 @@ const Index = () => {
             text="Total propiedades eliminadas:" 
             page={page} 
             setPage={setPage} 
+            number={20}
         />
     </div>  
   )
