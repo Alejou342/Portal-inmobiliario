@@ -34,10 +34,14 @@ const Index = () => {
     const [leads, setLeads] = React.useState([])
     const [search, setSearch] = React.useState("")
     const [loaderActive, setLoaderActive] = React.useState(true)
+    const [rol, setRol] = React.useState([])
 
     const memoizedFetchData = React.useMemo(() => fetchDataLeads(), [])
 
     React.useEffect(() => {
+
+        const userInfo = JSON.parse(Cookies?.get('SessionInfo'));
+        setRol(userInfo?.answer[0]?.rol)
 
         const fetchDataAndSetState = async () => {
             try {
@@ -86,7 +90,9 @@ const Index = () => {
             <SearchSection search={search} setSearch={setSearch} setPage={setPage} />
         </div>
         <table className="table table-hover bg-auxiliar w-full">
-            <TableHeader columns={['#', 'Código', 'Nombre Inmueble', 'Nombre Cliente', 'Teléfono Cliente', 'Fecha de generación', 'Hora de generación', 'Estado']} />
+            {rol !== 'admin' 
+            ? <TableHeader columns={['#', 'Código', 'Nombre Inmueble', 'Nombre Cliente', 'Teléfono Cliente', 'Fecha de generación', 'Hora de generación', 'Estado']} />
+            : <TableHeader columns={['#', 'Código', 'Nombre Inmueble', 'Nombre Cliente', 'Teléfono Cliente', 'Fecha de generación', 'Hora de generación']} />}
             <tbody>
                 {leads
                 .filter(lead => lead?.CodigoInmobiliaria?.includes(search))
@@ -96,13 +102,13 @@ const Index = () => {
                     <td className='border px-2 text-center'>{id + 1}</td>
                     <td className='border px-2 text-center'>{lead?.CodigoInmobiliaria}</td>
                     <td className='border px-2 text-center'>{lead?.NombreR?.substring(0,25) || lead?.NombreC?.substring(0,25)}</td>
-                    <td className='border px-2 text-center'>{lead?.Nombrecliente.substr(0,10)}...</td>
+                    <td className='border px-2 text-center'>{lead?.Nombrecliente.substr(0,10)}</td>
                     <td className='border px-2 text-center'>{lead?.Numerocliente.substr(2,10)}</td>
                     <td className='border px-2 text-center'>{lead?.Fechalead.substr(0,10)}</td>
                     <td className='border px-2 text-center'>{lead?.Fechalead.substr(11,5)}</td>
-                    <td className='border px-2 text-center'>
+                    {rol !== 'admin' && <td className='border px-2 text-center'>
                         <input type="checkbox" checked={lead.revisado} onChange={() => handleChecked(lead)}/>
-                    </td>
+                    </td>}
                 </tr>)}           
             </tbody>          
         </table>
