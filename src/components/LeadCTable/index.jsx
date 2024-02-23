@@ -7,7 +7,6 @@ import ModalGeneral from '@/containers/ModalGeneral'
 import SearchSection from '@/components/SearchSection'
 import ObservationForm from '@/components/ObservationForm'
 
-
 const Index = () => {
 
     const {

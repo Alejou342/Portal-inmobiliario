@@ -37,8 +37,8 @@ const Index = () => {
   const views = [
     { key: 'Residencial', component: <TableResidencial key="Residencial" />},
     { key: 'Comercial', component: <TableComercial key="Comercial" />},
-    { key: 'LeadC', component: <LeadCTable key="LeadC" />},
     { key: 'LeadR', component: <LeadRTable key="LeadR" />},
+    { key: 'LeadC', component: <LeadCTable key="LeadC" />},
     { key: 'Form', component: user?.rol == 'admin' ?  <TableInmobiliary key="Inmobiliary" /> : <Form key="Form" />},
     { key: 'Trace', component: <TraceTable /> },
   ]
