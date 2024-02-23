@@ -1,10 +1,10 @@
 "use client"
 import React from 'react'
-import Button from '@/components/Button'
-import { useItem } from '@/context/ItemContext'
-import UserInfo from '@/components/UserInfo'
-import { useRouter } from 'next/navigation'
 import Cookies from 'js-cookie'
+import Button from '@/components/Button'
+import { useRouter } from 'next/navigation'
+import UserInfo from '@/components/UserInfo'
+import { useItem } from '@/context/ItemContext'
 import SideHeader from '@/components/SideHeader'
 
 const Index = () => {
@@ -61,14 +61,14 @@ const Index = () => {
           type="button" 
           className={`text-xs ${item == 3 ? styles[0] : styles[1]}`} 
         >
-          Leads Comerciales
+          Leads residenciales
         </Button>
         <Button 
           onClick={() => handleChange(4)} 
           type="button" 
           className={`text-xs ${item == 4 ? styles[0] : styles[1]}`} 
         >
-          Leads Residenciales
+          Leads comerciales
         </Button>
         <Button 
           onClick={() => handleChange(5)} 
