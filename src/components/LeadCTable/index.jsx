@@ -1,94 +1,20 @@
 import React from 'react'
-import axios from 'axios'
-import Cookies from 'js-cookie'
 import Loader from '@/components/Loader'
+import useLeadTable from '@/hooks/useLeadTable'
 import TableHeader from '@/components/TableHeader'
 import TableFooter from '@/components/TableFooter'
 import ModalGeneral from '@/containers/ModalGeneral'
 import SearchSection from '@/components/SearchSection'
 import ObservationForm from '@/components/ObservationForm'
 
-const fetchDataLeads = async () => {
-    try {
-        const userInfo = JSON.parse(Cookies?.get('SessionInfo'))
-
-        const adminLeads = [axios.get(`${process.env.BACK_LINK}/api/getAllLeadsC`)]
-        const userLeads = [axios.get(`${process.env.BACK_LINK}/api/UserLeadComercial/${userInfo?.answer[0]?.Correo_Inmobiliaria}`)]
-
-        let response
-        if (userInfo?.answer[0]?.rol == 'admin') {
-            response = await Promise.all(adminLeads)
-        } else {
-            response = await Promise.all(userLeads)
-        }
-
-        const responseData = response.map(res => res.data)
-        return responseData
-    } catch (error) {
-        console.error(error)
-        throw error
-    }
-}
 
 const Index = () => {
 
-    const [id, setId] = React.useState(0)
-    const [rol, setRol] = React.useState("")
-    const [page, setPage] = React.useState(0)
-    const [leads, setLeads] = React.useState([])
-    const [search, setSearch] = React.useState("")
-    const [openModal, setOpenModal] = React.useState(false)
-    const [loaderActive, setLoaderActive] = React.useState(true)
-
-    const memoizedFetchData = React.useMemo(() => fetchDataLeads(), [])
-
-    React.useEffect(() => {
-
-        const userInfo = JSON.parse(Cookies?.get('SessionInfo'));
-        setRol(userInfo?.answer[0]?.rol)
-
-        const fetchDataAndSetState = async () => {
-            try {
-                const data = await memoizedFetchData
-                setLeads(
-                    data?.flat()
-                    .sort((a, b) => (a.Fechalead < b.Fechalead) ? 1 : ((b.Fechalead < a.Fechalead) ? -1 : 0)))
-                setLoaderActive(false)
-            } catch (error) {
-                console.error(error)
-                setLoaderActive(false)
-            }
-        }
-
-        fetchDataAndSetState()
-    }, [memoizedFetchData]) 
-    
-    const handleChecked = async (lead) => {
-        try {
-            setLeads(prevLeads => {
-                return prevLeads.map(prevLead => {
-                    if (prevLead.Idlead === lead.Idlead) {
-                        return {
-                            ...prevLead,
-                            revisado: !prevLead.revisado
-                        };
-                    }
-                    return prevLead;
-                });
-            });
-
-            await axios.put(`${process.env.BACK_LINK}/api/comercial/updateRevisado/${lead.Idlead}`
-            , { newStatus: !lead?.revisado });
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-    const handleObservation = (id) => {
-        setOpenModal(true)
-        setId(id)
-    }
-
+    const {
+        id, rol, page, leads, search, openModal, loaderActive,
+        setPage, setSearch, handleChecked, handleObservation, 
+        setOpenModal
+    } = useLeadTable('getAllLeadsC', 'UserLeadComercial', 'comercial')
 
   return (
     <>
