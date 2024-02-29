@@ -26,6 +26,7 @@ const useLeadTable = (admin, user, type ) => {
         }
     }
 
+    const availableStatus = ['Pendiente', 'Atendido', 'Descartado']
     const [id, setId] = React.useState(0)
     const [rol, setRol] = React.useState([])
     const [page, setPage] = React.useState(0)
@@ -57,28 +58,6 @@ const useLeadTable = (admin, user, type ) => {
         fetchDataAndSetState()
     }, [memoizedFetchData]) 
 
-    const handleChecked = async (lead) => {
-
-        try {
-            setLeads(prevLeads => {
-                return prevLeads.map(prevLead => {
-                    if (prevLead.Idlead === lead.Idlead) {
-                        return {
-                            ...prevLead,
-                            revisado: !prevLead.revisado
-                        };
-                    }
-                    return prevLead;
-                });
-            });
-
-            await axios.put(`${process.env.BACK_LINK}/api/${type}/updateRevisado/${lead.Idlead}`
-            , { newStatus: !lead?.revisado });
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
     const handleObservation = (id) => {
         setOpenModal(true)
         setId(id)
@@ -95,7 +74,7 @@ const useLeadTable = (admin, user, type ) => {
         setPage,
         setSearch,
         setOpenModal,
-        handleChecked,
+        availableStatus,
         handleObservation
     }
 }
