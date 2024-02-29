@@ -21,7 +21,7 @@ const Index = () => {
     <>
         { openModal && 
         <ModalGeneral state={openModal} setState={setOpenModal} className='p-4'>
-            <ObservationForm setState={setOpenModal} id={id} letter="R" />
+            <ObservationForm setState={setOpenModal} id={id} letter="R" type="Residencial" />
         </ModalGeneral>}
         <div className="bg-primary w-[70rem] overflow-auto py-1 rounded-md">
             <Loader active={loaderActive} />

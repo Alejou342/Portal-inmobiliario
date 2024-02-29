@@ -46,6 +46,7 @@ const Index = ({ setState, id, letter, type }) => {
         value={status}
         onChange={handleChangeList}
         className={{select: "mx-auto my-4 border-2 rounded-lg border-primary"}}
+        required
         />
         <textarea
         name="observation"
@@ -55,6 +56,7 @@ const Index = ({ setState, id, letter, type }) => {
         cols="30"
         rows="3"
         className='m-2 p-2'
+        required
         ></textarea>
         <Button type="submit" className="bg-primary text-auxiliar flex justify-center">
             Aceptar

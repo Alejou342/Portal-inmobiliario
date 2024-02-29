@@ -4,4 +4,4 @@ export const formatPrice = (number) => {
         currency: 'COP',
         minimumFractionDigits: 0
       });
-}
+};
