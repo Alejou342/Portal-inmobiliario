@@ -36,8 +36,8 @@ const Index = () => {
             {getDate() <= 2 
                 ? <Image src="/assets/send.svg"  alt="send.svg" height={30} width={30} title="Enviar resúmen mensual"
                 className='bg-auxiliar rounded-full p-1 cursor-pointer' 
-                onClick= {() => sendEmail('alejandro.auribe1@gmail.com', 
-                'Resumen facturación mes de Febrero', 
+                onClick= {() => sendEmail('lina.otalvaro@capitalpocket.app', 
+                'Resumen facturación de este mes', 
                 inmobiliarias
                 .filter(inmobiliaria => inmobiliaria.rol !== 'admin')
                 .map(inmobiliaria => `${inmobiliaria.Nombre_Inmobiliaria}: ${inmobiliaria.totalMes} Leads \n`).join(''))}/>

@@ -1,9 +1,25 @@
+'use client'
 import React from 'react'
 import EditComercial from '@/components/EditComercial'
 import Sidebar from '@/components/Sidebar'
-
+import { useRouter } from 'next/navigation'
+import Cookies from 'js-cookie'
 
 const Page = () => {
+
+    const router = useRouter()
+    const [rol, setRol] = React.useState('')
+
+    React.useEffect(() => {
+        const userInfo = JSON.parse(Cookies?.get('SessionInfo'))
+        setRol(userInfo?.answer[0]?.rol)
+
+        if (rol === 'Jazmin') {
+            router.push('/main')
+        }
+    }, [rol])
+
+
     return (
         <div className='flex items-center'>
             <Sidebar />

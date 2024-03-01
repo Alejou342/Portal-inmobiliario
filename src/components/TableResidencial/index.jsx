@@ -33,15 +33,18 @@ const fetchDataResidencial = async () => {
 const Index = () => {
 
     const router = useRouter()
+    const [rol, setRol] = React.useState('')
     const [page, setPage] = React.useState(0)
     const [search, setSearch] = React.useState("")
     const [inmuebles, setInmuebles] = React.useState([])
     const [openModal, setOpenModal] = React.useState(false)
     const [loaderActive, setLoaderActive] = React.useState(true)
-    
+
     const memoizedFetchData = React.useMemo(() => fetchDataResidencial(), [])
     
     React.useEffect(() => {
+        const userInfo = JSON.parse(Cookies?.get('SessionInfo'))
+        setRol(userInfo?.answer[0]?.rol)
         const fetchDataAndSetState = async () => {
             try {
                 const data = await memoizedFetchData
@@ -77,7 +80,9 @@ const Index = () => {
             <SearchSection search={search} setSearch={setSearch} setPage={setPage} />
         </div>
         <table className="table table-hover bg-auxiliar w-full">
-            <TableHeader columns={['#', 'Código', 'Nombre Inmueble', 'Tipo Negocio', 'Precio Inmueble', 'Estado', 'Editar', 'Eliminar']} />
+            {rol == 'Jazmin' 
+            ? <TableHeader columns={['#', 'Código', 'Nombre Inmueble', 'Tipo Negocio', 'Precio Inmueble', 'Estado']} />
+            : <TableHeader columns={['#', 'Código', 'Nombre Inmueble', 'Tipo Negocio', 'Precio Inmueble', 'Estado', 'Editar', 'Eliminar']} />}
             <tbody>
                 {inmuebles
                 .filter(inmueble => inmueble.CodigoInmobiliaria?.includes(search))
@@ -94,12 +99,15 @@ const Index = () => {
                         ? <Image src="/assets/green-circle.svg" alt="green.svg" title={inmueble.EstadoR} width={18} height={18} className="mx-auto cursor-pointer" /> 
                         : <Image src="/assets/red-circle.svg" alt="red.svg" title={inmueble.EstadoR} width={18} height={18} className="mx-auto cursor-pointer" />}
                     </td>
-                    <td className='border px-2 text-center cursor-pointer' onClick={() => handleNavigate(`/propertie/residencial/edit/${inmueble.ID_Residencial}`, inmueble.ID_Residencial)}>
-                        <Image src="/assets/edit.svg" alt="edit.svg" width={20} height={20} className="mx-auto" />
-                    </td> 
-                    <td className='border px-2 text-center cursor-pointer' onClick={() => handleDelete(inmueble.ID_Residencial)}>
-                        <Image src="/assets/delete.svg" alt="delete.svg" width={20} height={20} className="mx-auto" />
-                    </td>
+                    {rol !== 'Jazmin' ?
+                    <>
+                        <td className='border px-2 text-center cursor-pointer' onClick={() => handleNavigate(`/propertie/residencial/edit/${inmueble.ID_Residencial}`, inmueble.ID_Residencial)}>
+                            <Image src="/assets/edit.svg" alt="edit.svg" width={20} height={20} className="mx-auto" />
+                        </td> 
+                        <td className='border px-2 text-center cursor-pointer' onClick={() => handleDelete(inmueble.ID_Residencial)}>
+                            <Image src="/assets/delete.svg" alt="delete.svg" width={20} height={20} className="mx-auto" />
+                        </td>
+                    </> : null}
                 </tr>)}           
             </tbody>          
         </table>

@@ -1,26 +1,26 @@
 import React from 'react'
 import axios from 'axios'
+import Link from 'next/link'
+import Image from 'next/image'
 import Cookies from 'js-cookie'
 import Loader from '@/components/Loader'
 import TableFooter from '@/components/TableFooter'
 import TableHeader from '@/components/TableHeader'
-import ModalGeneral from '@/containers/ModalGeneral'
 import SearchSection from '@/components/SearchSection'
-import ResidencialContent from '@/components/ResidencialContent'
-import Link from 'next/link'
-import Image from 'next/image'
 
 const fetchDataResidencial = async () => {
     try {
         const userInfo = JSON.parse(Cookies?.get('SessionInfo'));
-        const deletes = `${process.env.BACK_LINK}/api/getDelete/${userInfo?.answer[0]?.Correo_Inmobiliaria}`;
-
-        const response = await axios.get(deletes, {
+        const rol = userInfo?.answer[0]?.rol
+        const userDeletes = `${process.env.BACK_LINK}/api/getDelete/${userInfo?.answer[0]?.Correo_Inmobiliaria}`;
+        const adminDeletes = `${process.env.BACK_LINK}/api/allDeletes`;
+        
+        const response = await axios.get(rol == 'admin' ? adminDeletes : userDeletes, {
             headers: {
                 "Authorization": `Bearer ${userInfo?.accesToken}`
             }
         });
-
+        
         return response.data;
     } catch (error) {
         console.error(error);
@@ -29,7 +29,8 @@ const fetchDataResidencial = async () => {
 };
 
 const Index = () => {
-
+    
+    const [rol, setRol] = React.useState('')
     const [page, setPage] = React.useState(0)
     const [search, setSearch] = React.useState("")
     const [inmuebles, setInmuebles] = React.useState([])

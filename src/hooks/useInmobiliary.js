@@ -36,7 +36,7 @@ const useInmobiliary = () => {
         form.append('from', 'noreply@cpocket.global')
         form.append('to', to)
         form.append('subject', subject)
-        form.append('text', `¡Buenos días Lina! \nAdjunto el resumen de leads del mes de Febrero: \n\n${text} \n¡Feliz día!`)
+        form.append('text', `¡Buenos días Lina! \nAdjunto el resumen de leads del mes actual: \n\n${text} \n¡Feliz día!`)
 
         try {
             axios.post('https://api.mailgun.net/v3/cpocket.global/messages', form, {

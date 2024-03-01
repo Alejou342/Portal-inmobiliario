@@ -12,14 +12,15 @@ import './index.css'
 const Index = ({ props }) => {
 
     const router = useRouter()
+    const [rol, setRol] = React.useState('')
     const [formData, setFormData] = React.useState({
         Idcomercial:0,
-        Nombrecliente:"Alejandro Uribe",
-        Numerocliente:"3506217627"
     })
 
     React.useEffect(() => {
         const response = Cookies.get('ComercialID')
+        const userInfo = JSON.parse(Cookies?.get('SessionInfo'))
+        setRol(userInfo?.answer[0]?.rol)
         setFormData({...formData, Idcomercial: parseInt(response)})
     }, [])
 
@@ -28,7 +29,7 @@ const Index = ({ props }) => {
         <div className='propertie-card bg-auxiliar relative rounded-lg'>
             <Image src={props?.ImagenC || '/assets/default-house.svg'} alt="foto" width={400} height={400} className="card-image aspect-square rounded-lg mb-2" />
             <div className="flex justify-between px-3">
-                <Image src="/assets/edit.svg" alt="edit" width={30} height={35} title="Editar" className="icon-edit absolute cursor-pointer" onClick={() => router.push(`/propertie/comercial/edit/${formData.Idcomercial}`)} />
+                {rol !== 'Jazmin' && <Image src="/assets/edit.svg" alt="edit" width={30} height={35} title="Editar" className="icon-edit absolute cursor-pointer" onClick={() => router.push(`/propertie/comercial/edit/${formData.Idcomercial}`)} />}
                 <p className="font-bold mx-auto"> {props?.NombreC.substr(0,40).toUpperCase()} </p>
                 <div className="is-available">
                     {props?.EstadoC == "Disponible" 
