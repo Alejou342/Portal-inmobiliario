@@ -15,7 +15,7 @@ const Index = () => {
             openModal, loaderActive, setPage, 
             setSearch, handleObservation, 
             setOpenModal, availableStatus
-        } = useLeadTable('getAllLeadsR', 'UserLeadResidencia', 'Residencial')
+        } = useLeadTable('getAllLeadsR', 'UserLeadResidencia')
 
   return (
     <>
@@ -46,12 +46,16 @@ const Index = () => {
                         <td className='border px-2 text-center'>{lead?.Numerocliente.substr(2,10)}</td>
                         <td className='border px-2 text-center'>{lead?.Fechalead.substr(0,10)}</td>
                         <td className='border px-2 text-center'>{lead?.Fechalead.substr(11,5)}</td>
-                        {rol !== 'admin' && <td className='flex justify-center'>
-                            <Image src={`/assets/status/${availableStatus[lead?.revisado]}.png`} title={availableStatus[lead?.revisado]} alt="Status" width={20} height={20} />
-                        </td>}
-                        <td className='border px-2 text-center text-xs' title={lead?.Observacion}>
-                            {(lead?.Observacion?.length > 16) ? lead?.Observacion?.substr(0,16).concat('...') : lead?.Observacion}
-                        </td>
+                        {rol !== 'admin' ? 
+                        <>
+                            <td className='flex justify-center'>
+                                <Image src={`/assets/status/${availableStatus[lead?.revisado]}.png`} title={availableStatus[lead?.revisado]} alt="Status" width={20} height={20} />
+                            </td>
+                            <td className='border px-2 text-center text-xs' title={lead?.Observacion}>
+                                {(lead?.Observacion?.length > 16) ? lead?.Observacion?.substr(0,16).concat('...') : lead?.Observacion}
+                            </td>
+                        </>
+                        : null }
                     </tr>)}           
                 </tbody>          
             </table>

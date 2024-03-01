@@ -18,7 +18,7 @@ const Index = () => {
             Promise.all([
                 axios.get(`${process.env.BACK_LINK}/api/UserLeadResidencia/${userInfo?.answer[0]?.Correo_Inmobiliaria}`),
                 axios.get(`${process.env.BACK_LINK}/api/UserLeadComercial/${userInfo?.answer[0]?.Correo_Inmobiliaria}`),
-                axios.get(`${process.env.BACK_LINK}/api/getAmountLeads/${userInfo?.answer[0]?.Correo_Inmobiliaria}`),
+                axios.get(`${process.env.BACK_LINK}/api/getAmountLeads/${userInfo?.answer[0]?.Correo_Inmobiliaria}`),   // --> Revisar esto
                 axios.get(`${process.env.BACK_LINK}/api/allLeads`)
             ])
             .then(([response1, response2, response3, response4]) => {

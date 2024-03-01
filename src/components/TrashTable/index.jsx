@@ -1,14 +1,12 @@
 import React from 'react'
 import axios from 'axios'
+import Link from 'next/link'
+import Image from 'next/image'
 import Cookies from 'js-cookie'
 import Loader from '@/components/Loader'
 import TableFooter from '@/components/TableFooter'
 import TableHeader from '@/components/TableHeader'
-import ModalGeneral from '@/containers/ModalGeneral'
 import SearchSection from '@/components/SearchSection'
-import ResidencialContent from '@/components/ResidencialContent'
-import Link from 'next/link'
-import Image from 'next/image'
 
 const fetchDataResidencial = async () => {
     try {
