@@ -13,14 +13,15 @@ import './index.css'
 const Index = ({ props }) => {
 
   const router = useRouter()
+  const [rol, setRol] = React.useState('')
   const [formData, setFormData] = React.useState({
     Idresidencia:0,
-    Nombrecliente:"Alejandro Uribe",  // --> Este valor debería llegar desde whatsapp
-    Numerocliente:"3506217627"
   })
 
   React.useEffect(() => {
     const response = Cookies.get('ResidencialID')
+    const userInfo = JSON.parse(Cookies?.get('SessionInfo'))
+    setRol(userInfo?.answer[0]?.rol)
     setFormData({...formData, Idresidencia: parseInt(response)})
   }, [])
 
@@ -29,7 +30,7 @@ const Index = ({ props }) => {
       <Image src={props?.ImagenR || '/assets/default-house.svg'} alt="foto" width={400} height={400} className="card-image aspect-square rounded-lg mb-2" />
       <div className="flex justify-between px-3">
         <p className="font-bold mx-auto"> {props?.NombreR.substr(0,40).toUpperCase()} </p>
-        <Image src="/assets/edit.svg" alt="edit" width={30} height={35} title="Editar" className="icon-edit absolute cursor-pointer" onClick={() => router.push(`/propertie/residencial/edit/${formData.Idresidencia}`)} />
+        {rol !== 'Jazmin' && <Image src="/assets/edit.svg" alt="edit" width={30} height={35} title="Editar" className="icon-edit absolute cursor-pointer" onClick={() => router.push(`/propertie/residencial/edit/${formData.Idresidencia}`)} />}
         <div className="is-available">
           {props?.EstadoR == "Disponible" 
           ? <Image src="/assets/green-circle.svg" alt="available" width={25} height={25} /> 
