@@ -24,7 +24,7 @@ const Index = () => {
                 { headers: { Authorization: `Bearer ${sessionInfo?.token}` }}),
                 axios.get(
                 `${process.env.BACK_LINK}/api/getAmountLeads/${sessionInfo?.answer[0]?.Correo_Inmobiliaria}`, 
-                { headers: { Authorization: `Bearer ${sessionInfo?.token}` }}),   // --> Revisar esto
+                { headers: { Authorization: `Bearer ${sessionInfo?.token}` }}),
                 axios.get(
                 `${process.env.BACK_LINK}/api/allLeads`, 
                 { headers: { Authorization: `Bearer ${sessionInfo?.token}` }})

@@ -1,44 +1,21 @@
 "use client"
-import axios from 'axios'
 import React from 'react'
+import useGET from '@/hooks/useGET'
 import Loader from '@/components/Loader'
 import Sidebar from '@/components/Sidebar'
 import ResidencialInfo from '@/containers/ResidencialInfo'
-import Cookies from 'js-cookie'
 
 const Page = ({ params }) => {
 
-  const [values, setValues] = React.useState(null)
-  const [loaderActive, setLoaderActive] = React.useState(false)
-
-  React.useEffect(() => {
-    try {
-      setLoaderActive(true)
-      const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
-      axios.get(`${process.env.BACK_LINK}/api/residenciaById/${params.id}`, {
-          headers: {
-              "Authorization": `Bearer ${sessionInfo?.token}`
-          }
-      })
-      .then((result) => {
-        setValues(result.data[0])
-        setLoaderActive(false)
-      })
-      .catch((error) => { 
-        console.error(error) 
-        setLoaderActive(false)
-      })
-    } catch (error) {
-        console.error(error)
-    }
-  }, [])
+  const { data, loading, error } = useGET(`${process.env.BACK_LINK}/api/residenciaById/${params.id}`)
 
   return (
     <div className='flex'>
-      <Loader active={loaderActive} />
+      <Loader active={loading} />
       <Sidebar />
-      <div className="mx-auto my-20">
-        <ResidencialInfo props={values} />
+      <div className="mx-auto my-20 max-w-[30rem]">
+        {data && <ResidencialInfo props={data[0]} />}
+        {error && <p> Algo salió mal... </p>}
       </div>
     </div>
   )

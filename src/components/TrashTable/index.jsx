@@ -30,7 +30,6 @@ const fetchDataResidencial = async () => {
 
 const Index = () => {
     
-    const [rol, setRol] = React.useState('')
     const [page, setPage] = React.useState(0)
     const [search, setSearch] = React.useState("")
     const [inmuebles, setInmuebles] = React.useState([])
