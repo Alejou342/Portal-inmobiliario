@@ -12,14 +12,22 @@ const Index = () => {
 
     React.useEffect(() => {
         try {
-            const userInfo = JSON.parse(Cookies?.get('SessionInfo'))
-            setRol(userInfo?.answer[0]?.rol)
+            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
+            setRol(sessionInfo?.answer[0]?.rol)
 
             Promise.all([
-                axios.get(`${process.env.BACK_LINK}/api/UserLeadResidencia/${userInfo?.answer[0]?.Correo_Inmobiliaria}`),
-                axios.get(`${process.env.BACK_LINK}/api/UserLeadComercial/${userInfo?.answer[0]?.Correo_Inmobiliaria}`),
-                axios.get(`${process.env.BACK_LINK}/api/getAmountLeads/${userInfo?.answer[0]?.Correo_Inmobiliaria}`),   // --> Revisar esto
-                axios.get(`${process.env.BACK_LINK}/api/allLeads`)
+                axios.get(
+                `${process.env.BACK_LINK}/api/UserLeadResidencia/${sessionInfo?.answer[0]?.Correo_Inmobiliaria}`, 
+                { headers: { Authorization: `Bearer ${sessionInfo?.accesToken}` }}),
+                axios.get(
+                `${process.env.BACK_LINK}/api/UserLeadComercial/${sessionInfo?.answer[0]?.Correo_Inmobiliaria}`, 
+                { headers: { Authorization: `Bearer ${sessionInfo?.accesToken}` }}),
+                axios.get(
+                `${process.env.BACK_LINK}/api/getAmountLeads/${sessionInfo?.answer[0]?.Correo_Inmobiliaria}`, 
+                { headers: { Authorization: `Bearer ${sessionInfo?.accesToken}` }}),   // --> Revisar esto
+                axios.get(
+                `${process.env.BACK_LINK}/api/allLeads`, 
+                { headers: { Authorization: `Bearer ${sessionInfo?.accesToken}` }})
             ])
             .then(([response1, response2, response3, response4]) => {
                 setLeads([...response1.data, ...response2.data])

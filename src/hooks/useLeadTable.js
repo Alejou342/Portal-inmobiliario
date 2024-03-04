@@ -6,14 +6,18 @@ const useLeadTable = (admin, user) => {
 
     const fetchDataLeads = async () => {
         try {
-            const userInfo = JSON.parse(Cookies?.get('SessionInfo'))
-            setRol(userInfo?.answer[0]?.rol)
+            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
+            setRol(sessionInfo?.answer[0]?.rol)
 
-            const adminLeads = [axios.get(`${process.env.BACK_LINK}/api/${admin}`)]
-            const userLeads = [axios.get(`${process.env.BACK_LINK}/api/${user}/${userInfo?.answer[0]?.Correo_Inmobiliaria}`)]
+            const adminLeads = [
+            axios.get(`${process.env.BACK_LINK}/api/${admin}`, 
+            { headers: { Authorization: `Bearer ${sessionInfo?.accesToken}` }})]
+            const userLeads = [
+            axios.get(`${process.env.BACK_LINK}/api/${user}/${sessionInfo?.answer[0]?.Correo_Inmobiliaria}`, 
+            { headers: { Authorization: `Bearer ${sessionInfo?.accesToken}` }})]
 
             let response
-            if (userInfo?.answer[0]?.rol == 'admin') {
+            if (sessionInfo?.answer[0]?.rol == 'admin') {
                 response = await Promise.all(adminLeads)
             } else {
                 response = await Promise.all(userLeads)

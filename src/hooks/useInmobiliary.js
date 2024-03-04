@@ -39,9 +39,9 @@ const useInmobiliary = () => {
         form.append('text', `¡Buenos días Lina! \nAdjunto el resumen de leads del mes actual: \n\n${text} \n¡Feliz día!`)
 
         try {
-            axios.post('https://api.mailgun.net/v3/cpocket.global/messages', form, {
+            axios.post(`${process.env.MAILGUN_LINK}`, form, {
                 headers: {
-                    Authorization: `Basic YXBpOmJlMjE4MDk5YjFhMzMxYjdkMDhmOTI3MWZlZjA3MmViLTEzNWE4ZDMyLWVmMGNhOTk5`,
+                    Authorization: `Basic ${process.env.MAILGUN_TOKEN}`,
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             })

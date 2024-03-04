@@ -11,8 +11,8 @@ const Page = () => {
     const [rol, setRol] = React.useState('')
 
     React.useEffect(() => {
-        const userInfo = JSON.parse(Cookies?.get('SessionInfo'))
-        setRol(userInfo?.answer[0]?.rol)
+        const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
+        setRol(sessionInfo?.answer[0]?.rol)
 
         if (rol === 'Jazmin') {
             router.push('/main')

@@ -13,13 +13,13 @@ import ResidencialContent from '@/components/ResidencialContent'
 
 const fetchDataResidencial = async () => {
     try {
-        const userInfo = JSON.parse(Cookies?.get('SessionInfo'));
+        const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'));
         const adminResidencials = `${process.env.BACK_LINK}/api/getAllR`;
-        const userResidencials = `${process.env.BACK_LINK}/api/UserResidencia/${userInfo?.answer[0]?.Correo_Inmobiliaria}`;
+        const userResidencials = `${process.env.BACK_LINK}/api/UserResidencia/${sessionInfo?.answer[0]?.Correo_Inmobiliaria}`;
 
-        const response = await axios.get(userInfo?.answer[0]?.rol === 'admin' ? adminResidencials : userResidencials, {
+        const response = await axios.get(sessionInfo?.answer[0]?.rol === 'admin' ? adminResidencials : userResidencials, {
             headers: {
-                "Authorization": `Bearer ${userInfo?.accesToken}`
+                "Authorization": `Bearer ${sessionInfo?.accesToken}`
             }
         });
 
@@ -43,8 +43,8 @@ const Index = () => {
     const memoizedFetchData = React.useMemo(() => fetchDataResidencial(), [])
     
     React.useEffect(() => {
-        const userInfo = JSON.parse(Cookies?.get('SessionInfo'))
-        setRol(userInfo?.answer[0]?.rol)
+        const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
+        setRol(sessionInfo?.answer[0]?.rol)
         const fetchDataAndSetState = async () => {
             try {
                 const data = await memoizedFetchData

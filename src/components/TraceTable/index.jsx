@@ -9,13 +9,13 @@ import SearchSection from '@/components/SearchSection'
 
 const fetchDataResidencial = async () => {
     try {
-        const userInfo = JSON.parse(Cookies?.get('SessionInfo'));
+        const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'));
         const adminTraces = `${process.env.BACK_LINK}/api/AllHuellas`;
-        const userTraces = `${process.env.BACK_LINK}/api/getHuellas/${userInfo?.answer[0]?.Correo_Inmobiliaria}`;
+        const userTraces = `${process.env.BACK_LINK}/api/getHuellas/${sessionInfo?.answer[0]?.Correo_Inmobiliaria}`;
 
-        const response = await axios.get(userInfo?.answer[0]?.rol === 'admin' ? adminTraces : userTraces, {
+        const response = await axios.get(sessionInfo?.answer[0]?.rol === 'admin' ? adminTraces : userTraces, {
             headers: {
-                "Authorization": `Bearer ${userInfo?.accesToken}`
+                "Authorization": `Bearer ${sessionInfo?.accesToken}`
             }
         });
 

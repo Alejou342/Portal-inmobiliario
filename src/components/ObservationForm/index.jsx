@@ -22,10 +22,23 @@ const Index = ({ setState, id, letter, type }) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         setLoaderActive(true)
+        const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
         try {
             Promise.all([
-                axios.put(`${process.env.BACK_LINK}/api/observacion${letter}/${id}`, { observacion: text }),
-                axios.put(`${process.env.BACK_LINK}/api/${type}/updateRevisado/${id}`, { newStatus: availableStatus.indexOf(status) })
+                axios.put(
+                `${process.env.BACK_LINK}/api/observacion${letter}/${id}`, 
+                { observacion: text }, {
+                    headers: {
+                        "Authorization": `Bearer ${sessionInfo.accesToken}`
+                    }
+                }),
+                axios.put(
+                `${process.env.BACK_LINK}/api/${type}/updateRevisado/${id}`, 
+                { newStatus: availableStatus.indexOf(status) }, {
+                    headers: {
+                        "Authorization": `Bearer ${sessionInfo.accesToken}`
+                    }
+                })
             ])
             .then(() => setLoaderActive(false), location.reload())
             .catch(() => setLoaderActive(false), location.reload())

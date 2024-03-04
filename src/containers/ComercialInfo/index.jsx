@@ -19,8 +19,8 @@ const Index = ({ props }) => {
 
     React.useEffect(() => {
         const response = Cookies.get('ComercialID')
-        const userInfo = JSON.parse(Cookies?.get('SessionInfo'))
-        setRol(userInfo?.answer[0]?.rol)
+        const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
+        setRol(sessionInfo?.answer[0]?.rol)
         setFormData({...formData, Idcomercial: parseInt(response)})
     }, [])
 

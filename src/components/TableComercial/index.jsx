@@ -14,13 +14,13 @@ import ComercialContent from '@/components/ComercialContent'
 
 const fetchDataComercial = async () => {
     try {
-        const userInfo = JSON.parse(Cookies?.get('SessionInfo'))
+        const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
         const adminComercials = `${process.env.BACK_LINK}/api/getAllC`
-        const userComercials = `${process.env.BACK_LINK}/api/UserComercial/${userInfo?.answer[0]?.Correo_Inmobiliaria}`
+        const userComercials = `${process.env.BACK_LINK}/api/UserComercial/${sessionInfo?.answer[0]?.Correo_Inmobiliaria}`
     
-        const response = await axios.get(userInfo?.answer[0]?.rol == 'admin' ? adminComercials : userComercials ,  {
+        const response = await axios.get(sessionInfo?.answer[0]?.rol == 'admin' ? adminComercials : userComercials ,  {
             headers: {
-                "Authorization": `Bearer ${userInfo?.accesToken}`
+                "Authorization": `Bearer ${sessionInfo?.accesToken}`
             }
         })
 
@@ -44,8 +44,8 @@ const Index = () => {
     const memoizedFetchData = React.useMemo(() => fetchDataComercial(), [])
 
     React.useEffect(() => {
-        const userInfo = JSON.parse(Cookies?.get('SessionInfo'))
-        setRol(userInfo?.answer[0]?.rol)
+        const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
+        setRol(sessionInfo?.answer[0]?.rol)
         const fetchDataAndSetState = async () => {
             try {
                 const data = await memoizedFetchData
