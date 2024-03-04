@@ -14,7 +14,7 @@ const Page = () => {
         const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
         setRol(sessionInfo?.answer[0]?.rol)
 
-        if (rol === 'Jazmin') {
+        if (rol === 'Otros') {
             router.push('/main')
         }
     }, [rol])

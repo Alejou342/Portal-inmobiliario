@@ -54,7 +54,7 @@ const Index = () => {
         </div>
         <div className="flex">
         {(rol == 'admin' || rol == 'user') ? <TrashButton /> : null}
-        {(rol == 'admin' || rol == 'Jazmin' || rol == 'Asesor') ? null : <LimitButton />}
+        {(rol == 'admin' || rol == 'Otros' || rol == 'Asesor') ? null : <LimitButton />}
         </div>
       </div>
     )

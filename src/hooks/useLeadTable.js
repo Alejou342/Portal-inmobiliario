@@ -50,7 +50,7 @@ const useLeadTable = (admin, user) => {
             try {
                 const data = await memoizedFetchData
 
-                if (rol == 'Jazmin') {
+                if (rol == 'Otros') {
                     setLeads(data?.flat()
                     .filter(lead => lead.revisado == 2)
                     .sort((a, b) => (a.Fechalead < b.Fechalead) ? 1 : ((b.Fechalead < a.Fechalead) ? -1 : 0)))
