@@ -14,10 +14,14 @@ const Index = ({ setState }) => {
     React.useEffect(() => {
         try {
             setLoaderActive(true)
-            const userInfo = JSON.parse(Cookies?.get('SessionInfo'))
+            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
             Promise.all([
-                axios.get(`${process.env.BACK_LINK}/api/UserLeadResidencia/${userInfo?.answer[0]?.Correo_Inmobiliaria}`),
-                axios.get(`${process.env.BACK_LINK}/api/UserLeadComercial/${userInfo?.answer[0]?.Correo_Inmobiliaria}`)  
+                axios.get(
+                `${process.env.BACK_LINK}/api/UserLeadResidencia/${sessionInfo?.answer[0]?.Correo_Inmobiliaria}`,
+                { headers: { Authorization: `Bearer ${sessionInfo?.token}` }}),
+                axios.get(
+                `${process.env.BACK_LINK}/api/UserLeadComercial/${sessionInfo?.answer[0]?.Correo_Inmobiliaria}`,
+                {headers: { Authorization: `Bearer ${sessionInfo?.token}` }})  
             ])
             .then(([response1, response2]) => {
                 setLeads([...response1.data, ...response2.data])
@@ -39,9 +43,12 @@ const Index = ({ setState }) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         try {
-            const userInfo = JSON.parse(Cookies?.get('SessionInfo'))
-            axios.patch(`${process.env.BACK_LINK}/api/amountLead/${userInfo?.answer[0]?.Correo_Inmobiliaria}`, {
-                Numero: parseInt(value)
+            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
+            axios.patch(`${process.env.BACK_LINK}/api/amountLead/${sessionInfo?.answer[0]?.Correo_Inmobiliaria}`, 
+            { Numero: parseInt(value)}, { 
+                headers: {
+                    "Authorization": `Bearer ${sessionInfo?.token}`
+                }
             })
             .then(() => {
                 location.reload()

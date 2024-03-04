@@ -87,7 +87,7 @@ const useComercial = () => {
                 
             axios.post(`${process.env.BACK_LINK}/api/addComercial`, formDataNumerico, {
                 headers: {
-                    "Authorization": `Bearer ${sessionInfo.accesToken}`
+                    "Authorization": `Bearer ${sessionInfo?.token}`
                 }
             })
             .then(() => location.reload())

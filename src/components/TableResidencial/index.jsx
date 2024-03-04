@@ -13,13 +13,13 @@ import ResidencialContent from '@/components/ResidencialContent'
 
 const fetchDataResidencial = async () => {
     try {
-        const userInfo = JSON.parse(Cookies?.get('SessionInfo'));
+        const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'));
         const adminResidencials = `${process.env.BACK_LINK}/api/getAllR`;
-        const userResidencials = `${process.env.BACK_LINK}/api/UserResidencia/${userInfo?.answer[0]?.Correo_Inmobiliaria}`;
+        const userResidencials = `${process.env.BACK_LINK}/api/UserResidencia/${sessionInfo?.answer[0]?.Correo_Inmobiliaria}`;
 
-        const response = await axios.get(userInfo?.answer[0]?.rol === 'admin' ? adminResidencials : userResidencials, {
+        const response = await axios.get(sessionInfo?.answer[0]?.rol === 'admin' ? adminResidencials : userResidencials, {
             headers: {
-                "Authorization": `Bearer ${userInfo?.accesToken}`
+                "Authorization": `Bearer ${sessionInfo?.token}`
             }
         });
 
@@ -43,8 +43,8 @@ const Index = () => {
     const memoizedFetchData = React.useMemo(() => fetchDataResidencial(), [])
     
     React.useEffect(() => {
-        const userInfo = JSON.parse(Cookies?.get('SessionInfo'))
-        setRol(userInfo?.answer[0]?.rol)
+        const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
+        setRol(sessionInfo?.answer[0]?.rol)
         const fetchDataAndSetState = async () => {
             try {
                 const data = await memoizedFetchData
@@ -80,7 +80,7 @@ const Index = () => {
             <SearchSection search={search} setSearch={setSearch} setPage={setPage} />
         </div>
         <table className="table table-hover bg-auxiliar w-full">
-            {rol == 'Jazmin' 
+            {rol == 'Otros' 
             ? <TableHeader columns={['#', 'Código', 'Nombre Inmueble', 'Tipo Negocio', 'Precio Inmueble', 'Estado']} />
             : <TableHeader columns={['#', 'Código', 'Nombre Inmueble', 'Tipo Negocio', 'Precio Inmueble', 'Estado', 'Editar', 'Eliminar']} />}
             <tbody>
@@ -99,7 +99,7 @@ const Index = () => {
                         ? <Image src="/assets/green-circle.svg" alt="green.svg" title={inmueble.EstadoR} width={18} height={18} className="mx-auto cursor-pointer" /> 
                         : <Image src="/assets/red-circle.svg" alt="red.svg" title={inmueble.EstadoR} width={18} height={18} className="mx-auto cursor-pointer" />}
                     </td>
-                    {rol !== 'Jazmin' ?
+                    {rol !== 'Otros' ?
                     <>
                         <td className='border px-2 text-center cursor-pointer' onClick={() => handleNavigate(`/propertie/residencial/edit/${inmueble.ID_Residencial}`, inmueble.ID_Residencial)}>
                             <Image src="/assets/edit.svg" alt="edit.svg" width={20} height={20} className="mx-auto" />

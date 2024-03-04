@@ -40,7 +40,7 @@ const Index = () => {
                 'Resumen facturación de este mes', 
                 inmobiliarias
                 .filter(inmobiliaria => inmobiliaria.rol !== 'admin')
-                .map(inmobiliaria => `${inmobiliaria.Nombre_Inmobiliaria}: ${inmobiliaria.totalMes} Leads \n`).join(''))}/>
+                .map(inmobiliaria => `${inmobiliaria.Nombre_Inmobiliaria}: ${inmobiliaria.Totalmes} Leads \n`).join(''))}/>
                 : <Image src="/assets/send.svg"  alt="send.svg" height={30} width={30} title="Disponible solamente los días 1 y 2 de cada mes"
                 className='bg-auxiliar rounded-full p-1 cursor-not-allowed' /> }
             </div> 

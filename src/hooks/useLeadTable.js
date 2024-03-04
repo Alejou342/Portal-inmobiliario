@@ -6,14 +6,18 @@ const useLeadTable = (admin, user) => {
 
     const fetchDataLeads = async () => {
         try {
-            const userInfo = JSON.parse(Cookies?.get('SessionInfo'))
-            setRol(userInfo?.answer[0]?.rol)
+            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
+            setRol(sessionInfo?.answer[0]?.rol)
 
-            const adminLeads = [axios.get(`${process.env.BACK_LINK}/api/${admin}`)]
-            const userLeads = [axios.get(`${process.env.BACK_LINK}/api/${user}/${userInfo?.answer[0]?.Correo_Inmobiliaria}`)]
+            const adminLeads = [
+            axios.get(`${process.env.BACK_LINK}/api/${admin}`, 
+            { headers: { Authorization: `Bearer ${sessionInfo?.token}` }})]
+            const userLeads = [
+            axios.get(`${process.env.BACK_LINK}/api/${user}/${sessionInfo?.answer[0]?.Correo_Inmobiliaria}`, 
+            { headers: { Authorization: `Bearer ${sessionInfo?.token}` }})]
 
             let response
-            if (userInfo?.answer[0]?.rol == 'admin') {
+            if (sessionInfo?.answer[0]?.rol == 'admin') {
                 response = await Promise.all(adminLeads)
             } else {
                 response = await Promise.all(userLeads)
@@ -46,7 +50,7 @@ const useLeadTable = (admin, user) => {
             try {
                 const data = await memoizedFetchData
 
-                if (rol == 'Jazmin') {
+                if (rol == 'Otros') {
                     setLeads(data?.flat()
                     .filter(lead => lead.revisado == 2)
                     .sort((a, b) => (a.Fechalead < b.Fechalead) ? 1 : ((b.Fechalead < a.Fechalead) ? -1 : 0)))

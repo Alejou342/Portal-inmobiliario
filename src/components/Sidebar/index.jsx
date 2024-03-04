@@ -70,7 +70,7 @@ const Index = () => {
         >
           Leads comerciales
         </Button>
-        {user?.rol !== 'Jazmin' && <Button 
+        {user?.rol !== 'Otros' && <Button 
           onClick={() => handleChange(5)} 
           type="button" 
           className={`text-xs ${item == 5 ? styles[0] : styles[1]}`} 

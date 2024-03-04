@@ -17,7 +17,7 @@ const Page = ({ params }) => {
       const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
       axios.get(`${process.env.BACK_LINK}/api/residenciaById/${params.id}`, {
           headers: {
-              "Authorization": `Bearer ${sessionInfo.accesToken}`
+              "Authorization": `Bearer ${sessionInfo?.token}`
           }
       })
       .then((result) => {

@@ -10,14 +10,14 @@ import SearchSection from '@/components/SearchSection'
 
 const fetchDataResidencial = async () => {
     try {
-        const userInfo = JSON.parse(Cookies?.get('SessionInfo'));
-        const rol = userInfo?.answer[0]?.rol
-        const userDeletes = `${process.env.BACK_LINK}/api/getDelete/${userInfo?.answer[0]?.Correo_Inmobiliaria}`;
+        const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'));
+        const rol = sessionInfo?.answer[0]?.rol
+        const userDeletes = `${process.env.BACK_LINK}/api/getDelete/${sessionInfo?.answer[0]?.Correo_Inmobiliaria}`;
         const adminDeletes = `${process.env.BACK_LINK}/api/allDeletes`;
         
         const response = await axios.get(rol == 'admin' ? adminDeletes : userDeletes, {
             headers: {
-                "Authorization": `Bearer ${userInfo?.accesToken}`
+                "Authorization": `Bearer ${sessionInfo?.token}`
             }
         });
         

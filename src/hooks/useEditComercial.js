@@ -34,7 +34,7 @@ const useEditComercial = () => {
     
             axios.get(`${process.env.BACK_LINK}/api/comercialById/${comercialId}`, {
                 headers: {
-                    "Authorization": `Bearer ${sessionInfo?.accesToken}`
+                    "Authorization": `Bearer ${sessionInfo?.token}`
                 }
             })
             .then((result) => {
@@ -115,7 +115,7 @@ const useEditComercial = () => {
 
             axios.put(`${process.env.BACK_LINK}/api/updateComercial/${comercialId}`, formDataNumerico, {
                 headers: {
-                    "Authorization": `Bearer ${sessionInfo.accesToken}`
+                    "Authorization": `Bearer ${sessionInfo?.token}`
                 }
             })
             .then(() => router.push('/main'))
