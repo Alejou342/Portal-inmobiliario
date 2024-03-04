@@ -33,6 +33,7 @@ const fetchDataResidencial = async () => {
 const Index = () => {
 
     const router = useRouter()
+    const [id, setId] = React.useState(null)
     const [rol, setRol] = React.useState('')
     const [page, setPage] = React.useState(0)
     const [search, setSearch] = React.useState("")
@@ -61,11 +62,13 @@ const Index = () => {
 
     const handleNavigate = (url, id) => {
         Cookies.set('ResidencialID', id)
+        setId(id)
         router.push(url)
     }
-
+    
     const handleDelete = (id) => {
         Cookies.set('ResidencialID', id)
+        setId(id)
         setOpenModal(true)
     }
 
@@ -73,7 +76,7 @@ const Index = () => {
     <div className="bg-primary w-[60rem] overflow-auto py-1 rounded-md">
         <Loader active={loaderActive} />
         <ModalGeneral state={openModal} setState={setOpenModal}>
-            <ResidencialContent setState={setOpenModal} />
+            <ResidencialContent setState={setOpenModal} id={id} />
         </ModalGeneral>
         <div className="flex justify-between my-2 px-8 mx-auto items-center">
             <h1 className="text-center text-3xl font-bold text-auxiliar">Mis Propiedades Residenciales</h1>

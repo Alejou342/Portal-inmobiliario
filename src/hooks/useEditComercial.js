@@ -39,7 +39,6 @@ const useEditComercial = () => {
             })
             .then((result) => {
                 setFormData({
-                    // Idinmobiliaria: result?.data[0]?.ID_Inmobiliaria,
                     Tipocomercial: result?.data[0]?.TipoC,
                     Tiposervicio: result?.data[0]?.Tipo_ServicioC,
                     CodigoInmobiliaria: result?.data[0]?.CodigoInmobiliaria,
