@@ -17,7 +17,7 @@ const Index = ({ setState }) => {
             setId(id)
             axios.get(`${process.env.BACK_LINK}/api/comercialById/${id}`, {
                 headers: {
-                    "Authorization": `Bearer ${sessionInfo.accesToken}`
+                    "Authorization": `Bearer ${sessionInfo?.token}`
                 }
             })
             .then((result) => {
@@ -39,7 +39,7 @@ const Index = ({ setState }) => {
             const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
             axios.post(`${process.env.BACK_LINK}/api/deleteComercial/${id}`, { Personaencargada: sessionInfo?.answer[0]?.Personaencargada }, {
                 headers: {
-                    "Authorization": `Bearer ${sessionInfo.accesToken}`
+                    "Authorization": `Bearer ${sessionInfo?.token}`
                 }
             })
             .then(() => {

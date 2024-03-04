@@ -18,16 +18,16 @@ const Index = () => {
             Promise.all([
                 axios.get(
                 `${process.env.BACK_LINK}/api/UserLeadResidencia/${sessionInfo?.answer[0]?.Correo_Inmobiliaria}`, 
-                { headers: { Authorization: `Bearer ${sessionInfo?.accesToken}` }}),
+                { headers: { Authorization: `Bearer ${sessionInfo?.token}` }}),
                 axios.get(
                 `${process.env.BACK_LINK}/api/UserLeadComercial/${sessionInfo?.answer[0]?.Correo_Inmobiliaria}`, 
-                { headers: { Authorization: `Bearer ${sessionInfo?.accesToken}` }}),
+                { headers: { Authorization: `Bearer ${sessionInfo?.token}` }}),
                 axios.get(
                 `${process.env.BACK_LINK}/api/getAmountLeads/${sessionInfo?.answer[0]?.Correo_Inmobiliaria}`, 
-                { headers: { Authorization: `Bearer ${sessionInfo?.accesToken}` }}),   // --> Revisar esto
+                { headers: { Authorization: `Bearer ${sessionInfo?.token}` }}),   // --> Revisar esto
                 axios.get(
                 `${process.env.BACK_LINK}/api/allLeads`, 
-                { headers: { Authorization: `Bearer ${sessionInfo?.accesToken}` }})
+                { headers: { Authorization: `Bearer ${sessionInfo?.token}` }})
             ])
             .then(([response1, response2, response3, response4]) => {
                 setLeads([...response1.data, ...response2.data])

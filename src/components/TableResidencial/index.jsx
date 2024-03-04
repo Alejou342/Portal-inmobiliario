@@ -19,7 +19,7 @@ const fetchDataResidencial = async () => {
 
         const response = await axios.get(sessionInfo?.answer[0]?.rol === 'admin' ? adminResidencials : userResidencials, {
             headers: {
-                "Authorization": `Bearer ${sessionInfo?.accesToken}`
+                "Authorization": `Bearer ${sessionInfo?.token}`
             }
         });
 

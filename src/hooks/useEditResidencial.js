@@ -38,7 +38,7 @@ const useEditResidencial = () => {
     
             axios.get(`${process.env.BACK_LINK}/api/residenciaById/${residencialId}`, {
                 headers: {
-                    "Authorization": `Bearer ${sessionInfo?.accesToken}`
+                    "Authorization": `Bearer ${sessionInfo?.token}`
                 }
             })
             .then((result) => {
@@ -125,7 +125,7 @@ const useEditResidencial = () => {
             
             axios.put(`${process.env.BACK_LINK}/api/updateResidencial/${residencialId}`, formDataNumerico, {
                 headers: {
-                    "Authorization": `Bearer ${sessionInfo.accesToken}`
+                    "Authorization": `Bearer ${sessionInfo?.token}`
                 }
             })
             .then(() => router.push('/main'))

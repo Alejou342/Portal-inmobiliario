@@ -29,14 +29,14 @@ const Index = ({ setState, id, letter, type }) => {
                 `${process.env.BACK_LINK}/api/observacion${letter}/${id}`, 
                 { observacion: text }, {
                     headers: {
-                        "Authorization": `Bearer ${sessionInfo.accesToken}`
+                        "Authorization": `Bearer ${sessionInfo?.token}`
                     }
                 }),
                 axios.put(
                 `${process.env.BACK_LINK}/api/${type}/updateRevisado/${id}`, 
                 { newStatus: availableStatus.indexOf(status) }, {
                     headers: {
-                        "Authorization": `Bearer ${sessionInfo.accesToken}`
+                        "Authorization": `Bearer ${sessionInfo?.token}`
                     }
                 })
             ])

@@ -17,7 +17,7 @@ const fetchDataResidencial = async () => {
         
         const response = await axios.get(rol == 'admin' ? adminDeletes : userDeletes, {
             headers: {
-                "Authorization": `Bearer ${sessionInfo?.accesToken}`
+                "Authorization": `Bearer ${sessionInfo?.token}`
             }
         });
         

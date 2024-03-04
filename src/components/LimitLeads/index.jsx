@@ -18,10 +18,10 @@ const Index = ({ setState }) => {
             Promise.all([
                 axios.get(
                 `${process.env.BACK_LINK}/api/UserLeadResidencia/${sessionInfo?.answer[0]?.Correo_Inmobiliaria}`,
-                { headers: { Authorization: `Bearer ${sessionInfo?.accesToken}` }}),
+                { headers: { Authorization: `Bearer ${sessionInfo?.token}` }}),
                 axios.get(
                 `${process.env.BACK_LINK}/api/UserLeadComercial/${sessionInfo?.answer[0]?.Correo_Inmobiliaria}`,
-                {headers: { Authorization: `Bearer ${sessionInfo?.accesToken}` }})  
+                {headers: { Authorization: `Bearer ${sessionInfo?.token}` }})  
             ])
             .then(([response1, response2]) => {
                 setLeads([...response1.data, ...response2.data])
@@ -47,7 +47,7 @@ const Index = ({ setState }) => {
             axios.patch(`${process.env.BACK_LINK}/api/amountLead/${sessionInfo?.answer[0]?.Correo_Inmobiliaria}`, 
             { Numero: parseInt(value)}, { 
                 headers: {
-                    "Authorization": `Bearer ${sessionInfo.accesToken}`
+                    "Authorization": `Bearer ${sessionInfo?.token}`
                 }
             })
             .then(() => {

@@ -94,7 +94,7 @@ const useResidencial = () => {
             };
             axios.post(`${process.env.BACK_LINK}/api/addResidencia`, formDataNumerico, {
                 headers: {
-                    "Authorization": `Bearer ${sessionInfo.accesToken}`
+                    "Authorization": `Bearer ${sessionInfo?.token}`
                 }
             })
             .then(() => location.reload())

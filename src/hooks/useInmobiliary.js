@@ -14,7 +14,7 @@ const useInmobiliary = () => {
             setLoaderActive(true)
             axios.get(`${process.env.BACK_LINK}/api/getI`, {
                 headers: {
-                    "Authorization": `Bearer ${sessionInfo?.accesToken}`
+                    "Authorization": `Bearer ${sessionInfo?.token}`
                 }
             })
             .then((result) => {

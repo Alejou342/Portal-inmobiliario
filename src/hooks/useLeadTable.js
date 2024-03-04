@@ -11,10 +11,10 @@ const useLeadTable = (admin, user) => {
 
             const adminLeads = [
             axios.get(`${process.env.BACK_LINK}/api/${admin}`, 
-            { headers: { Authorization: `Bearer ${sessionInfo?.accesToken}` }})]
+            { headers: { Authorization: `Bearer ${sessionInfo?.token}` }})]
             const userLeads = [
             axios.get(`${process.env.BACK_LINK}/api/${user}/${sessionInfo?.answer[0]?.Correo_Inmobiliaria}`, 
-            { headers: { Authorization: `Bearer ${sessionInfo?.accesToken}` }})]
+            { headers: { Authorization: `Bearer ${sessionInfo?.token}` }})]
 
             let response
             if (sessionInfo?.answer[0]?.rol == 'admin') {

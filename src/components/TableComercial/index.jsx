@@ -20,7 +20,7 @@ const fetchDataComercial = async () => {
     
         const response = await axios.get(sessionInfo?.answer[0]?.rol == 'admin' ? adminComercials : userComercials ,  {
             headers: {
-                "Authorization": `Bearer ${sessionInfo?.accesToken}`
+                "Authorization": `Bearer ${sessionInfo?.token}`
             }
         })
 
