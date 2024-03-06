@@ -1,34 +1,10 @@
-import React from 'react'
 import axios from 'axios'
-import Cookies from 'js-cookie'
 import FormData from 'form-data'
+import useGET from '@/hooks/useGET'
 
-const useInmobiliary = () => {
-    
-    const [inmobiliarias, setInmobiliarias] = React.useState([])
-    const [loaderActive, setLoaderActive] = React.useState(false)
+const useInmobiliary = (url) => {
 
-    React.useEffect(() => {
-        try {
-            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
-            setLoaderActive(true)
-            axios.get(`${process.env.BACK_LINK}/api/getI`, {
-                headers: {
-                    "Authorization": `Bearer ${sessionInfo?.token}`
-                }
-            })
-            .then((result) => {
-                setInmobiliarias(result.data)
-                setLoaderActive(false)
-            })
-            .catch((error) => { 
-                console.error(error) 
-                setLoaderActive(false)
-            })
-        } catch (error) {
-            console.error(error)
-        }
-    }, [])
+    const { data, loading, error } = useGET(url)
 
     const sendEmail = (to, subject, text) => {
         const form = new FormData()
@@ -53,10 +29,9 @@ const useInmobiliary = () => {
     }
 
   return {
-    inmobiliarias, 
-    setInmobiliarias,
-    loaderActive,
-    setLoaderActive,
+    data, 
+    loading, 
+    error,
     sendEmail
   }
 }

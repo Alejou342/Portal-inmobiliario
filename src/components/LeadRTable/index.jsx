@@ -1,21 +1,21 @@
 import React from 'react'
 import Image from 'next/image'
 import Loader from '@/components/Loader'
-import useLeadTable from '@/hooks/useLeadTable'
 import TableHeader from '@/components/TableHeader'
 import TableFooter from '@/components/TableFooter'
 import ModalGeneral from '@/containers/ModalGeneral'
 import SearchSection from '@/components/SearchSection'
 import ObservationForm from '@/components/ObservationForm'
+import useTables from '@/hooks/useTables'
 
 const Index = () => {
 
     const {
-            id, rol, page, leads, search, 
+            id, rol, page, data, search, 
             openModal, loaderActive, setPage, 
             setSearch, handleObservation, 
             setOpenModal, availableStatus
-        } = useLeadTable('getAllLeadsR', 'UserLeadResidencia')
+        } = useTables('leadsR')
 
   return (
     <>
@@ -34,8 +34,7 @@ const Index = () => {
                 ? <TableHeader columns={['#', 'Código', 'Nombre Inmueble', 'Nombre Cliente', 'Teléfono Cliente', 'Fecha de generación', 'Hora de generación', 'Estado', 'Observaciones']} />
                 : <TableHeader columns={['#', 'Código', 'Nombre Inmueble', 'Nombre Cliente', 'Teléfono Cliente', 'Fecha de generación', 'Hora de generación']} />}
                 <tbody>
-                    {leads
-                    .filter(lead => lead?.CodigoInmobiliaria?.includes(search))
+                    {data?.filter(lead => lead?.CodigoInmobiliaria?.includes(search))
                     .slice(page * 20, page * 20 + 20)
                     .map((lead, id) => 
                     <tr key={id + 1} className="cursor-pointer hover:bg-slate-300" onClick={() => handleObservation(lead?.Idlead)}>
@@ -60,7 +59,7 @@ const Index = () => {
                 </tbody>          
             </table>
             <TableFooter 
-            param={leads.filter(lead => lead?.CodigoInmobiliaria?.includes(search))} 
+            param={data?.filter(lead => lead?.CodigoInmobiliaria?.includes(search))} 
             text="Total Leads Residenciales este mes:" 
             page={page} 
             setPage={setPage}

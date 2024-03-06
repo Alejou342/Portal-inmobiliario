@@ -1,77 +1,21 @@
 "use client"
 import React from 'react'
-import axios from 'axios'
 import Image from 'next/image'
-import Cookies from 'js-cookie'
 import Loader from '@/components/Loader'
-import { useRouter } from 'next/navigation'
 import { formatPrice } from '@/utils/formatPrice'
+import useProperties from '@/hooks/useProperties'
 import TableFooter from '@/components/TableFooter'
 import TableHeader from '@/components/TableHeader'
 import ModalGeneral from '@/containers/ModalGeneral'
 import SearchSection from '@/components/SearchSection'
 import ComercialContent from '@/components/ComercialContent'
 
-const fetchDataComercial = async () => {
-    try {
-        const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
-        const adminComercials = `${process.env.BACK_LINK}/api/getAllC`
-        const userComercials = `${process.env.BACK_LINK}/api/UserComercial/${sessionInfo?.answer[0]?.Correo_Inmobiliaria}`
-    
-        const response = await axios.get(sessionInfo?.answer[0]?.rol == 'admin' ? adminComercials : userComercials ,  {
-            headers: {
-                "Authorization": `Bearer ${sessionInfo?.token}`
-            }
-        })
-
-        return response.data    
-    } catch (error) {
-        console.error(error)
-        throw error
-    }
-}
-
 const Index = () => {
 
-    const router = useRouter()
-    const [id, setId] = React.useState(null)
-    const [rol, setRol] = React.useState('')
-    const [page, setPage] = React.useState(0)
-    const [search, setSearch] = React.useState("")
-    const [inmuebles, setInmuebles] = React.useState([])
-    const [openModal, setOpenModal] = React.useState(false)
-    const [loaderActive, setLoaderActive] = React.useState(true)
-
-    const memoizedFetchData = React.useMemo(() => fetchDataComercial(), [])
-
-    React.useEffect(() => {
-        const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
-        setRol(sessionInfo?.answer[0]?.rol)
-        const fetchDataAndSetState = async () => {
-            try {
-                const data = await memoizedFetchData
-                setInmuebles(data.toReversed())
-                setLoaderActive(false)
-            } catch (error) {
-                console.error(error)
-                setLoaderActive(false)
-            }
-        }
-
-        fetchDataAndSetState()
-    }, [memoizedFetchData])
-
-    const handleNavigate = (url, id) => {
-        Cookies.set('ComercialID', id)
-        setId(id)
-        router.push(url)
-    }
-
-    const handleDelete = (id) => {
-        Cookies.set('ComercialID', id)
-        setId(id)
-        setOpenModal(true)
-    }
+    const {
+        id, rol, page, search, setPage, setSearch, openModal, inmuebles, 
+        loaderActive, handleDelete, handleNavigate, setOpenModal
+    } = useProperties('comercial')
 
   return (
     <div className="bg-primary w-[60rem] overflow-auto py-1 rounded-md">

@@ -7,24 +7,17 @@ const useLeadTable = (admin, user) => {
     const fetchDataLeads = async () => {
         try {
             const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
-            setRol(sessionInfo?.answer[0]?.rol)
+            const rol = sessionInfo?.answer[0]?.rol
+            const adminLeads = `${process.env.BACK_LINK}/api/${admin}`
+            const userLeads = `${process.env.BACK_LINK}/api/${user}/${sessionInfo?.answer[0]?.Correo_Inmobiliaria}` 
 
-            const adminLeads = [
-            axios.get(`${process.env.BACK_LINK}/api/${admin}`, 
-            { headers: { Authorization: `Bearer ${sessionInfo?.token}` }})]
-            const userLeads = [
-            axios.get(`${process.env.BACK_LINK}/api/${user}/${sessionInfo?.answer[0]?.Correo_Inmobiliaria}`, 
-            { headers: { Authorization: `Bearer ${sessionInfo?.token}` }})]
+            const response = await axios.get(rol == 'admin' ? adminLeads : userLeads, {
+                headers: {
+                    "Authorization": `Bearer ${sessionInfo?.token}`
+                }
+            });
 
-            let response
-            if (sessionInfo?.answer[0]?.rol == 'admin') {
-                response = await Promise.all(adminLeads)
-            } else {
-                response = await Promise.all(userLeads)
-            }
-
-            const responseData = response.map(res => res.data)
-            return responseData
+            return response.data
         } catch (error) {
             console.error(error)
             throw error
@@ -48,17 +41,17 @@ const useLeadTable = (admin, user) => {
 
         const fetchDataAndSetState = async () => {
             try {
-                const data = await memoizedFetchData
+                // const data = await memoizedFetchData
 
-                if (rol == 'Otros') {
-                    setLeads(data?.flat()
-                    .filter(lead => lead.revisado == 2)
-                    .sort((a, b) => (a.Fechalead < b.Fechalead) ? 1 : ((b.Fechalead < a.Fechalead) ? -1 : 0)))
-                } else {
-                    setLeads(data?.flat()
-                    .sort((a, b) => (a.Fechalead < b.Fechalead) ? 1 : ((b.Fechalead < a.Fechalead) ? -1 : 0)))
-                }
-                setLoaderActive(false)
+                // if (rol == 'Otros') {
+                //     setLeads(data?.flat()
+                //     .filter(lead => lead.revisado == 2)
+                //     .sort((a, b) => (a.Fechalead < b.Fechalead) ? 1 : ((b.Fechalead < a.Fechalead) ? -1 : 0)))
+                // } else {
+                //     setLeads(data?.flat()
+                //     .sort((a, b) => (a.Fechalead < b.Fechalead) ? 1 : ((b.Fechalead < a.Fechalead) ? -1 : 0)))
+                // }
+                // setLoaderActive(false)
             } catch (error) {
                 console.error(error)
                 setLoaderActive(false)
