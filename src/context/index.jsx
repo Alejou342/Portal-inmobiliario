@@ -7,7 +7,16 @@ const ItemContext = React.createContext();
 const ItemProvider = ({children}) => {
 
     const [item, setItem] = React.useState(1)
-    const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
+    const [sessionInfo, setSessionInfo] = React.useState(null)
+
+    React.useEffect(() => {
+      try {
+        const cookie = JSON.parse(Cookies?.get('SessionInfo'))
+        setSessionInfo(cookie)
+      } catch (error) {
+        console.error(error)
+      }
+    }, [])
 
   return (
     <ItemContext.Provider value={{item, setItem, sessionInfo}}>

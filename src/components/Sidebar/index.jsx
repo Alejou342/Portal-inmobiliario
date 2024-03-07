@@ -4,7 +4,7 @@ import Cookies from 'js-cookie'
 import Button from '@/components/Button'
 import { useRouter } from 'next/navigation'
 import UserInfo from '@/components/UserInfo'
-import { useItem } from '@/context/ItemContext'
+import { useItem } from '@/context'
 import SideHeader from '@/components/SideHeader'
 
 const Index = () => {
