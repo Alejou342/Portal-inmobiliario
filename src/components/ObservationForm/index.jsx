@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import Cookies from 'js-cookie'
 import Loader from '@/components/Loader'
 import Button from '@/components/Button'
 import FormSelect from '@/components/FormSelect'

@@ -1,24 +1,25 @@
 import React from 'react'
 import axios from 'axios'
-import Cookies from 'js-cookie'
+import { useItem } from '@/context/ItemContext'
 
 const useTables = (param) => {
 
     const wordKeys = {
         traces: ['AllHuellas', 'getHuellas'],
         deletes: ['allDeletes', 'getDelete'],
-        leadsR: ['getAllLeadsR', 'UserLeadResidencia'],
-        leadsC: ['getAllLeadsC', 'UserLeadComercial']
+        leadsC: ['getAllLeadsC', 'UserLeadComercial'],
+        leadsR: ['getAllLeadsR', 'UserLeadResidencia']
     }
+
+    const { sessionInfo } = useItem()
+    const rol = sessionInfo?.answer[0]?.rol
 
     const fetchDataResidencial = async () => {
         try {
-            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'));
-            const rol = sessionInfo?.answer[0]?.rol
-            const adminDeletes = `${process.env.BACK_LINK}/api/${wordKeys[param][0]}`;
-            const userDeletes = `${process.env.BACK_LINK}/api/${wordKeys[param][1]}/${sessionInfo?.answer[0]?.Correo_Inmobiliaria}`;
+            const adminData = `${process.env.BACK_LINK}/api/${wordKeys[param][0]}`;
+            const userData = `${process.env.BACK_LINK}/api/${wordKeys[param][1]}/${sessionInfo?.answer[0]?.Correo_Inmobiliaria}`;
             
-            const response = await axios.get(rol == 'admin' ? adminDeletes : userDeletes, {
+            const response = await axios.get(rol == 'admin' ? adminData : userData, {
                 headers: {
                     "Authorization": `Bearer ${sessionInfo?.token}`
                 }
@@ -30,7 +31,7 @@ const useTables = (param) => {
             throw error;
         }
     };
-
+    
         const availableStatus = ['Pendiente', 'Atendido', 'Descartado']
         const [id, setId] = React.useState(0)
         const [page, setPage] = React.useState(0)
@@ -63,17 +64,18 @@ const useTables = (param) => {
         }
 
   return {
-    availableStatus,
-    id,
-    setId,
-    openModal,
-    setOpenModal,
+    id, 
+    rol,
     page, 
-    setPage,
     data,
-    loaderActive,
+    setId,
     search,
+    setPage,
+    openModal,
     setSearch,
+    setOpenModal,
+    loaderActive,
+    availableStatus,
     handleObservation
   }
 }

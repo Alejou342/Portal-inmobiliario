@@ -1,12 +1,13 @@
 import React from 'react'
 import Image from 'next/image'
+import Cookies from 'js-cookie'
 import Loader from '@/components/Loader'
+import useTables from '@/hooks/useTables'
 import TableHeader from '@/components/TableHeader'
 import TableFooter from '@/components/TableFooter'
 import ModalGeneral from '@/containers/ModalGeneral'
 import SearchSection from '@/components/SearchSection'
 import ObservationForm from '@/components/ObservationForm'
-import useTables from '@/hooks/useTables'
 
 const Index = () => {
 
@@ -35,6 +36,8 @@ const Index = () => {
                 : <TableHeader columns={['#', 'Código', 'Nombre Inmueble', 'Nombre Cliente', 'Teléfono Cliente', 'Fecha de generación', 'Hora de generación']} />}
                 <tbody>
                     {data?.filter(lead => lead?.CodigoInmobiliaria?.includes(search))
+                    .filter(lead => rol == 'Otros' ? lead.revisado == 2 : lead)
+                    .sort((a, b) => (a.Fechalead < b.Fechalead) ? 1 : ((b.Fechalead < a.Fechalead) ? -1 : 0))
                     .slice(page * 20, page * 20 + 20)
                     .map((lead, id) => 
                     <tr key={id + 1} className="cursor-pointer hover:bg-slate-300" onClick={() => handleObservation(lead?.Idlead)}>
@@ -55,11 +58,13 @@ const Index = () => {
                             </td>
                         </>
                         : null }
-                    </tr>)}           
+                    </tr>)}
                 </tbody>          
             </table>
             <TableFooter 
-            param={data?.filter(lead => lead?.CodigoInmobiliaria?.includes(search))} 
+            param={data?.filter(lead => lead?.CodigoInmobiliaria?.includes(search))
+                .filter(lead => rol == 'Otros' ? lead.revisado == 2 : lead)
+                } 
             text="Total Leads Residenciales este mes:" 
             page={page} 
             setPage={setPage}
