@@ -18,7 +18,7 @@ const useTables = (param) => {
             const adminData = `${process.env.BACK_LINK}/api/${wordKeys[param][0]}`;
             const userData = `${process.env.BACK_LINK}/api/${wordKeys[param][1]}/${sessionInfo?.answer[0]?.Correo_Inmobiliaria}`;
             
-            const response = await axios.get(rol == 'admin' ? adminData : userData, {
+            const response = await axios.get(sessionInfo?.answer[0]?.rol == 'admin' ? adminData : userData, {
                 headers: {
                     "Authorization": `Bearer ${sessionInfo?.token}`
                 }
@@ -39,6 +39,8 @@ const useTables = (param) => {
         const [search, setSearch] = React.useState("")
         const [openModal, setOpenModal] = React.useState(false)
         const [loaderActive, setLoaderActive] = React.useState(true)
+
+        console.log(rol)
     
         
         const memoizedFetchData = React.useMemo(() => fetchDataResidencial(), [])
