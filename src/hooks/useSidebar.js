@@ -1,12 +1,11 @@
 import React from 'react'
 import Cookies from 'js-cookie'
-import { useRouter } from 'next/navigation'
 import { useItem } from '@/context'
+import { useRouter } from 'next/navigation'
 
 const useSidebar = () => {
 
     const router = useRouter()
-    const styles = ['bg-secondary hover:bg-auxiliar hover:text-secondary', 'bg-white hover:bg-auxiliar !text-black']
     const [user, setUser] = React.useState()
     const { item, setItem } = useItem() 
 
@@ -35,7 +34,6 @@ const useSidebar = () => {
     }
 
   return {
-    styles,
     user,
     item,
     handleLogout,

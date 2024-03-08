@@ -7,7 +7,8 @@ import SideHeader from '@/components/SideHeader'
 
 const Index = () => {
 
-    const { styles, user, item, handleChange, handleLogout } = useSidebar()
+  const styles = ['bg-secondary hover:bg-auxiliar hover:text-secondary', 'bg-white hover:bg-auxiliar !text-black']
+  const { user, item, handleChange, handleLogout } = useSidebar()
 
   return (
     <aside className="bg-primary w-1/6 h-screen relative py-12 rounded-r-[4rem]">
