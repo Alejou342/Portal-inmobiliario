@@ -20,7 +20,7 @@ const Index = () => {
         </div>
         <table className="table table-hover bg-auxiliar w-full">
             <TableHeader columns={['#', 'Código', 'Tipo Inmueble', 'Persona', 'Enlace']} />
-            <tbody className='h-[33.75rem]'>
+            <tbody>
                 {data?.filter(inmueble => inmueble.CodigoInmobiliaria?.includes(search))
                 .slice(page * 20, page * 20 + 20)
                 .map((inmueble, id) => 
