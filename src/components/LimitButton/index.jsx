@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import { getDate } from '@/utils/getDate'
+import { getDate } from '@/utils'
 import AlertIcon from '@/components/AlertIcon'
 import LimitLeads from '@/components/LimitLeads'
 import ModalGeneral from '@/containers/ModalGeneral'

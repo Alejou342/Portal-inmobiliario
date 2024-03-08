@@ -1,8 +1,8 @@
 "use client"
 import React from 'react'
 import Image from 'next/image'
+import { getDate } from '@/utils'
 import Loader from '@/components/Loader'
-import { getDate } from '@/utils/getDate'
 import TableHeader from '@/components/TableHeader'
 import useInmobiliary from '@/hooks/useInmobiliary'
 

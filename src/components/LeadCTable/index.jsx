@@ -11,10 +11,8 @@ import ObservationForm from '@/components/ObservationForm'
 const Index = () => {
 
     const {
-        id, rol, page, data, search, 
-        openModal, loaderActive, setPage, 
-        setSearch, handleObservation, 
-        setOpenModal, availableStatus
+        id, rol, page, data, search, openModal, loaderActive, setPage, 
+        setSearch, handleObservation, setOpenModal, availableStatus
     } = useTables('leadsC')
 
   return (
