@@ -31,13 +31,14 @@ const Index = () => {
                 {rol !== 'admin' 
                 ? <TableHeader columns={['#', 'Código', 'Nombre Inmueble', 'Nombre Cliente', 'Teléfono Cliente', 'Fecha de generación', 'Hora de generación', 'Estado', 'Observaciones']} />
                 : <TableHeader columns={['#', 'Código', 'Nombre Inmueble', 'Nombre Cliente', 'Teléfono Cliente', 'Fecha de generación', 'Hora de generación']} />}
-                <tbody className='h-[33.75rem]'>
-                    {data && data?.filter(lead => lead?.CodigoInmobiliaria?.includes(search))
+                <tbody>
+                    {data
+                    .filter(lead => lead?.CodigoInmobiliaria?.includes(search))
                     .filter(lead => rol == 'Otros' ? lead.revisado == 2 : lead)
                     .sort((a, b) => (a.Fechalead < b.Fechalead) ? 1 : ((b.Fechalead < a.Fechalead) ? -1 : 0))
                     .slice(page * 20, page * 20 + 20)
                     .map((lead, id) => 
-                    <tr key={id + 1} className="cursor-pointer hover:bg-slate-300" onClick={() => handleObservation(lead?.Idlead)}>
+                    <tr key={id + 1} className="cursor-pointer hover:bg-slate-300 border" onClick={() => handleObservation(lead?.Idlead)}>
                         <td className='border px-2 text-center'>{id + 1}</td>
                         <td className='border px-2 text-center'>{lead?.CodigoInmobiliaria}</td>
                         <td className='border px-2 text-center'>{lead?.NombreR?.substring(0,25)}</td>
@@ -47,8 +48,8 @@ const Index = () => {
                         <td className='border px-2 text-center'>{lead?.Fechalead.substr(11,5)}</td>
                         {rol !== 'admin' ? 
                         <>
-                            <td className='flex justify-center'>
-                                <Image src={`/assets/status/${availableStatus[lead?.revisado]}.png`} title={availableStatus[lead?.revisado]} alt="Status" width={20} height={20} />
+                            <td>
+                                <Image src={`/assets/status/${availableStatus[lead?.revisado]}.svg`} className='mx-auto' title={availableStatus[lead?.revisado]} alt="Status" width={20} height={20} />
                             </td>
                             <td className='border px-2 text-center text-xs' title={lead?.Observacion}>
                                 {(lead?.Observacion?.length > 16) ? lead?.Observacion?.substr(0,16).concat('...') : lead?.Observacion}

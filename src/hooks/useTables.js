@@ -32,7 +32,7 @@ const useTables = (param) => {
         }
     };
     
-        const availableStatus = ['Pendiente', 'Atendido', 'Descartado']
+        const availableStatus = ['uncheck', 'check', 'discard']
         const [id, setId] = React.useState(0)
         const [page, setPage] = React.useState(0)
         const [data, setData] = React.useState([])
@@ -47,7 +47,7 @@ const useTables = (param) => {
             const fetchDataAndSetState = async () => {
                 try {
                     const data = await memoizedFetchData
-                    setData(data)
+                    setData(data || [])
                     setLoaderActive(false)
                 } catch (error) {
                     console.error(error)
