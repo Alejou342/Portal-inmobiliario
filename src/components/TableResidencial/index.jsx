@@ -2,7 +2,7 @@
 import React from 'react'
 import Image from 'next/image'
 import Loader from '@/components/Loader'
-import { formatPrice } from '@/utils/formatPrice'
+import { formatPrice } from '@/utils'
 import useProperties from '@/hooks/useProperties'
 import TableFooter from '@/components/TableFooter'
 import TableHeader from '@/components/TableHeader'

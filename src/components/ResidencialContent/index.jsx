@@ -1,33 +1,11 @@
-import axios from 'axios'
 import React from 'react'
-import Cookies from 'js-cookie'
 import Loader from '@/components/Loader'
 import useGET from '@/hooks/useGET'
+import { handleDeleteR } from '@/utils'
 
 const Index = ({ setState, id }) => {
 
     const { data, loading, error } = useGET(`${process.env.BACK_LINK}/api/residenciaById/${id}`)
-
-    const handleDelete = (id) => {
-        try {
-            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
-            axios.post(`${process.env.BACK_LINK}/api/deleteResidencial/${id}`, { Personaencargada: sessionInfo?.answer[0]?.Personaencargada }, {
-                headers: {
-                    "Authorization": `Bearer ${sessionInfo?.token}`
-                }
-            })
-            .then(() => {
-                setState(false)
-                location.reload()
-            })
-            .catch((error) => { 
-                console.error(error) 
-                setState(false)
-            })
-        } catch (error) {
-            console.error(error)
-        }
-    }
 
     return (
         <div className='Gray flex flex-col min-w-fit min-h-fit items-center p-6 pb-10'>
@@ -38,7 +16,7 @@ const Index = ({ setState, id }) => {
             </div>
             <div className="mt-8 flex gap-6">
                 <button className="rounded-full bg-slate-400 px-4 py-2 text-white font-bold" onClick={() => setState(false)}>CANCELAR</button>
-                <button className="rounded-full bg-primary px-4 py-2 text-white font-bold" onClick={() => handleDelete(id)}>CONFIRMAR</button>
+                <button className="rounded-full bg-primary px-4 py-2 text-white font-bold" onClick={() => handleDeleteR(setState, id)}>CONFIRMAR</button>
             </div>
         </div>
     )
