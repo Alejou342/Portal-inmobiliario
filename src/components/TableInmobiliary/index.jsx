@@ -16,7 +16,7 @@ const Index = () => {
         <h1 className="text-center mb-4 text-3xl font-bold text-auxiliar"> Inmobiliarias asociadas </h1>
         {data && <table className="table table-hover w-full bg-auxiliar">
             <TableHeader columns={['ID Inmobiliaria','Nombre Inmobiliaria','Celular','Encargado']}/>
-            <tbody>
+            <tbody className='h-[33.75rem]'>
                 {data?.filter(inmobiliaria => inmobiliaria.rol !== 'admin')
                 .map(inmobiliaria => 
                 <tr key={inmobiliaria.ID_Inmobiliaria} className="hover:bg-slate-300">

@@ -1,4 +1,5 @@
 import React from 'react'
+import Cookies from 'js-cookie'
 import { useItem } from '@/context'
 import Form from '@/containers/Form'
 import LeadRTable from '@/components/LeadRTable'
@@ -11,7 +12,7 @@ import TableResidencial from '@/components/TableResidencial'
 const useMain = () => {
 
     const [rol, setRol] = React.useState()
-    const { item, sessionInfo } = useItem()
+    const { item } = useItem()
 
     const views = [
         { key: 'Residencial', component: <TableResidencial key="Residencial" />},
@@ -24,6 +25,7 @@ const useMain = () => {
     
     React.useEffect(() => {
       try {
+        const sessionInfo = JSON.parse(Cookies.get('SessionInfo'))
         if (sessionInfo) {
           setRol(sessionInfo?.answer[0]?.rol)
         }

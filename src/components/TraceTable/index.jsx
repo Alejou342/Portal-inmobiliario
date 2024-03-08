@@ -18,7 +18,7 @@ const Index = () => {
         </div>
         <table className="table table-hover bg-auxiliar w-full">
             <TableHeader columns={['#', 'Correo', 'Fecha Ingreso', 'Hora Ingreso', 'Encargado']} />
-            <tbody>
+            <tbody className='h-[33.75rem]'>
                 {data && data?.filter(inmueble => inmueble.Personaencargada?.toLowerCase().includes(search.toLowerCase()))
                 .slice(page * 20, page * 20 + 20)
                 .map((inmueble, id) => 
