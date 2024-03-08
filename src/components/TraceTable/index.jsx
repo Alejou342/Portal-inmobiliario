@@ -19,7 +19,7 @@ const Index = () => {
         <table className="table table-hover bg-auxiliar w-full">
             <TableHeader columns={['#', 'Correo', 'Fecha Ingreso', 'Hora Ingreso', 'Encargado']} />
             <tbody>
-                {data?.filter(inmueble => inmueble.Personaencargada?.toLowerCase().includes(search.toLowerCase()))
+                {data && data?.filter(inmueble => inmueble.Personaencargada?.toLowerCase().includes(search.toLowerCase()))
                 .slice(page * 20, page * 20 + 20)
                 .map((inmueble, id) => 
                 <tr key={id + 1} className="hover:bg-slate-300">
@@ -32,7 +32,7 @@ const Index = () => {
             </tbody>          
         </table>
         <TableFooter 
-            param={data?.filter(inmueble => inmueble.Personaencargada?.toLowerCase().includes(search.toLowerCase()))} 
+            param={data && data?.filter(inmueble => inmueble.Personaencargada?.toLowerCase().includes(search.toLowerCase()))} 
             text="Total ingresos:" 
             page={page} 
             setPage={setPage} 
