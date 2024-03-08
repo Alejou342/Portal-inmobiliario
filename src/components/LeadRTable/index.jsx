@@ -1,6 +1,5 @@
 import React from 'react'
 import Image from 'next/image'
-import Cookies from 'js-cookie'
 import Loader from '@/components/Loader'
 import useTables from '@/hooks/useTables'
 import TableHeader from '@/components/TableHeader'
@@ -12,11 +11,11 @@ import ObservationForm from '@/components/ObservationForm'
 const Index = () => {
 
     const {
-            id, rol, page, data, search, 
-            openModal, loaderActive, setPage, 
-            setSearch, handleObservation, 
-            setOpenModal, availableStatus
-        } = useTables('leadsR')
+        id, rol, page, data, search, 
+        openModal, loaderActive, setPage, 
+        setSearch, handleObservation, 
+        setOpenModal, availableStatus
+    } = useTables('leadsR')
 
   return (
     <>
@@ -35,7 +34,7 @@ const Index = () => {
                 ? <TableHeader columns={['#', 'Código', 'Nombre Inmueble', 'Nombre Cliente', 'Teléfono Cliente', 'Fecha de generación', 'Hora de generación', 'Estado', 'Observaciones']} />
                 : <TableHeader columns={['#', 'Código', 'Nombre Inmueble', 'Nombre Cliente', 'Teléfono Cliente', 'Fecha de generación', 'Hora de generación']} />}
                 <tbody>
-                    {data?.filter(lead => lead?.CodigoInmobiliaria?.includes(search))
+                    {data && data?.filter(lead => lead?.CodigoInmobiliaria?.includes(search))
                     .filter(lead => rol == 'Otros' ? lead.revisado == 2 : lead)
                     .sort((a, b) => (a.Fechalead < b.Fechalead) ? 1 : ((b.Fechalead < a.Fechalead) ? -1 : 0))
                     .slice(page * 20, page * 20 + 20)
@@ -62,9 +61,8 @@ const Index = () => {
                 </tbody>          
             </table>
             <TableFooter 
-            param={data?.filter(lead => lead?.CodigoInmobiliaria?.includes(search))
-                .filter(lead => rol == 'Otros' ? lead.revisado == 2 : lead)
-                } 
+            param={data && data?.filter(lead => lead?.CodigoInmobiliaria?.includes(search))
+                .filter(lead => rol == 'Otros' ? lead.revisado == 2 : lead)} 
             text="Total Leads Residenciales este mes:" 
             page={page} 
             setPage={setPage}
