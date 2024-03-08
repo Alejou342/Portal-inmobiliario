@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import { useItem } from '@/context'
+import Cookies from 'js-cookie'
 
 const useTables = (param) => {
 
@@ -10,12 +10,11 @@ const useTables = (param) => {
         leadsC: ['getAllLeadsC', 'UserLeadComercial'],
         leadsR: ['getAllLeadsR', 'UserLeadResidencia']
     }
-
-    const { sessionInfo } = useItem()
-    const rol = sessionInfo?.answer[0]?.rol
-
+    
     const fetchDataResidencial = async () => {
         try {
+            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'));
+            setRol(sessionInfo?.answer[0]?.rol)
             const adminData = `${process.env.BACK_LINK}/api/${wordKeys[param][0]}`;
             const userData = `${process.env.BACK_LINK}/api/${wordKeys[param][1]}/${sessionInfo?.answer[0]?.Correo_Inmobiliaria}`;
             
@@ -35,6 +34,7 @@ const useTables = (param) => {
         const availableStatus = ['uncheck', 'check', 'discard']
         const [id, setId] = React.useState(0)
         const [page, setPage] = React.useState(0)
+        const [rol, setRol] = React.useState('')
         const [data, setData] = React.useState([])
         const [search, setSearch] = React.useState("")
         const [openModal, setOpenModal] = React.useState(false)
