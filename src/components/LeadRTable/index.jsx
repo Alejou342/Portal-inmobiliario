@@ -31,7 +31,7 @@ const Index = () => {
                 {rol !== 'admin' 
                 ? <TableHeader columns={['#', 'Código', 'Nombre Inmueble', 'Nombre Cliente', 'Teléfono Cliente', 'Fecha de generación', 'Hora de generación', 'Estado', 'Observaciones']} />
                 : <TableHeader columns={['#', 'Código', 'Nombre Inmueble', 'Nombre Cliente', 'Teléfono Cliente', 'Fecha de generación', 'Hora de generación']} />}
-                <tbody>
+                <tbody className='h-[33.75rem]'>
                     {data && data?.filter(lead => lead?.CodigoInmobiliaria?.includes(search))
                     .filter(lead => rol == 'Otros' ? lead.revisado == 2 : lead)
                     .sort((a, b) => (a.Fechalead < b.Fechalead) ? 1 : ((b.Fechalead < a.Fechalead) ? -1 : 0))
