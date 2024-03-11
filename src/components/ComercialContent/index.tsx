@@ -3,7 +3,12 @@ import useGET from '@/hooks/useGET'
 import Loader from '@/components/Loader'
 import { handleDeleteC } from '@/utils'
 
-const Index = ({ setState, id }) => {
+interface ComponentProps {
+    setState: React.Dispatch<React.SetStateAction<boolean>>
+    id: number
+}
+
+const Index = ({ setState, id }: ComponentProps) => {
 
     const { data, loading, error } = useGET(`${process.env.BACK_LINK}/api/comercialById/${id}`)
 

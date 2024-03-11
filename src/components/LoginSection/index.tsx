@@ -6,6 +6,7 @@ interface ComponentProps {
     placeholder: string,
     label: string,
     onChange: any,
+    value: number
     type: string,
     minValue: number,
     maxValue: number
@@ -15,7 +16,7 @@ interface ComponentProps {
     },
 }
 
-const Index: React.FC<ComponentProps> = ({id, placeholder, label, onChange, type, className, minValue, maxValue}) => {
+const Index: React.FC<ComponentProps> = ({id, placeholder, label, onChange, type, className, minValue, maxValue, value}) => {
 
     return (
         <div className="mb-2">
@@ -28,6 +29,7 @@ const Index: React.FC<ComponentProps> = ({id, placeholder, label, onChange, type
                     id={id} 
                     placeholder={placeholder}
                     onChange={onChange}
+                    value={value}
                     min={minValue}
                     max={maxValue}
                     required

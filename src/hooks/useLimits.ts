@@ -2,16 +2,16 @@ import React from 'react'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 
-const useLimits = (setState) => {
+const useLimits = (setState: any) => {
 
-    const [value, setValue] = React.useState(null)
-    const [loaderActive, setLoaderActive] = React.useState(true)
-    const [leads, setLeads] = React.useState([])
+    const [value, setValue] = React.useState<number>(0)
+    const [loaderActive, setLoaderActive] = React.useState<boolean>(true)
+    const [leads, setLeads] = React.useState<string[]>([])
 
     React.useEffect(() => {
         try {
             setLoaderActive(true)
-            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
+            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo') || '{}')
             Promise.all([
                 axios.get(
                 `${process.env.BACK_LINK}/api/UserLeadResidencia/${sessionInfo?.answer[0]?.Correo_Inmobiliaria}`,
@@ -33,16 +33,16 @@ const useLimits = (setState) => {
         }
     }, [])
 
-    const handleChange = (e) => {
+    const handleChange = (e: any) => {
         setValue(e.target.value)
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: any) => {
         e.preventDefault()
         try {
-            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
+            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo') || '{}')
             axios.patch(`${process.env.BACK_LINK}/api/amountLead/${sessionInfo?.answer[0]?.Correo_Inmobiliaria}`, 
-            { Numero: parseInt(value)}, { 
+            { Numero: value}, { 
                 headers: {
                     "Authorization": `Bearer ${sessionInfo?.token}`
                 }

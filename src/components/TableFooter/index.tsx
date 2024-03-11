@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 
 interface ComponentProps {
-    param: [],
+    param: string[],        // --> Revisar esto
     text: string,
     page: number,
     setPage: any,

@@ -6,8 +6,8 @@ interface ComponentProps {
   search: string,
   setSearch: any,
   setPage: any,
-  type: string,
-  placeholder: string
+  type?: string,
+  placeholder?: string
 }
 
 const index: React.FC<ComponentProps> = ({ search, setSearch, setPage, type, placeholder }) => {

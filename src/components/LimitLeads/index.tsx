@@ -4,7 +4,11 @@ import Button from '@/components/Button'
 import useLimits from '@/hooks/useLimits'
 import LoginSection from '@/components/LoginSection'
 
-const Index = ({ setState }) => {
+interface ComponentProps {
+  setState: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const Index = ({ setState } : ComponentProps ) => {
 
     const { value, loaderActive, leads, handleChange, handleSubmit } = useLimits(setState)
 

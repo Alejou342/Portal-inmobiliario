@@ -6,6 +6,13 @@ import Loader from '@/components/Loader'
 import TableHeader from '@/components/TableHeader'
 import useInmobiliary from '@/hooks/useInmobiliary'
 
+interface ComponentProps {
+    ID_Inmobiliaria: string
+    Nombre_Inmobiliaria: string
+    Celular: string
+    Personaencargada: string
+}
+
 const Index = () => {
 
     const { data, loading, error, sendEmail } = useInmobiliary(`${process.env.BACK_LINK}/api/getI`)
@@ -17,8 +24,8 @@ const Index = () => {
         {data && <table className="table table-hover w-full bg-auxiliar">
             <TableHeader columns={['ID Inmobiliaria','Nombre Inmobiliaria','Celular','Encargado']}/>
             <tbody>
-                {data?.filter(inmobiliaria => inmobiliaria.rol !== 'admin')
-                .map(inmobiliaria => 
+                {data?.filter((inmobiliaria: { rol: string }) => inmobiliaria.rol !== 'admin')
+                .map((inmobiliaria: ComponentProps) => 
                 <tr key={inmobiliaria.ID_Inmobiliaria} className="hover:bg-slate-300">
                     <td className='border px-2 text-center'>{inmobiliaria.ID_Inmobiliaria}</td>
                     <td className='border px-2 text-center cursor-pointer'>{inmobiliaria.Nombre_Inmobiliaria}</td>
@@ -37,8 +44,8 @@ const Index = () => {
                     className='bg-auxiliar rounded-full p-1 cursor-pointer' 
                     onClick= {() => sendEmail('lina.otalvaro@capitalpocket.app', 
                     'Resumen facturación de este mes', 
-                    data?.filter(inmobiliaria => inmobiliaria.rol !== 'admin')
-                    .map(inmobiliaria => `${inmobiliaria.Nombre_Inmobiliaria}: ${inmobiliaria.Totalmes} Leads \n`).join(''))}/> 
+                    data?.filter((inmobiliaria: { rol: string }) => inmobiliaria.rol !== 'admin')
+                    .map((inmobiliaria: { Nombre_Inmobiliaria: string, Totalmes: number }) => `${inmobiliaria.Nombre_Inmobiliaria}: ${inmobiliaria.Totalmes} Leads \n`).join(''))}/> 
                 </div> 
             }
         </div>

@@ -3,16 +3,16 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/navigation'
 
-const useProperties = (param) => {
+const useProperties = (param: string) => {
 
-    const wordKeys = {
+    const wordKeys: any = {
         residencial: ['getAllR', 'UserResidencia', 'ResidencialID'],
         comercial: ['getAllC', 'UserComercial', 'ComercialID']
     }
 
     const fetchDataResidencial = async () => {
         try {
-            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'));
+            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo') || '{}');
             const adminEndpoint = `${process.env.BACK_LINK}/api/${wordKeys[param][0]}`;
             const userEndpoint = `${process.env.BACK_LINK}/api/${wordKeys[param][1]}/${sessionInfo?.answer[0]?.Correo_Inmobiliaria}`;
     
@@ -30,18 +30,18 @@ const useProperties = (param) => {
     };
     
         const router = useRouter()
-        const [id, setId] = React.useState(null)
-        const [rol, setRol] = React.useState('')
-        const [page, setPage] = React.useState(0)
-        const [search, setSearch] = React.useState("")
-        const [inmuebles, setInmuebles] = React.useState([])
-        const [openModal, setOpenModal] = React.useState(false)
-        const [loaderActive, setLoaderActive] = React.useState(true)
+        const [id, setId] = React.useState<string>('')
+        const [rol, setRol] = React.useState<string>('')
+        const [page, setPage] = React.useState<number>(0)
+        const [search, setSearch] = React.useState<string>("")
+        const [inmuebles, setInmuebles] = React.useState<any>([])
+        const [openModal, setOpenModal] = React.useState<boolean>(false)
+        const [loaderActive, setLoaderActive] = React.useState<boolean>(true)
     
         const memoizedFetchData = React.useMemo(() => fetchDataResidencial(), [])
         
         React.useEffect(() => {
-            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
+            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo') || '{}')
             setRol(sessionInfo?.answer[0]?.rol)
             const fetchDataAndSetState = async () => {
                 try {
@@ -57,13 +57,13 @@ const useProperties = (param) => {
             fetchDataAndSetState()
         }, [memoizedFetchData])
     
-        const handleNavigate = (url, id) => {
+        const handleNavigate = (url: string, id: string) => {
             Cookies.set(`${wordKeys[param][2]}`, id)
             setId(id)
             router.push(url)
         }
         
-        const handleDelete = (id) => {
+        const handleDelete = (id: string) => {
             Cookies.set(`${wordKeys[param][2]}`, id)
             setId(id)
             setOpenModal(true)

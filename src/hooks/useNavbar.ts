@@ -4,14 +4,14 @@ import Cookies from 'js-cookie'
 
 const useNavbar = () => {
 
-    const [leads, setLeads] = React.useState([])
-    const [total, setTotal] = React.useState(null)
-    const [number, setNumber] = React.useState(null)
-    const [rol, setRol] = React.useState('')
+    const [leads, setLeads] = React.useState<any>([])
+    const [total, setTotal] = React.useState<number>(0)
+    const [number, setNumber] = React.useState<number>(0)
+    const [rol, setRol] = React.useState<string>('')
 
     React.useEffect(() => {
         try {
-            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
+            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo') || '{}')
             setRol(sessionInfo?.answer[0]?.rol)
 
             Promise.all([

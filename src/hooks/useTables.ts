@@ -2,9 +2,9 @@ import React from 'react'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 
-const useTables = (param) => {
+const useTables = (param: string) => {
 
-    const wordKeys = {
+    const wordKeys: any = {
         traces: ['AllHuellas', 'getHuellas'],
         deletes: ['allDeletes', 'getDelete'],
         leadsC: ['getAllLeadsC', 'UserLeadComercial'],
@@ -13,7 +13,7 @@ const useTables = (param) => {
     
     const fetchDataResidencial = async () => {
         try {
-            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'));
+            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo') || '{}');
             setRol(sessionInfo?.answer[0]?.rol)
             const adminData = `${process.env.BACK_LINK}/api/${wordKeys[param][0]}`;
             const userData = `${process.env.BACK_LINK}/api/${wordKeys[param][1]}/${sessionInfo?.answer[0]?.Correo_Inmobiliaria}`;
@@ -60,7 +60,7 @@ const useTables = (param) => {
             fetchDataAndSetState()
         }, [memoizedFetchData])
 
-        const handleObservation = (id) => {
+        const handleObservation = (id: number) => {
             setOpenModal(true)
             setId(id)
         }

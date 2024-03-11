@@ -2,25 +2,37 @@ import React from 'react'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 
-const useObservation = (setState, id, letter, type) => {
+interface UseObservationProps {
+    setState: any
+    id: number
+    letter: string
+    type: string
+}
+
+const useObservation = ({ setState, id, letter, type } : UseObservationProps) => {
   
     const availableStatus = ['Pendiente', 'Atendido', 'Descartado']
     const [text, setText] = React.useState(null)
     const [status, setStatus] = React.useState('Pendiente')
     const [loaderActive, setLoaderActive] = React.useState(false)
 
-    const handleChange = (e) => {
+    const handleChange = (e: any) => {
         setText(e.target.value)
     }
 
-    const handleChangeList = (e) => {
+    const handleChangeList = (e: any) => {
         setStatus(e.target.value)
     }
 
-    const handleSubmit = (e) => {
+    const handleSuccess = () => {
+        setLoaderActive(false)
+        location.reload()
+    }
+
+    const handleSubmit = (e: any) => {
         e.preventDefault()
         setLoaderActive(true)
-        const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
+        const sessionInfo = JSON.parse(Cookies?.get('SessionInfo') || '{}')
         try {
             Promise.all([
                 axios.put(
@@ -38,8 +50,8 @@ const useObservation = (setState, id, letter, type) => {
                     }
                 })
             ])
-            .then(() => setLoaderActive(false), location.reload())
-            .catch(() => setLoaderActive(false), location.reload())
+            .then(() => handleSuccess)
+            .catch(() => handleSuccess)
             setState(false)
         } catch(error) {
             console.error(error)

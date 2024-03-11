@@ -4,12 +4,42 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/navigation'
 
-const useEditResidencial = () => {
+interface FormDataProps {
+    Tiporesidencia: string
+    CodigoInmobiliaria: string
+    Tiposervicio: string
+    Estado: string
+    Nombre: string
+    Areaconstruida: number
+    Habitaciones: number
+    Baños: number
+    Parqueaderos: number
+    Ciudad: string
+    Barrio: string
+    Unidadcerrada: string
+    Anoconstruccion: number
+    Enlace: string
+    Precio: number
+    Arealote: number
+    Imagen: string
+}
+
+interface useEditResidencialProps {
+    alert: string
+    setAlert: React.Dispatch<React.SetStateAction<string>>
+    formData:  FormDataProps
+    setFormData: React.Dispatch<React.SetStateAction<FormDataProps>>
+    uploadImage: () => void
+    handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+    handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void
+}
+
+const useEditResidencial = (): useEditResidencialProps => {
 
     const router = useRouter()
-    const [alert, setAlert] = React.useState(null)
-    const [residencialId, setResidencialId] = React.useState(null)
-    const [formData, setFormData] = React.useState({
+    const [alert, setAlert] = React.useState<string>('')
+    const [residencialId, setResidencialId] = React.useState<string>('')
+    const [formData, setFormData] = React.useState<FormDataProps>({
         Tiporesidencia: "",
         CodigoInmobiliaria: "",
         Tiposervicio: "",
@@ -31,8 +61,8 @@ const useEditResidencial = () => {
 
     React.useEffect(() => {
         try {
-            const residencialId = Cookies.get('ResidencialID')
-            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
+            const residencialId = Cookies.get('ResidencialID') || ''
+            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo') || '{}')
             setResidencialId(residencialId)
     
             axios.get(`${process.env.BACK_LINK}/api/residenciaById/${residencialId}`, {
@@ -71,9 +101,9 @@ const useEditResidencial = () => {
 
     const uploadImage = () => { 
         const clientId = process.env.IMGUR_ID;
-        const apiUrl = process.env.IMGUR_LINK;
-        const imageInput = document.getElementById('Imagen');
-        const imageFile = imageInput.files[0];
+        const apiUrl = process.env.IMGUR_LINK || '';
+        const imageInput = document.getElementById('Imagen') as HTMLInputElement;
+        const imageFile = imageInput.files?.[0];
         if (imageFile) {
             const imageFormData = new FormData();
             imageFormData.append('image', imageFile);
@@ -97,7 +127,7 @@ const useEditResidencial = () => {
         }
     }
     
-    const handleInputChange = (e) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { id, value } = e.target;
         setFormData({
         ...formData,
@@ -105,20 +135,20 @@ const useEditResidencial = () => {
         });
     };
     
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
         try {
-            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
+            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo') || '{}')
             const formDataNumerico = {
                 ...formData,
-                Areaconstruida: parseInt(formData.Areaconstruida),
-                Habitaciones: parseInt(formData.Habitaciones),
-                Baños: parseInt(formData.Baños),
-                Parqueaderos: parseInt(formData.Parqueaderos),
-                Anoconstruccion: parseInt(formData.Anoconstruccion),
-                Precio: parseInt(formData.Precio),
-                Arealote: parseInt(formData.Arealote),
+                Areaconstruida: formData.Areaconstruida,
+                Habitaciones: formData.Habitaciones,
+                Baños: formData.Baños,
+                Parqueaderos: formData.Parqueaderos,
+                Anoconstruccion: formData.Anoconstruccion,
+                Precio: formData.Precio,
+                Arealote: formData.Arealote,
             }
             
             axios.put(`${process.env.BACK_LINK}/api/updateResidencial/${residencialId}`, formDataNumerico, {

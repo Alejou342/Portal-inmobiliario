@@ -4,13 +4,38 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/navigation'
 
+interface FormDataProps {
+    Tipocomercial: string
+    CodigoInmobiliaria: string
+    Tiposervicio: string
+    Estado: string
+    Nombre: string
+    Ciudad: string
+    Barrio: string
+    Areaconstruida: number
+    Anoconstruccion: number
+    Enlace: string
+    Precio: number
+    Arealote: number
+    Imagen: string
+}
 
-const useEditComercial = () => {
+interface UseEditComercialProps {
+    alert: string
+    formData: FormDataProps
+    setAlert: React.Dispatch<React.SetStateAction<string>>,
+    setFormData: React.Dispatch<React.SetStateAction<FormDataProps>>
+    handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+    uploadImage: () => void
+    handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void
+}
+
+const useEditComercial = (): UseEditComercialProps => {
 
     const router = useRouter()
-    const [alert, setAlert] = React.useState(null)
-    const [comercialId, setComercialId] = React.useState(null)
-    const [formData, setFormData] = React.useState({
+    const [alert, setAlert] = React.useState<string>('')
+    const [comercialId, setComercialId] = React.useState<string>('')
+    const [formData, setFormData] = React.useState<FormDataProps>({
         Tipocomercial: "",
         CodigoInmobiliaria: "",
         Tiposervicio: "",
@@ -28,8 +53,8 @@ const useEditComercial = () => {
 
     React.useEffect(() => {
         try {
-            const comercialId = Cookies.get('ComercialID')
-            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
+            const comercialId = Cookies.get('ComercialID') || ''
+            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo') || '{}')
             setComercialId(comercialId)
     
             axios.get(`${process.env.BACK_LINK}/api/comercialById/${comercialId}`, {
@@ -62,7 +87,7 @@ const useEditComercial = () => {
         }
     }, [])
     
-    const handleInputChange = (e) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { id, value } = e.target;
         setFormData({
         ...formData,
@@ -72,9 +97,9 @@ const useEditComercial = () => {
 
     const uploadImage = () => { 
         const clientId = process.env.IMGUR_ID;
-        const apiUrl = process.env.IMGUR_LINK;
-        const imageInput = document.getElementById('Imagen');
-        const imageFile = imageInput.files[0];
+        const apiUrl = process.env.IMGUR_LINK || '';
+        const imageInput = document.getElementById('Imagen') as HTMLInputElement;
+        const imageFile = imageInput.files?.[0];
 
         if (imageFile) {
             const imageFormData = new FormData();
@@ -99,17 +124,17 @@ const useEditComercial = () => {
         }
     }
     
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
         try {
-            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'))
+            const sessionInfo = JSON.parse(Cookies?.get('SessionInfo') || '{}')
             const formDataNumerico = {
                 ...formData,
-                Areaconstruida: parseInt(formData.Areaconstruida),
-                Anoconstruccion: parseInt(formData.Anoconstruccion),
-                Precio: parseInt(formData.Precio),
-                Arealote: parseInt(formData.Arealote),
+                Areaconstruida: formData.Areaconstruida,
+                Anoconstruccion: formData.Anoconstruccion,
+                Precio: formData.Precio,
+                Arealote: formData.Arealote,
             }
 
             axios.put(`${process.env.BACK_LINK}/api/updateComercial/${comercialId}`, formDataNumerico, {

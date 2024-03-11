@@ -2,11 +2,11 @@ import React from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-    const useGET = (url) => {
-        const [data, setData] = React.useState(null);
-        const [error, setError] = React.useState(null);
-        const [loading, setLoading] = React.useState(true);
-        const sessionInfo = JSON.parse(Cookies?.get('SessionInfo'));
+    const useGET = (url: string) => {
+        const [data, setData] = React.useState<any>([]);
+        const [error, setError] = React.useState<any>(null);
+        const [loading, setLoading] = React.useState<boolean>(true);
+        const sessionInfo = JSON.parse(Cookies?.get('SessionInfo') || '{}');
 
         React.useEffect(() => {
             const fetchData = async () => {
@@ -19,7 +19,7 @@ import Cookies from 'js-cookie';
                 });
                 setData(response.data);
                 setError(null);
-            } catch (error) {
+            } catch (error: any) {
                 setError(error);
             } finally {
                 setLoading(false);

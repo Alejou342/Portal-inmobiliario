@@ -2,11 +2,11 @@ import axios from 'axios'
 import FormData from 'form-data'
 import useGET from '@/hooks/useGET'
 
-const useInmobiliary = (url) => {
+const useInmobiliary = (url: string) => {
 
     const { data, loading, error } = useGET(url)
 
-    const sendEmail = (to, subject, text) => {
+    const sendEmail = (to: string, subject: string, text: string) => {
         const form = new FormData()
 
         form.append('from', 'noreply@cpocket.global')
