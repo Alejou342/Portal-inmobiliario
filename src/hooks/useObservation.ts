@@ -12,9 +12,9 @@ interface UseObservationProps {
 const useObservation = ({ setState, id, letter, type } : UseObservationProps) => {
   
     const availableStatus = ['Pendiente', 'Atendido', 'Descartado']
-    const [text, setText] = React.useState(null)
-    const [status, setStatus] = React.useState('Pendiente')
-    const [loaderActive, setLoaderActive] = React.useState(false)
+    const [text, setText] = React.useState<string>('')
+    const [status, setStatus] = React.useState<string>('Pendiente')
+    const [loaderActive, setLoaderActive] = React.useState<boolean>(false)
 
     const handleChange = (e: any) => {
         setText(e.target.value)

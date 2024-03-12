@@ -17,7 +17,6 @@ const Index = () => {
         <SideHeader to="/" />
         <LoginSection  
             label="Correo electrónico"
-            className={"w-full"}
             type="text"
             id="Correo"
             placeholder="Correo electrónico"

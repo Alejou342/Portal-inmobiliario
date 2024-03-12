@@ -35,13 +35,18 @@ interface LoginApiResponse {
     token: string;
 }
 
+interface FormData {
+    Correo: string
+    Contraseña: string
+}
+
 const useLogin = () => {
 
     const router = useRouter()
     const [loaderActive, setLoaderActive] = React.useState(false)
     const [alert, setAlert] = React.useState('')
 
-    const [formData, setFormData] = React.useState({
+    const [formData, setFormData] = React.useState<FormData>({
         Correo: '',
         Contraseña: '',
     }); 

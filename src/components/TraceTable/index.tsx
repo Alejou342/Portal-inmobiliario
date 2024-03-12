@@ -5,6 +5,12 @@ import TableFooter from '@/components/TableFooter'
 import TableHeader from '@/components/TableHeader'
 import SearchSection from '@/components/SearchSection'
 
+interface TraceDataProps {
+    Correo: string
+    Fechaingreso: string
+    Personaencargada: string
+}
+
 const Index = () => {
     
     const { page, setPage, data, loaderActive, search, setSearch } = useTables('traces')
@@ -19,9 +25,9 @@ const Index = () => {
         <table className="table table-hover bg-auxiliar w-full">
             <TableHeader columns={['#', 'Correo', 'Fecha Ingreso', 'Hora Ingreso', 'Encargado']} />
             <tbody>
-                {data && data?.filter(inmueble => inmueble.Personaencargada?.toLowerCase().includes(search.toLowerCase()))
+                {data && data?.filter((inmueble: TraceDataProps) => inmueble.Personaencargada?.toLowerCase().includes(search.toLowerCase()))
                 .slice(page * 20, page * 20 + 20)
-                .map((inmueble, id) => 
+                .map((inmueble: TraceDataProps, id: number) => 
                 <tr key={id + 1} className="hover:bg-slate-300">
                     <td className='border px-2 text-center'>{id + 1}</td>
                     <td className='border px-2 text-center'>{inmueble.Correo}</td>
@@ -32,7 +38,7 @@ const Index = () => {
             </tbody>          
         </table>
         <TableFooter 
-            param={data && data?.filter(inmueble => inmueble.Personaencargada?.toLowerCase().includes(search.toLowerCase()))} 
+            param={data && data?.filter((inmueble: TraceDataProps) => inmueble.Personaencargada?.toLowerCase().includes(search.toLowerCase()))} 
             text="Total ingresos:" 
             page={page} 
             setPage={setPage} 

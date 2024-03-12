@@ -7,9 +7,10 @@ interface ComponentProps {
     placeholder: string,
     label: string,
     onChange: any
+    value: any
 }
 
-const Index: React.FC<ComponentProps> = ({id, placeholder, label, onChange}) => {
+const Index: React.FC<ComponentProps> = ({id, placeholder, label, onChange, value}) => {
 
     const [state, setState] = React.useState<boolean>(false)
 

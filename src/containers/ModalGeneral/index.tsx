@@ -6,7 +6,7 @@ interface ComponentProps {
     children: JSX.Element,
     state: boolean,
     setState: any,
-    className: string
+    className?: string
 }
 
 const Index: React.FC<ComponentProps> = ({ children, state, setState, className }) => {

@@ -10,6 +10,15 @@ import ModalGeneral from '@/containers/ModalGeneral'
 import SearchSection from '@/components/SearchSection'
 import ResidencialContent from '@/components/ResidencialContent'
 
+interface InmueblesRTypes {
+    ID_Residencial: string
+    CodigoInmobiliaria: string
+    Tipo_ServicioR: string
+    EstadoR: string
+    PrecioR: number
+    NombreR: string
+}
+
 const Index = () => {
 
     const {
@@ -21,7 +30,7 @@ const Index = () => {
     <div className="bg-primary w-[60rem] overflow-auto py-1 rounded-md">
         <Loader active={loaderActive} />
         <ModalGeneral state={openModal} setState={setOpenModal}>
-            <ResidencialContent setState={setOpenModal} id={id} />
+            <ResidencialContent setState={setOpenModal} id={parseInt(id)} />
         </ModalGeneral>
         <div className="flex justify-between my-2 px-8 mx-auto items-center">
             <h1 className="text-center text-3xl font-bold text-auxiliar">Mis Propiedades Residenciales</h1>
@@ -33,9 +42,9 @@ const Index = () => {
             : <TableHeader columns={['#', 'Código', 'Nombre Inmueble', 'Tipo Negocio', 'Precio Inmueble', 'Estado', 'Editar', 'Eliminar']} />}
             <tbody>
                 {inmuebles
-                .filter(inmueble => inmueble.CodigoInmobiliaria?.includes(search))
+                .filter((inmueble: { CodigoInmobiliaria: string }) => inmueble.CodigoInmobiliaria?.includes(search))
                 .slice(page * 20, page * 20 + 20)
-                .map((inmueble, id) => 
+                .map((inmueble: InmueblesRTypes, id: number) => 
                 <tr key={inmueble.ID_Residencial} className="hover:bg-slate-300">
                     <td className='border px-2 text-center'>{id + 1}</td>
                     <td className='border px-2 text-center'>{inmueble.CodigoInmobiliaria}</td>
@@ -60,7 +69,7 @@ const Index = () => {
             </tbody>          
         </table>
         <TableFooter 
-            param={inmuebles.filter(inmueble => inmueble.CodigoInmobiliaria?.includes(search))} 
+            param={inmuebles.filter((inmueble: { CodigoInmobiliaria: string }) => inmueble.CodigoInmobiliaria?.includes(search))} 
             text="Total Propiedades Residenciales:" 
             page={page} 
             setPage={setPage} 

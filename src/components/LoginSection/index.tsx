@@ -6,10 +6,10 @@ interface ComponentProps {
     placeholder: string,
     label: string,
     onChange: any,
-    value: number
+    value: string
     type: string,
-    minValue: number,
-    maxValue: number
+    minValue?: number,
+    maxValue?: number
     className?: {
         input?: string,
         label?: string

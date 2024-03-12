@@ -10,6 +10,15 @@ import ModalGeneral from '@/containers/ModalGeneral'
 import SearchSection from '@/components/SearchSection'
 import ComercialContent from '@/components/ComercialContent'
 
+interface InmueblesCTypes {
+    CodigoInmobiliaria: string
+    ID_Comercial: string
+    Tipo_ServicioC: string
+    NombreC: string
+    PrecioC: number
+    EstadoC: string
+}
+
 const Index = () => {
 
     const {
@@ -21,7 +30,7 @@ const Index = () => {
     <div className="bg-primary w-[60rem] overflow-auto py-1 rounded-md">
         <Loader active={loaderActive} />
         <ModalGeneral state={openModal} setState={setOpenModal}>
-            <ComercialContent setState={setOpenModal} id={id} />
+            <ComercialContent setState={setOpenModal} id={parseInt(id)} />
         </ModalGeneral>
         <div className="flex justify-between my-2 px-8 mx-auto items-center">
             <h1 className="text-center text-3xl font-bold text-auxiliar">Mis Propiedades Comerciales</h1>
@@ -33,9 +42,9 @@ const Index = () => {
                 : <TableHeader columns={['#', 'Código', 'Nombre Inmueble', 'Tipo Negocio', 'Precio Inmueble', 'Estado', 'Editar', 'Eliminar']} />}
             <tbody>
                 {inmuebles
-                .filter(inmueble => inmueble.CodigoInmobiliaria?.includes(search))
+                .filter((inmueble: { CodigoInmobiliaria: string }) => inmueble.CodigoInmobiliaria?.includes(search))
                 .slice(page * 20, page * 20 + 20)
-                .map((inmueble, id) => 
+                .map((inmueble: InmueblesCTypes, id: number) => 
                 <tr key={inmueble.ID_Comercial} className="hover:bg-slate-300">
                     <td className='border px-2 text-center'>{id + 1}</td>
                     <td className='border px-2 text-center'>{inmueble.CodigoInmobiliaria}</td>
@@ -61,7 +70,7 @@ const Index = () => {
             </tbody>          
         </table>
         <TableFooter 
-        param={inmuebles.filter(inmueble => inmueble.CodigoInmobiliaria?.includes(search))} 
+        param={inmuebles.filter((inmueble: { CodigoInmobiliaria: string }) => inmueble.CodigoInmobiliaria?.includes(search))} 
         text="Total Propiedades Comerciales:" 
         page={page} 
         setPage={setPage} 
