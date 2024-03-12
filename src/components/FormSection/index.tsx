@@ -1,15 +1,7 @@
 import React from 'react'
+import { FormSectionProps } from '@/interfaces'
 
-interface ComponentProps {
-  type: string, 
-  id: string,
-  placeholder: string
-  label: string,
-  onChange: any,
-  value: string | number
-}
-
-const Index: React.FC<ComponentProps> = ({type, id, placeholder, label, onChange, value}) => {
+const Index: React.FC<FormSectionProps> = ({type, id, placeholder, label, onChange, value}) => {
   return (
     <div className="mb-2 flex justify-between">
       <label htmlFor={id} className="form-label text-sm">{label}</label>

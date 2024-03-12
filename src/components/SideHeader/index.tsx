@@ -1,12 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { SideHeaderProps } from '@/interfaces'
 
-interface ComponentProps {
-  to: string
-}
-
-const Index: React.FC<ComponentProps> = ({ to }) => {
+const Index: React.FC<SideHeaderProps> = ({ to }) => {
   return (
     <div className='mx-auto bg-white w-2/3 rounded-[4rem] rounded-ee-none py-2 mb-8'>
         <Link href={to}>

@@ -1,15 +1,8 @@
 import React from 'react'
 import Image from 'next/image'
+import { TableFooterProps } from '@/interfaces'
 
-interface ComponentProps {
-    param: string[],        // --> Revisar esto
-    text: string,
-    page: number,
-    setPage: any,
-    number: number
-}
-
-const index: React.FC<ComponentProps> = ({ param, text, page, setPage, number }) => {
+const index: React.FC<TableFooterProps> = ({ param, text, page, setPage, number }) => {
 
     const handlePreview = () => {
         return page > 0 ? setPage(page - 1) : null

@@ -2,29 +2,14 @@
 import React from 'react'
 import Image from 'next/image'
 import Cookies from 'js-cookie'
-import { useRouter } from 'next/navigation'
 import { formatPrice } from '@/utils'
+import { useRouter } from 'next/navigation'
+import { ComercialInfoProps } from '@/interfaces'
 import CardSection from '@/components/CardSection'
 import LinkSection from '@/components/LinkSection'
 import './index.css'
 
-interface ComponentProps {
-    props: {
-        NombreC: string,
-        ImagenC: string,
-        EstadoC: string,
-        AreaC: string,
-        CiudadC: string,
-        BarrioC: string,
-        Ano_ConstruccionC: string,
-        Tipo_ServicioC: string,
-        PrecioC: number
-        EnlaceC: string,
-    }
-}
-
-
-const Index: React.FC<ComponentProps> = ({ props }) => {
+const Index: React.FC<ComercialInfoProps> = ({ props }) => {
 
     const router = useRouter()
     const [rol, setRol] = React.useState('')

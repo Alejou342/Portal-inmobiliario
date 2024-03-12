@@ -3,39 +3,14 @@ import React from 'react'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/navigation'
-
-interface FormDataProps {
-    Tipocomercial: string
-    CodigoInmobiliaria: string
-    Tiposervicio: string
-    Estado: string
-    Nombre: string
-    Ciudad: string
-    Barrio: string
-    Areaconstruida: number
-    Anoconstruccion: number
-    Enlace: string
-    Precio: number
-    Arealote: number
-    Imagen: string
-}
-
-interface UseEditComercialProps {
-    alert: string
-    formData: FormDataProps
-    setAlert: React.Dispatch<React.SetStateAction<string>>,
-    setFormData: React.Dispatch<React.SetStateAction<FormDataProps>>
-    handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-    uploadImage: () => void
-    handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void
-}
+import { UseEditComercialProps, FormEditDataPropsC } from '@/interfaces'
 
 const useEditComercial = (): UseEditComercialProps => {
 
     const router = useRouter()
     const [alert, setAlert] = React.useState<string>('')
     const [comercialId, setComercialId] = React.useState<string>('')
-    const [formData, setFormData] = React.useState<FormDataProps>({
+    const [formData, setFormData] = React.useState<FormEditDataPropsC>({
         Tipocomercial: "",
         CodigoInmobiliaria: "",
         Tiposervicio: "",

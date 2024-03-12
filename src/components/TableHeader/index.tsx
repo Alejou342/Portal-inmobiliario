@@ -1,10 +1,7 @@
 import React from 'react'
+import { TableHeaderProps } from '@/interfaces'
 
-interface ComponentProps {
-  columns: string[]
-}
-
-const index: React.FC<ComponentProps> = ({ columns }) => {
+const index: React.FC<TableHeaderProps> = ({ columns }) => {
   return (
     <thead className='bg-secondary text-white h-10'>
         <tr>        

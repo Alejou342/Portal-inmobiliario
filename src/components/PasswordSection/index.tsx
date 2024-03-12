@@ -1,16 +1,9 @@
 "use client"
 import React from 'react'
 import Image from 'next/image'
+import { PasswordSectionProps } from '@/interfaces'
 
-interface ComponentProps {
-    id: string,
-    placeholder: string,
-    label: string,
-    onChange: any
-    value: any
-}
-
-const Index: React.FC<ComponentProps> = ({id, placeholder, label, onChange, value}) => {
+const Index: React.FC<PasswordSectionProps> = ({id, placeholder, label, onChange, value}) => {
 
     const [state, setState] = React.useState<boolean>(false)
 

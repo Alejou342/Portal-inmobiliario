@@ -3,15 +3,10 @@ import React from 'react'
 import useGET from '@/hooks/useGET'
 import Loader from '@/components/Loader'
 import Sidebar from '@/components/Sidebar'
+import { ComercialIdProps } from '@/interfaces'
 import ComercialInfo from '@/containers/ComercialInfo'
 
-interface PageProps {
-  params: {
-    id: number;
-  };
-}
-
-const Page: React.FC<PageProps> = ({ params }) => {
+const Page: React.FC<ComercialIdProps> = ({ params }) => {
 
   const { data, loading, error } = useGET(`${process.env.BACK_LINK}/api/comercialById/${params.id}`)
 

@@ -1,19 +1,8 @@
 import React from 'react'
 import Image from 'next/image'
+import { UserInfoProps } from '@/interfaces'
 
-interface ComponentProps {
-    props: {
-        handleLogout: any,
-        user: {
-            Nombre_Inmobiliaria: string,
-            Personaencargada: string,
-            Correo_Inmobiliaria: string,
-            Celular: string
-        }
-    }
-}
-
-const Index: React.FC<ComponentProps> = ({ props }) => {
+const Index: React.FC<UserInfoProps> = ({ props }) => {
 
     return (
         <div className="flex justify-center items-center">

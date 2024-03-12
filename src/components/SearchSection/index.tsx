@@ -1,16 +1,9 @@
 import React from 'react'
 import Image from 'next/image'
+import { SearchSectionProps } from '@/interfaces'
 import './index.css'
 
-interface ComponentProps {
-  search: string,
-  setSearch: any,
-  setPage: any,
-  type?: string,
-  placeholder?: string
-}
-
-const index: React.FC<ComponentProps> = ({ search, setSearch, setPage, type, placeholder }) => {
+const index: React.FC<SearchSectionProps> = ({ search, setSearch, setPage, type, placeholder }) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value)

@@ -1,14 +1,10 @@
 import React from 'react'
 import useGET from '@/hooks/useGET'
-import Loader from '@/components/Loader'
 import { handleDeleteC } from '@/utils'
+import Loader from '@/components/Loader'
+import { ComercialContentProps } from '@/interfaces'
 
-interface ComponentProps {
-    setState: React.Dispatch<React.SetStateAction<boolean>>
-    id: number
-}
-
-const Index = ({ setState, id }: ComponentProps) => {
+const Index = ({ setState, id }: ComercialContentProps) => {
 
     const { data, loading, error } = useGET(`${process.env.BACK_LINK}/api/comercialById/${id}`)
 

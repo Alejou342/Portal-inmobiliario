@@ -6,18 +6,10 @@ import { formatPrice } from '@/utils'
 import useProperties from '@/hooks/useProperties'
 import TableFooter from '@/components/TableFooter'
 import TableHeader from '@/components/TableHeader'
+import { TableComercialProps } from '@/interfaces'
 import ModalGeneral from '@/containers/ModalGeneral'
 import SearchSection from '@/components/SearchSection'
 import ComercialContent from '@/components/ComercialContent'
-
-interface InmueblesCTypes {
-    CodigoInmobiliaria: string
-    ID_Comercial: string
-    Tipo_ServicioC: string
-    NombreC: string
-    PrecioC: number
-    EstadoC: string
-}
 
 const Index = () => {
 
@@ -44,7 +36,7 @@ const Index = () => {
                 {inmuebles
                 .filter((inmueble: { CodigoInmobiliaria: string }) => inmueble.CodigoInmobiliaria?.includes(search))
                 .slice(page * 20, page * 20 + 20)
-                .map((inmueble: InmueblesCTypes, id: number) => 
+                .map((inmueble: TableComercialProps, id: number) => 
                 <tr key={inmueble.ID_Comercial} className="hover:bg-slate-300">
                     <td className='border px-2 text-center'>{id + 1}</td>
                     <td className='border px-2 text-center'>{inmueble.CodigoInmobiliaria}</td>

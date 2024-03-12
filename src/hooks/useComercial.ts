@@ -2,40 +2,13 @@
 import React from 'react'
 import axios from 'axios'
 import Cookies from 'js-cookie'
-
-interface FormDataProps {
-    Idinmobiliaria: number
-    Tipocomercial: string
-    CodigoInmobiliaria: string
-    Tiposervicio: string
-    Estado: string
-    Nombre: string
-    Ciudad: string
-    Barrio: string
-    Areaconstruida: number
-    Anoconstruccion: number
-    Enlace: string
-    Precio: number
-    Arealote: number
-    Imagen: string
-}
-
-interface UseComercialProps {
-    alert: string
-    loaderActive: boolean
-    formData: FormDataProps
-    setAlert: React.Dispatch<React.SetStateAction<string>>
-    setFormData: React.Dispatch<React.SetStateAction<FormDataProps>>
-    uploadImage: () => void
-    handleSubmit: (e: React.FormEvent<HTMLFormElement>)  => void
-    handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-}
+import { UseComercialProps, FormDataPropsC } from '@/interfaces'
 
 const useComercial = (): UseComercialProps => {
 
     const [alert, setAlert] = React.useState<string>('')
     const [loaderActive, setLoaderActive] = React.useState<boolean>(false)
-    const [formData, setFormData] = React.useState({
+    const [formData, setFormData] = React.useState<FormDataPropsC>({
         Idinmobiliaria: 0,
         Tipocomercial: "",
         CodigoInmobiliaria: "",

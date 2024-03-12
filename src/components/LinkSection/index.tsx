@@ -1,14 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { LinkSectionProps } from '@/interfaces'
 
-interface ComponentProps {
-  route: string,
-  link: string,
-  title: string
-}
-
-const Index: React.FC<ComponentProps> = ({ route, link, title }) => {
+const Index: React.FC<LinkSectionProps> = ({ route, link, title }) => {
   return (
     <div className="p-2" title={title}>
       <Link href={link} target='blank'> 

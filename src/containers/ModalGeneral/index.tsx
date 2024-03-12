@@ -1,15 +1,9 @@
 import React from 'react'
 import Image from 'next/image'
+import { ModalGeneralProps } from '@/interfaces'
 import './index.css'
 
-interface ComponentProps {
-    children: JSX.Element,
-    state: boolean,
-    setState: any,
-    className?: string
-}
-
-const Index: React.FC<ComponentProps> = ({ children, state, setState, className }) => {
+const Index: React.FC<ModalGeneralProps> = ({ children, state, setState, className }) => {
 
     return (
         <>

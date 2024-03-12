@@ -1,13 +1,7 @@
 import React from 'react'
+import { ButtonProps } from '@/interfaces';
 
-interface ComponentProps {
-  children: string,
-  onClick?: React.MouseEventHandler<HTMLButtonElement>,
-  type: 'button' | 'submit' | 'reset' | undefined,
-  className: string,
-}
-
-const Button: React.FC<ComponentProps> = ({children, onClick, type, className}) => {
+const Button: React.FC<ButtonProps> = ({children, onClick, type, className}) => {
     return (
       <button 
       type={type} 

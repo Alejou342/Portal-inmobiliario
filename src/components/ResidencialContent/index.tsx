@@ -2,13 +2,9 @@ import React from 'react'
 import Loader from '@/components/Loader'
 import useGET from '@/hooks/useGET'
 import { handleDeleteR } from '@/utils'
+import { ResidencialContentProps } from '@/interfaces'
 
-interface ComponentProps {
-    setState: React.Dispatch<React.SetStateAction<boolean>>
-    id: number
-}
-
-const Index = ({ setState, id }: ComponentProps) => {
+const Index: React.FC<ResidencialContentProps> = ({ setState, id }) => {
 
     const { data, loading, error } = useGET(`${process.env.BACK_LINK}/api/residenciaById/${id}`)
 

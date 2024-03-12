@@ -1,12 +1,7 @@
 import React from 'react'
+import { FileSectionProps } from '@/interfaces'
 
-interface ComponentProps {
-  id: string,
-  label: string,
-  onChange: any
-}
-
-const Index: React.FC<ComponentProps> = ({ id, label, onChange }) => {
+const Index: React.FC<FileSectionProps> = ({ id, label, onChange }) => {
   return (
     <div className="mb-2 flex justify-between">
       <label htmlFor={id} className="form-label text-sm">{label}</label>

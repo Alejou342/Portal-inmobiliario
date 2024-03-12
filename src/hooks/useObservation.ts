@@ -1,13 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import Cookies from 'js-cookie'
-
-interface UseObservationProps {
-    setState: any
-    id: number
-    letter: string
-    type: string
-}
+import { UseObservationProps } from '@/interfaces'
 
 const useObservation = ({ setState, id, letter, type } : UseObservationProps) => {
   

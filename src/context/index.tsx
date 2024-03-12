@@ -1,16 +1,7 @@
 "use client"
 import React from 'react'
 import Cookies from 'js-cookie'
-
-interface ItemContextType {
-  item: number,
-  setItem: React.Dispatch<React.SetStateAction<number>>
-  sessionInfo: any
-}
-
-interface ComponentProps {
-  children: JSX.Element
-}
+import { ItemContextProps, ItemContextType } from '@/interfaces';
 
 const ItemContext = React.createContext<ItemContextType>({
   item: 0,
@@ -19,7 +10,7 @@ const ItemContext = React.createContext<ItemContextType>({
 });
 
 
-const ItemProvider: React.FC<ComponentProps> = ({children}) => {
+const ItemProvider: React.FC<ItemContextProps> = ({children}) => {
 
     const [item, setItem] = React.useState(1)
     const [sessionInfo, setSessionInfo] = React.useState(null)

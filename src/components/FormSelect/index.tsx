@@ -1,17 +1,7 @@
 import React from 'react'
+import { FormSelectProps } from '@/interfaces'
 
-interface ComponentProps {
-    list: string[], 
-    onChange: any, 
-    id: string, 
-    value: string, 
-    label: string, 
-    className?: {
-        select?: string
-    } 
-}
-
-const Index: React.FC<ComponentProps> = ({ list, onChange, id, value, label, className }) => {
+const Index: React.FC<FormSelectProps> = ({ list, onChange, id, value, label, className }) => {
 
     return (
         <div className="select-form flex justify-between">

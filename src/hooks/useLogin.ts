@@ -2,43 +2,7 @@ import React from 'react'
 import axios, { AxiosResponse } from 'axios';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
-
-interface InmobiliariaData {
-    ID_Inmobiliaria: number;
-    Nombre_Inmobiliaria: string;
-    Correo_Inmobiliaria: string;
-    Telefono_Inmobiliaria: string | null;
-    Ubicacion_Inmobiliaria: string | null;
-    Estado: number;
-    Fecharegistro: string;
-    Numeroidentificacion: string | null;
-    Representante: string;
-    Tipoidentificacion: string | null;
-    Municipio: string;
-    Departamento: string;
-    Telefonorepresen: string | null;
-    Celular: string;
-    Correofacturacion: string | null;
-    Personaencargada: string;
-    Cargo: string | null;
-    Telefonocargo: string;
-    cantidadLeads: number;
-    rol: string;
-    Contraseña2: string | null;
-    Contraseña3: string | null;
-    reserva: string | null;
-    Contraseña4: string | null;
-  }
-
-interface LoginApiResponse {
-    answer: InmobiliariaData[];
-    token: string;
-}
-
-interface FormData {
-    Correo: string
-    Contraseña: string
-}
+import { LoginApiResponse, FormData } from '@/interfaces'
 
 const useLogin = () => {
 

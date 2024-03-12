@@ -2,38 +2,7 @@
 import React from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-
-interface FormDataProps {
-    Idinmobiliaria: number
-    Tiporesidencia: string
-    CodigoInmobiliaria: string
-    Tiposervicio: string
-    Estado: string
-    Nombre: string
-    Areaconstruida: number
-    Habitaciones: number
-    Baños: number
-    Parqueaderos: number
-    Ciudad: string
-    Barrio: string
-    Unidadcerrada: string
-    Anoconstruccion: number
-    Enlace: string
-    Precio: number
-    Arealote: number
-    Imagen: string
-}
-
-interface UseResidencialProps {
-    alert: string
-    loaderActive: boolean
-    formData: FormDataProps
-    setAlert: React.Dispatch<React.SetStateAction<string>>
-    setFormData: React.Dispatch<React.SetStateAction<FormDataProps>>
-    uploadImage: () => void
-    handleSubmit: (e: React.FormEvent<HTMLFormElement>)  => void
-    handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-}
+import { UseResidencialProps } from '@/interfaces';
 
 const useResidencial = (): UseResidencialProps => {
 

@@ -5,13 +5,7 @@ import { getDate } from '@/utils'
 import Loader from '@/components/Loader'
 import TableHeader from '@/components/TableHeader'
 import useInmobiliary from '@/hooks/useInmobiliary'
-
-interface ComponentProps {
-    ID_Inmobiliaria: string
-    Nombre_Inmobiliaria: string
-    Celular: string
-    Personaencargada: string
-}
+import { TableInmobiliaryProps } from '@/interfaces'
 
 const Index = () => {
 
@@ -25,7 +19,7 @@ const Index = () => {
             <TableHeader columns={['ID Inmobiliaria','Nombre Inmobiliaria','Celular','Encargado']}/>
             <tbody>
                 {data?.filter((inmobiliaria: { rol: string }) => inmobiliaria.rol !== 'admin')
-                .map((inmobiliaria: ComponentProps) => 
+                .map((inmobiliaria: TableInmobiliaryProps) => 
                 <tr key={inmobiliaria.ID_Inmobiliaria} className="hover:bg-slate-300">
                     <td className='border px-2 text-center'>{inmobiliaria.ID_Inmobiliaria}</td>
                     <td className='border px-2 text-center cursor-pointer'>{inmobiliaria.Nombre_Inmobiliaria}</td>

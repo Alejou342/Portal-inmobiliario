@@ -2,22 +2,12 @@ import React from 'react'
 import Image from 'next/image'
 import Loader from '@/components/Loader'
 import useTables from '@/hooks/useTables'
+import { LeadCTableTypes } from '@/interfaces'
 import TableHeader from '@/components/TableHeader'
 import TableFooter from '@/components/TableFooter'
 import ModalGeneral from '@/containers/ModalGeneral'
 import SearchSection from '@/components/SearchSection'
 import ObservationForm from '@/components/ObservationForm'
-
-interface LeadProps {
-    CodigoInmobiliaria: string
-    NombreC: string
-    Nombrecliente: string
-    Numerocliente: string
-    Fechalead: string
-    Observacion: string
-    revisado: number
-    Idlead: number
-}
 
 const Index = () => {
 
@@ -48,7 +38,7 @@ const Index = () => {
                     .filter((lead: { CodigoInmobiliaria: string }) => lead?.CodigoInmobiliaria?.includes(search))
                     .sort((a: {Fechalead: string}, b: {Fechalead: string}) => (a.Fechalead < b.Fechalead) ? 1 : ((b.Fechalead < a.Fechalead) ? -1 : 0))
                     .slice(page * 20, page * 20 + 20)
-                    .map((lead: LeadProps, id: number) => 
+                    .map((lead: LeadCTableTypes, id: number) => 
                     <tr key={id + 1} className="cursor-pointer hover:bg-slate-300 border" onClick={() => handleObservation(lead?.Idlead)}>
                         <td className='border px-2 text-center'>{id + 1}</td>
                         <td className='border px-2 text-center'>{lead?.CodigoInmobiliaria}</td>

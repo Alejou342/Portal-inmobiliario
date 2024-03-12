@@ -1,22 +1,8 @@
 "use client"
 import React from 'react'
+import { LoginSectionProps } from '@/interfaces'
 
-interface ComponentProps {
-    id: string,
-    placeholder: string,
-    label: string,
-    onChange: any,
-    value: string
-    type: string,
-    minValue?: number,
-    maxValue?: number
-    className?: {
-        input?: string,
-        label?: string
-    },
-}
-
-const Index: React.FC<ComponentProps> = ({id, placeholder, label, onChange, type, className, minValue, maxValue, value}) => {
+const Index: React.FC<LoginSectionProps> = ({id, placeholder, label, onChange, type, className, minValue, maxValue, value}) => {
 
     return (
         <div className="mb-2">

@@ -3,16 +3,10 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Loader from '@/components/Loader'
 import useTables from '@/hooks/useTables'
+import { TrashTableTypes } from '@/interfaces'
 import TableFooter from '@/components/TableFooter'
 import TableHeader from '@/components/TableHeader'
 import SearchSection from '@/components/SearchSection'
-
-interface TrashDataProps {
-    CodigoInmobiliaria: string
-    Personaencargada: string
-    Enlace: string
-    Tipo: string
-}
 
 const Index = () => {
 
@@ -28,9 +22,9 @@ const Index = () => {
         <table className="table table-hover bg-auxiliar w-full">
             <TableHeader columns={['#', 'Código', 'Tipo Inmueble', 'Persona', 'Enlace']} />
             <tbody>
-                {data?.filter((inmueble: TrashDataProps) => inmueble.CodigoInmobiliaria?.includes(search))
+                {data?.filter((inmueble: TrashTableTypes) => inmueble.CodigoInmobiliaria?.includes(search))
                 .slice(page * 20, page * 20 + 20)
-                .map((inmueble: TrashDataProps, id: number) => 
+                .map((inmueble: TrashTableTypes, id: number) => 
                 <tr key={id + 1} className="hover:bg-slate-300">
                     <td className='border px-2 text-center'>{id + 1}</td>
                     <td className='border px-2 text-center'>{inmueble?.CodigoInmobiliaria}</td>
@@ -45,7 +39,7 @@ const Index = () => {
             </tbody>          
         </table>
         <TableFooter 
-            param={data?.filter((inmueble: TrashDataProps) => inmueble.CodigoInmobiliaria?.includes(search))} 
+            param={data?.filter((inmueble: TrashTableTypes) => inmueble.CodigoInmobiliaria?.includes(search))} 
             text="Total propiedades eliminadas:" 
             page={page} 
             setPage={setPage} 

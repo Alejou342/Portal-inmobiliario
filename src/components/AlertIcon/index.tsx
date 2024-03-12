@@ -1,19 +1,8 @@
 import React from 'react'
 import Image from 'next/image'
+import { AlertIconProps } from '@/interfaces'
 
-interface ComponentProps {
-    icon: string,
-    isHover: boolean,
-    setIsHover: any,
-    setOpenModal: any,
-    text: string,
-    className: {
-        i: string,
-        p: string
-    }
-}
-
-const index: React.FC<ComponentProps> = ({icon, isHover, setIsHover, setOpenModal, text, className}) => {
+const index: React.FC<AlertIconProps> = ({icon, isHover, setIsHover, setOpenModal, text, className}) => {
     return (
         <div className='flex'>
             {isHover && 

@@ -7,27 +7,12 @@ import { useRouter } from 'next/navigation'
 import { formatPrice } from '@/utils'
 import LinkSection from '@/components/LinkSection'
 import CardSection from '@/components/CardSection'
+import { ResidencialInfoProps } from '@/interfaces'
 import './index.css'
 
-interface ComponentProps {
-  props: {
-    ImagenR: string,
-    NombreR: string,
-    EstadoR: string,
-    Area_ConstruidaR: string,
-    CiudadR: string,
-    BarrioR: string,
-    HabitacionR: string,
-    BanosR: string,
-    ParqueaderosR: string,
-    Ano_ConstruccionR: string,
-    Tipo_ServicioR: string,
-    PrecioR: number,
-    EnlaceR: string,
-  }
-}
 
-const Index: React.FC<ComponentProps> = ({ props }) => {
+
+const Index: React.FC<ResidencialInfoProps> = ({ props }) => {
 
   const router = useRouter()
   const [rol, setRol] = React.useState('')

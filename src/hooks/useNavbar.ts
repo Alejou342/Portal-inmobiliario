@@ -2,19 +2,11 @@ import React from 'react'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 
-interface Number {
-    Total: number
-}
-
-interface Total {
-    cantidadLeads: number
-}
-
 const useNavbar = () => {
 
     const [leads, setLeads] = React.useState<any>([])
-    const [total, setTotal] = React.useState<Total>({ cantidadLeads: 0 })
-    const [number, setNumber] = React.useState<Number>({ Total: 0 })
+    const [total, setTotal] = React.useState<{ cantidadLeads: number }>({ cantidadLeads: 0 })
+    const [number, setNumber] = React.useState<{ Total: number }>({ Total: 0 })
     const [rol, setRol] = React.useState<string>('')
 
     React.useEffect(() => {

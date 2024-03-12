@@ -2,13 +2,10 @@ import React from 'react'
 import Loader from '@/components/Loader'
 import Button from '@/components/Button'
 import useLimits from '@/hooks/useLimits'
+import { LimitLeadsProps } from '@/interfaces'
 import LoginSection from '@/components/LoginSection'
 
-interface ComponentProps {
-  setState: React.Dispatch<React.SetStateAction<boolean>>
-}
-
-const Index = ({ setState } : ComponentProps ) => {
+const Index: React.FC<LimitLeadsProps> = ({ setState }) => {
 
     const { value, loaderActive, leads, handleChange, handleSubmit } = useLimits(setState)
 
@@ -22,7 +19,7 @@ const Index = ({ setState } : ComponentProps ) => {
             placeholder="Ej: 10"
             label="Límite mensual de leads"
             onChange={handleChange}
-            value={value}
+            value={value.toString()}
             minValue={leads.length}
             maxValue={500}
         />

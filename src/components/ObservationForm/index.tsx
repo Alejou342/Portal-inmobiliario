@@ -2,16 +2,11 @@ import React from 'react'
 import Loader from '@/components/Loader'
 import Button from '@/components/Button'
 import FormSelect from '@/components/FormSelect'
+import { ObservationFormProps } from '@/interfaces'
 import useObservation from '@/hooks/useObservation'
 
-interface ComponentProps {
-  setState: React.Dispatch<React.SetStateAction<boolean>>
-  id: number
-  letter: string
-  type: string
-}
 
-const Index = ({ setState, id, letter, type }: ComponentProps) => {
+const Index: React.FC<ObservationFormProps> = ({ setState, id, letter, type }) => {
 
     const { availableStatus, text, status, loaderActive, handleChange, handleChangeList, handleSubmit } = useObservation({ setState, id, letter, type }) 
 

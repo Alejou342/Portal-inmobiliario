@@ -7,17 +7,9 @@ import useProperties from '@/hooks/useProperties'
 import TableFooter from '@/components/TableFooter'
 import TableHeader from '@/components/TableHeader'
 import ModalGeneral from '@/containers/ModalGeneral'
+import { TableResidencialProps } from '@/interfaces'
 import SearchSection from '@/components/SearchSection'
 import ResidencialContent from '@/components/ResidencialContent'
-
-interface InmueblesRTypes {
-    ID_Residencial: string
-    CodigoInmobiliaria: string
-    Tipo_ServicioR: string
-    EstadoR: string
-    PrecioR: number
-    NombreR: string
-}
 
 const Index = () => {
 
@@ -44,7 +36,7 @@ const Index = () => {
                 {inmuebles
                 .filter((inmueble: { CodigoInmobiliaria: string }) => inmueble.CodigoInmobiliaria?.includes(search))
                 .slice(page * 20, page * 20 + 20)
-                .map((inmueble: InmueblesRTypes, id: number) => 
+                .map((inmueble: TableResidencialProps, id: number) => 
                 <tr key={inmueble.ID_Residencial} className="hover:bg-slate-300">
                     <td className='border px-2 text-center'>{id + 1}</td>
                     <td className='border px-2 text-center'>{inmueble.CodigoInmobiliaria}</td>
