@@ -24,14 +24,7 @@ const useObservation = ({ setState, id, letter, type } : UseObservationProps) =>
         setStatus(e.target.value)
     }
 
-    const handleSuccess = () => {
-        setLoaderActive(false)
-        location.reload()
-    }
-
-    const handleSubmit = (e: any) => {
-        e.preventDefault()
-        setLoaderActive(true)
+    const handleSubmit = () => {
         const sessionInfo = JSON.parse(Cookies?.get('SessionInfo') || '{}')
         try {
             Promise.all([
@@ -50,8 +43,8 @@ const useObservation = ({ setState, id, letter, type } : UseObservationProps) =>
                     }
                 })
             ])
-            .then(() => handleSuccess)
-            .catch(() => handleSuccess)
+            .then(() => location.reload())
+            .catch(() => setLoaderActive(false))
             setState(false)
         } catch(error) {
             console.error(error)

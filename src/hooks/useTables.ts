@@ -40,9 +40,6 @@ const useTables = (param: string) => {
         const [openModal, setOpenModal] = React.useState(false)
         const [loaderActive, setLoaderActive] = React.useState(true)
 
-        console.log(rol)
-    
-        
         const memoizedFetchData = React.useMemo(() => fetchDataResidencial(), [])
         
         React.useEffect(() => {

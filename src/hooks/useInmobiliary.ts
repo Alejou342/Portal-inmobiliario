@@ -21,7 +21,7 @@ const useInmobiliary = (url: string) => {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             })
-            .then(() => console.log('Email enviado con éxito'))
+            .then(() => {})
             .catch((error) => console.error(error))
         } catch(error) {
             console.error(error)
