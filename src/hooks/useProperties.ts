@@ -14,9 +14,9 @@ const useProperties = (param: string) => {
         try {
             const sessionInfo = JSON.parse(Cookies?.get('SessionInfo') || '{}');
             const adminEndpoint = `${process.env.BACK_LINK}/api/${wordKeys[param][0]}`;
-            const userEndpoint = `${process.env.BACK_LINK}/api/${wordKeys[param][1]}/${sessionInfo?.answer[0]?.Correo_Inmobiliaria}`;
+            const userEndpoint = `${process.env.BACK_LINK}/api/${wordKeys[param][1]}/${sessionInfo?.answer?.[0].Correo_Inmobiliaria}`;
     
-            const response = await axios.get(sessionInfo?.answer[0]?.rol === 'admin' ? adminEndpoint : userEndpoint, {
+            const response = await axios.get(sessionInfo?.answer?.[0].rol === 'admin' ? adminEndpoint : userEndpoint, {
                 headers: {
                     "Authorization": `Bearer ${sessionInfo?.token}`
                 }
