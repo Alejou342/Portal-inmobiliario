@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 
-const useLimits = (setState: any) => {
+const useLimits = (setState: React.Dispatch<React.SetStateAction<boolean>>) => {
 
     const [value, setValue] = React.useState<number>(0)
     const [loaderActive, setLoaderActive] = React.useState<boolean>(true)

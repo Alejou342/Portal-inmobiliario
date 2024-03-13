@@ -1,10 +1,11 @@
 import React from 'react'
 import axios from 'axios'
 import Cookies from 'js-cookie'
+import { WordKeysTable } from '@/interfaces'
 
 const useTables = (param: string) => {
 
-    const wordKeys: any = {
+    const wordKeys: WordKeysTable = {
         traces: ['AllHuellas', 'getHuellas'],
         deletes: ['allDeletes', 'getDelete'],
         leadsC: ['getAllLeadsC', 'UserLeadComercial'],

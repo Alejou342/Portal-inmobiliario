@@ -427,3 +427,38 @@ export interface FormData {
     Correo: string
     Contraseña: string
 }
+
+export interface WordKeysTable {
+    [key: string]: string[]
+}
+
+export interface User {
+    ID_Inmobiliaria: number,
+    Nombre_Inmobiliaria: string,
+    Correo_Inmobiliaria: string,
+    Telefono_Inmobiliaria: string,
+    Ubicacion_Inmobiliaria: string,
+    Estado: number,
+    Fecharegistro: string,
+    Numeroidentificacion: string,
+    Representante: string,
+    Tipoidentificacion: string,
+    Municipio: string,
+    Departamento: string,
+    Telefonorepresen: string,
+    Celular: string,
+    Correofacturacion: string,
+    Personaencargada: string,
+    Cargo: string,
+    Telefonocargo: string,
+    cantidadLeads: number,
+    rol: string,
+    Contraseña2: string,
+    Contraseña3: string,
+    reserva: string,
+    Contraseña4: string
+}
+
+export interface WordKeysProperties {
+    [key: string]: string[]
+}

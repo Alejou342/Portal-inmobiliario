@@ -2,10 +2,11 @@ import React from 'react'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/navigation'
+import { WordKeysProperties } from '@/interfaces'
 
 const useProperties = (param: string) => {
 
-    const wordKeys: any = {
+    const wordKeys: WordKeysProperties = {
         residencial: ['getAllR', 'UserResidencia', 'ResidencialID'],
         comercial: ['getAllC', 'UserComercial', 'ComercialID']
     }

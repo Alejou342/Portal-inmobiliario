@@ -1,7 +1,7 @@
 import axios from 'axios'
 import Cookies from 'js-cookie'
 
-export const handleDeleteC = (setState: any, id: number) => {
+export const handleDeleteC = (setState: React.Dispatch<React.SetStateAction<boolean>>, id: number) => {
     try {
         const sessionInfo = JSON.parse(Cookies?.get('SessionInfo') || '{}')
         axios.post(`${process.env.BACK_LINK}/api/deleteComercial/${id}`, { Personaencargada: sessionInfo?.answer[0]?.Personaencargada }, {
@@ -22,7 +22,7 @@ export const handleDeleteC = (setState: any, id: number) => {
     }
 }
 
-export const handleDeleteR = (setState: any, id: number) => {
+export const handleDeleteR = (setState: React.Dispatch<React.SetStateAction<boolean>>, id: number) => {
     try {
         const sessionInfo = JSON.parse(Cookies?.get('SessionInfo') || '?')
         axios.post(`${process.env.BACK_LINK}/api/deleteResidencial/${id}`, { Personaencargada: sessionInfo?.answer[0]?.Personaencargada }, {

@@ -1,12 +1,13 @@
 import React from 'react'
 import Cookies from 'js-cookie'
 import { useItem } from '@/context'
+import { User } from '@/interfaces'
 import { useRouter } from 'next/navigation'
 
 const useSidebar = () => {
 
     const router = useRouter()
-    const [user, setUser] = React.useState<any>()
+    const [user, setUser] = React.useState<User>()
     const { item, setItem } = useItem() 
 
     React.useEffect(() => {
