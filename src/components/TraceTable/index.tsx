@@ -20,7 +20,8 @@ const Index = () => {
         <table className="table table-hover bg-auxiliar w-full">
             <TableHeader columns={['#', 'Correo', 'Fecha Ingreso', 'Hora Ingreso', 'Encargado']} />
             <tbody>
-                {data && data?.filter((inmueble: TraceTableProps) => inmueble.Personaencargada?.toLowerCase().includes(search.toLowerCase()))
+                {data && data?.toReversed()
+                .filter((inmueble: TraceTableProps) => inmueble.Personaencargada?.toLowerCase().includes(search.toLowerCase()))
                 .slice(page * 20, page * 20 + 20)
                 .map((inmueble: TraceTableProps, id: number) => 
                 <tr key={id + 1} className="hover:bg-slate-300">
