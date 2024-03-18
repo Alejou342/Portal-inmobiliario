@@ -1,3 +1,20 @@
+/* 
+    Hook utilizado para proveer la información esencial para el renderizado de las tablas de propiedades (Comerciales y Residenciales)
+        * param: Es un número el cual se utiliza para diferenciar los parámetros de las solicitudes utilizando el objeto wordKeys
+        * wordKeys: Provee información relevante para completar la información de los Endpoints de admin y user
+        * fetchDataResidencial: Función que se encarga de hacer fetch de la URL que recibe como parámetro
+        * id: Esta variable guarda la información de cada propiedad y es un parámetro utilizado para llevar a cabo la navegación
+        * router: Variable que utiliza el hook useRouter para realizar la navegación desde la tabla a cada propiedad en específico
+        * page: Valor utilizado para manejar la paginación, ya que las propiedades solamente se muestran 20 por página
+        * search: Valor utilizado para filtrar información de la tabla según las coincidencias con este valor
+        * inmuebles: Contiene la información del total de las propiedades que se van a exponer en dicha tabla
+        * openModal: Contiene un valor booleano que cuando está en true, abre un modal con información, cuando está en false, cierra el modal
+        * loaderActive: Contiene un valor booleano que cuando está en true, significa que hay una petición HTTP en curso
+        * memoizedFetchData: Función que memoiza el resultado de la función fetchDataResidencial()
+        * handleNavigate: Función que utiliza useRouter para realizar la navegación desde la tabla hasta la card de la propiedad
+        * handleDelete: Función que utiliza una petición POST para eliminar un inmueble, se ejecuta desde el botón "Aceptar" del Modal
+*/
+
 import React from 'react'
 import axios from 'axios'
 import Cookies from 'js-cookie'

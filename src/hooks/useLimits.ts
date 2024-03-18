@@ -1,3 +1,11 @@
+/* 
+    Hook que maneja la información y la lógica de los límites mensuales de Leads de las inmobiliarias:
+        * setState: Es una variable que almacena un valor booleano para definir si el componente modal está abierto o cerrado
+        * value: Es una variable que almacena el valor del límite de Leads acordado por cada inmobiliaria
+        * leads: almacena la información actual de leads que posee cada inmobiliaria
+        * handleChange: Es una función que maneja la información utilizada en los formularios
+*/
+
 import React from 'react'
 import axios from 'axios'
 import Cookies from 'js-cookie'

@@ -1,3 +1,8 @@
+/* 
+    Hook que se encarga de renderizar la información asociada a inmobiliarias y enviar el correo mensual de facturación
+        * sendEmail: Función que se encarga de organizar la información de la generación de Leads y los envía vía correo electrónico
+*/
+
 import axios from 'axios'
 import FormData from 'form-data'
 import useGET from '@/hooks/useGET'

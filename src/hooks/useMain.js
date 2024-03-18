@@ -1,3 +1,10 @@
+/* 
+  Hook que permite manejar el contenido a renderizar en el componente Main de la aplicación
+    * views: Es un arreglo que contiene los componentes que se utilizan en las diferentes vistas de la aplicación
+    * rol: Variable que contiene la información de los permisos que el usuario tiene dentro de la aplicación
+    * item: Contiene la información proveniente del contexto del contenido a renderizar
+*/
+
 import React from 'react'
 import Cookies from 'js-cookie'
 import { useItem } from '@/context'
@@ -25,7 +32,7 @@ const useMain = () => {
     
     React.useEffect(() => {
       try {
-        const sessionInfo = JSON.parse(Cookies.get('SessionInfo'))
+        const sessionInfo = JSON.parse(Cookies.get('SessionInfo') || '{}')
         if (sessionInfo) {
           setRol(sessionInfo?.answer[0]?.rol)
         }

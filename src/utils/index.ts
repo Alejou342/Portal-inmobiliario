@@ -1,3 +1,11 @@
+/*
+    Funciones de utilidad dentro del proyecto: 
+        * handleDeleteC: Función para eliminar una propiedad de tipo Comercial mediante la confirmación al interior de un componente modal
+        * handleDeleteR: Función para eliminar una propiedad de tipo Residencial mediante la confirmación al interior de un componente modal
+        * formatPrice: Función para agregar signos de puntuación y de precio, para transformar un número en un valor comercial de moneda
+        * getDate: Función para obtener el día actual del mes
+*/
+
 import axios from 'axios'
 import Cookies from 'js-cookie'
 
