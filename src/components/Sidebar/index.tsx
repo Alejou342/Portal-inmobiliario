@@ -57,7 +57,7 @@ const Index = () => {
           Huella
         </Button>}
       </div>
-      <UserInfo props = {{user, handleLogout}} />
+      <UserInfo props = {{ user, handleLogout }} />
     </aside>
   )
 }

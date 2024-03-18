@@ -1,3 +1,10 @@
+/*
+  Contexto de la aplicación: Sirve para almacenar el item, la función actualizadora del item y la información de la session:
+    * item: Se refiere a la sección del Navbar que esté activa en determinado momento
+    * setItem: Se refiere a la función actualizadora del item
+    * sessionInfo: Se refiere a la información del usuario activo en la aplicación
+*/
+
 "use client"
 import React from 'react'
 import Cookies from 'js-cookie'

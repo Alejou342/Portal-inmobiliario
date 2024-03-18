@@ -1,3 +1,11 @@
+/*
+    Hook utilizado para mostrar la información de el componente superior derecho de la aplicación `Navbar`
+        * leads: Hace referencia a un número el cual corresponde a la cantidad de leads que se han registrado en el mes actual
+        * total: Hace referencia a un número el cual corresponde a el límite de leads establecido por la inmobiliaria
+        * number: Hace referencia a la cantidad de leads del mes actual
+        * rol: Hace referencia a un valor utilizado para los permisos de los usuarios dentro de la aplicación
+*/
+
 import React from 'react'
 import axios from 'axios'
 import Cookies from 'js-cookie'

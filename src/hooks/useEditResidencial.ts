@@ -1,3 +1,15 @@
+/* 
+    Hook que maneja la información y la lógica para editar una propiedad residencial: 
+        * Consta de un formulario que trae la información actual del inmueble con inputs de tipo select, text y file 
+        para completar la información de un inmueble tipo residencial
+        * alert: Es una variable que define un mensaje de éxito o error a la hora de subir la imagen al formulario
+        * loaderActive: Es una variable que define el tiempo mientras se completa una petición HTTP
+        * formData: Es una variable que almacena la información del formulario
+        * handleInputChange: Es una función que actualiza el estado de cualquier campo del formulario
+        * uploadImage: Es una función que se encarga de almacenar en la web una imagen de local
+        * handleSubmit: Es la función que se encarga de llevar la información del formulario 
+*/
+
 "use client"
 import React from 'react'
 import axios from 'axios'

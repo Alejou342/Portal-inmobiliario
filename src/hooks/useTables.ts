@@ -1,10 +1,27 @@
+/*
+    Hook utilizado para mostrar correctamente las siguientes tablas: [Huella, Papelera, Leads Comerciales, Leads Residenciales]
+        * param: Número utilizado para encontrar en wordKeys la información correcta para renderizar la información adecuada
+        * wordKeys: Contiene palabras claves utilizadas para llevar a cabo las peticiones HTTP en las diferentes tables y según el rol
+        * fetchDataResidencial: Función encargada de hacer GET según el rol del usuario en cuestión
+        * availableStatus: Los estados disponibles que pueden tener los Leads en las tablas de Leads
+        * id: Variable que almacena el número de identificador de una fila en la tabla en cuestión
+        * page: Valor utilizado para manejar la paginación, ya que las propiedades solamente se muestran 20 por página
+        * search: Valor utilizado para filtrar información de la tabla según las coincidencias con este valor
+        * inmuebles: Contiene la información del total de las propiedades que se van a exponer en dicha tabla
+        * openModal: Contiene un valor booleano que cuando está en true, abre un modal con información, cuando está en false, cierra el modal
+        * loaderActive: Contiene un valor booleano que cuando está en true, significa que hay una petición HTTP en curso
+        * memoizedFetchData: Función que memoiza el resultado de la función fetchDataResidencial()
+        * handleObservation: Función que activa el modal para modificar la observación de un Lead en específico
+*/
+
 import React from 'react'
 import axios from 'axios'
 import Cookies from 'js-cookie'
+import { WordKeysTable } from '@/interfaces'
 
 const useTables = (param: string) => {
 
-    const wordKeys: any = {
+    const wordKeys: WordKeysTable = {
         traces: ['AllHuellas', 'getHuellas'],
         deletes: ['allDeletes', 'getDelete'],
         leadsC: ['getAllLeadsC', 'UserLeadComercial'],

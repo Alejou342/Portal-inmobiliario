@@ -1,10 +1,18 @@
+/*
+    Hook usado para realizar modificación a las observaciones y al estado de los Leads
+        * availableStatus: Hace referencia a los estados posibles para los Leads generados
+        * text: Hace referencia a una información adicional para los Leads generados
+        * status: Hace referencia al estado de cada Lead, por defecto su valor será 'Pendiente'
+        * loaderActive: Es una variable que retorna true mientras se completa una petición HTTP y false cuando se finaliza
+*/
+
 import React from 'react'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import { UseObservationProps } from '@/interfaces'
 
 const useObservation = ({ setState, id, letter, type } : UseObservationProps) => {
-  
+
     const availableStatus = ['Pendiente', 'Atendido', 'Descartado']
     const [text, setText] = React.useState<string>('')
     const [status, setStatus] = React.useState<string>('Pendiente')
