@@ -1,3 +1,10 @@
+/*
+  Este contenedor es el principal de nuestra aplicación renderiza ciertos componentes ubicados en diferentes lugares para dar una experiecia, consume a useMain 
+    * views: Contiene los componentes que se renderizan según los roles del usuario
+    * item: Contiene la información del item que actualmente está activo, para dar una buena experiencia al usuario
+    * rol: Un valor proveniente de la Cookie SessionInfo, y que otorga diferentes permisos a los usuarios de la aplicación
+*/
+
 "use client"
 import './index.css'
 import React from 'react'

@@ -1,3 +1,8 @@
+/*
+    Este contenedor corresponde a una vista introductoria donde el usuario puede escoger un formulario para crear propiedades
+        * type: Almacena el estado donde se diferencia si se motrará el formulario COMERCIAL o el formulario RESIDENCIAL
+*/
+
 "use client"
 import React from 'react'
 import ComercialForm from '@/components/ComercialForm'

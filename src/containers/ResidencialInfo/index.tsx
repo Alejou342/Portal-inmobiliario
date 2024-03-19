@@ -1,6 +1,12 @@
+/*
+    Este contenedor corresponde a una tarjeta donde se puede revisar la información de una propiedad RESIDENCIAL en específico
+        * router: Utiliza el hook useRouter para realizar la navegación entre rutas
+        * rol: Consume el valor de la Cookie para otorgar permisos según el valor dentro de la aplicación
+        * formData Almacena la información de un identificador utilizado para renderizar el contenido de la propiedad adecuada
+*/
+
 "use client"
 import React from 'react'
-import axios from 'axios'
 import Image from 'next/image'
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/navigation'
@@ -9,8 +15,6 @@ import LinkSection from '@/components/LinkSection'
 import CardSection from '@/components/CardSection'
 import { ResidencialInfoProps } from '@/interfaces'
 import './index.css'
-
-
 
 const Index: React.FC<ResidencialInfoProps> = ({ props }) => {
 
