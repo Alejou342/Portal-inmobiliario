@@ -1,3 +1,9 @@
+/*
+  Ruta de Login de la aplicación
+    * Si el usuario está Logeado (Encuentra la cookie SessionInfo) el sistema lo redirige a la ruta /main
+    * Si el usuario NO está Logeado (No encuentra la cookie SessionInfo) el sistema muestra el formulario de login
+*/
+
 "use client"
 import React from "react"
 import Login from '@/containers/Login'

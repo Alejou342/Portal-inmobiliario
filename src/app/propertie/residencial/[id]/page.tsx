@@ -1,3 +1,10 @@
+/*
+  Página para observar una propiedad residencial
+    * Esta página consume el hook de useGET para manejar las peticiones implicadas, y utiliza esta información para renderizar
+    * Posee el manejo de errores 
+    * Posee el estado de carga mientras se completa la petición
+*/
+
 "use client"
 import React from 'react'
 import useGET from '@/hooks/useGET'

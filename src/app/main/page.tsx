@@ -1,3 +1,9 @@
+/*
+  Ruta principal de la aplicación cuando un usuario está Logeado
+    * Si el usuario NO está Logeado (No encuentra la cookie SessionInfo) el sistema lo redirige a la ruta de login
+    * Si el usuario está Logeado (Encuentra la cookie SessionInfo) el sistema muestra la información de los componentes
+*/
+
 "use client"
 import React from 'react'
 import Main from '@/containers/Main'
