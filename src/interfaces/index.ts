@@ -79,6 +79,38 @@ export interface SideHeaderProps {
     to: string
 }
 
+export interface Answer {
+    ID_Inmobiliaria: number;
+    Nombre_Inmobiliaria: string;
+    Correo_Inmobiliaria: string;
+    Telefono_Inmobiliaria: string | null;
+    Ubicacion_Inmobiliaria: string | null;
+    Estado: number;
+    Fecharegistro: string;
+    Numeroidentificacion: string | null;
+    Representante: string;
+    Tipoidentificacion: string | null;
+    Municipio: string;
+    Departamento: string;
+    Telefonorepresen: string | null;
+    Celular: string;
+    Correofacturacion: string | null;
+    Personaencargada: string;
+    Cargo: string | null;
+    Telefonocargo: string;
+    cantidadLeads: number;
+    rol: string;
+    Contraseña2: string | null;
+    Contraseña3: string | null;
+    reserva: string | null;
+    Contraseña4: string | null;
+  }
+  
+  interface ApiResponse {
+    answer: Answer[];
+    token: string;
+  }
+  
 export interface SearchSectionProps {
     search: string,
     setSearch: any,

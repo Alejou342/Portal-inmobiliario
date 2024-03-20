@@ -17,7 +17,7 @@ import { useRouter } from 'next/navigation'
 const useSidebar = () => {
 
     const router = useRouter()
-    const [user, setUser] = React.useState<User>()
+    const [user, setUser] = React.useState<User | any>()
     const { item, setItem } = useItem() 
 
     React.useEffect(() => {

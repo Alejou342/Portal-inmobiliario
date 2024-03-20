@@ -1,3 +1,9 @@
+/*
+    Página para editar una propiedad de tipo residencial
+        * Esta página solo es visible si las personas están autenticadas con un rol diferente a 'Otros'
+        * Si la persona tiene rol = 'Otros' Será redirigido automáticamente a la ruta /main
+*/
+
 'use client'
 import React from 'react'
 import Cookies from 'js-cookie'

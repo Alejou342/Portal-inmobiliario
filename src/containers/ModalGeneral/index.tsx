@@ -1,3 +1,11 @@
+/*
+    Este componente se encarga de proveer una plantilla para mostar elementos dentro de un modal
+        * children: Muestra la información interna del modal, para un propósito variable y específico
+        * state: Es un valor booleano que maneja si el modal es visible o está oculto
+        * setState: Función actualizadora del estado
+        * className: String que sirve para dar estilos al componente modal
+*/
+
 import React from 'react'
 import Image from 'next/image'
 import { ModalGeneralProps } from '@/interfaces'

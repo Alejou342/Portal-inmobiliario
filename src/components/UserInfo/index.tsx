@@ -1,8 +1,8 @@
 import React from 'react'
 import Image from 'next/image'
-// import { UserInfoProps, User } from '@/interfaces'
+import { UserInfoProps } from '@/interfaces'
 
-const Index: React.FC<any> = ({ props }) => {
+const Index: React.FC<UserInfoProps> = ({ props }) => {
 
     return (
         <div className="flex justify-center items-center">

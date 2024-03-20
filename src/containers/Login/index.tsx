@@ -1,3 +1,12 @@
+/*
+    Este contenedor corresponde a la UI del formulario de Login, utiliza la lógica proveniente de useLogin
+        * loaderActive: Es una variable que retorna true cuando una petición está en curso
+        * alert: Renderiza un mensaje de alerta en caso de logearse con credenciales incorrectas
+        * handleInputChange: Maneja los eventos de escrituras en cada uno de los inputs
+        * onLoginSubmit: Maneja el evento de envío del formulario
+        * formData: Almacena la información de Logeo
+*/
+
 "use client"
 import React from 'react';
 import useLogin from '@/hooks/useLogin';
