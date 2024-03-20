@@ -49,13 +49,13 @@ const useTables = (param: string) => {
     };
     
         const availableStatus = ['uncheck', 'check', 'discard']
-        const [id, setId] = React.useState(0)
-        const [page, setPage] = React.useState(0)
-        const [rol, setRol] = React.useState('')
-        const [data, setData] = React.useState([])
-        const [search, setSearch] = React.useState("")
-        const [openModal, setOpenModal] = React.useState(false)
-        const [loaderActive, setLoaderActive] = React.useState(true)
+        const [id, setId] = React.useState<number>(0)
+        const [page, setPage] = React.useState<number>(0)
+        const [rol, setRol] = React.useState<string | null>('')
+        const [data, setData] = React.useState<any>([])
+        const [search, setSearch] = React.useState<string>("")
+        const [openModal, setOpenModal] = React.useState<boolean>(false)
+        const [loaderActive, setLoaderActive] = React.useState<boolean>(true)
 
         const memoizedFetchData = React.useMemo(() => fetchDataResidencial(), [])
         

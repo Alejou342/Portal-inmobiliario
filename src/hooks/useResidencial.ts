@@ -13,13 +13,13 @@
 import React from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { UseResidencialProps } from '@/interfaces';
+import { UseResidencialProps, FormDataPropsR } from '@/interfaces';
 
 const useResidencial = (): UseResidencialProps => {
 
     const [alert, setAlert] = React.useState<string>('')
     const [loaderActive, setLoaderActive] = React.useState<boolean>(false)
-    const [formData, setFormData] = React.useState({
+    const [formData, setFormData] = React.useState<FormDataPropsR>({
         Idinmobiliaria: 0,
         Tiporesidencia: "",
         CodigoInmobiliaria: "",

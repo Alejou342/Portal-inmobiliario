@@ -7,8 +7,8 @@ import ModalGeneral from '@/containers/ModalGeneral'
 
 const Index: React.FC = () => {
 
-  const [isHover, setIsHover] = React.useState(false)
-  const [openModal, setOpenModal] = React.useState(false)
+  const [isHover, setIsHover] = React.useState<boolean>(false)
+  const [openModal, setOpenModal] = React.useState<boolean>(false)
 
   return (
     <>

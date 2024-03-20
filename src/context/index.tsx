@@ -19,8 +19,8 @@ const ItemContext = React.createContext<ItemContextType>({
 
 const ItemProvider: React.FC<ItemContextProps> = ({children}) => {
 
-    const [item, setItem] = React.useState(1)
-    const [sessionInfo, setSessionInfo] = React.useState(null)
+    const [item, setItem] = React.useState<number>(1)
+    const [sessionInfo, setSessionInfo] = React.useState<any>(null)
 
     React.useEffect(() => {
       try {

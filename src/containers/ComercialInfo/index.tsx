@@ -19,8 +19,8 @@ import './index.css'
 const Index: React.FC<ComercialInfoProps> = ({ props }) => {
 
     const router = useRouter()
-    const [rol, setRol] = React.useState('')
-    const [formData, setFormData] = React.useState({
+    const [rol, setRol] = React.useState<string | null>('')
+    const [formData, setFormData] = React.useState<{ Idcomercial: number }>({
         Idcomercial:0,
     })
 

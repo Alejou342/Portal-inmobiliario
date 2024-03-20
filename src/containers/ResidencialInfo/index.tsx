@@ -19,8 +19,8 @@ import './index.css'
 const Index: React.FC<ResidencialInfoProps> = ({ props }) => {
 
   const router = useRouter()
-  const [rol, setRol] = React.useState('')
-  const [formData, setFormData] = React.useState({
+  const [rol, setRol] = React.useState<string | null>('')
+  const [formData, setFormData] = React.useState<{ Idresidencia: number }>({
     Idresidencia:0,
   })
 
