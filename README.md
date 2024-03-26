@@ -22,6 +22,7 @@ click en el botón "Ingresar"
 
 ![alt text](/public/assets/readme/image-1.png)  
 
+La vista principal muestra las secciones importantes, a continuación se detalla un poco de cada una:
     1. Panel *Central*: Su utilidad es mostrar el contenido de la sección actualmente activa  
     2. Panel *Superior Derecho*: Su utilidad es mostrar un contador de Leads registrados mes a mes  
     3. Panel *Inferior Derecho*: Su utilidad es mostrar herramientas adicionales para llevar el control de la aplicación  
