@@ -22,10 +22,10 @@ click en el botón "Ingresar"
 
 ![alt text](/public/assets/readme/image-1.png)  
 
-Panel *Central*: Su utilidad es mostrar el contenido de la sección actualmente activa  
-Panel *Superior Derecho*: Su utilidad es mostrar un contador de Leads registrados mes a mes  
-Panel *Inferior Derecho*: Su utilidad es mostrar herramientas adicionales para llevar el control de la aplicación  
-Panel *Lateral*: Su utilidad es registrar las secciones posibles según los permisos de cada usuario  
+    1. Panel *Central*: Su utilidad es mostrar el contenido de la sección actualmente activa  
+    2. Panel *Superior Derecho*: Su utilidad es mostrar un contador de Leads registrados mes a mes  
+    3. Panel *Inferior Derecho*: Su utilidad es mostrar herramientas adicionales para llevar el control de la aplicación  
+    4. Panel *Lateral*: Su utilidad es registrar las secciones posibles según los permisos de cada usuario  
 
 ## Panel de Administrador
 
