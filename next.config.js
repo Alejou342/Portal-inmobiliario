@@ -25,6 +25,10 @@ const nextConfig = {
                 protocol: 'https',
                 hostname: 'staticw.s3.amazonaws.com',
             },
+            {
+                protocol: 'https',
+                hostname: 'multimedia.metrocuadrado.com',
+            },
         ]
     }
 }
